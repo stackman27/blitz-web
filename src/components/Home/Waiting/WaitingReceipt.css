@@ -1,0 +1,39 @@
+#pulse {
+  align-self: "center";
+  margin: 100px;
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  background: #0a63bc;
+  cursor: pointer;
+  position: relative;
+  border: 4px solid #0a63bc;
+}
+
+#pulse:after {
+  content: "";
+  width: 225px;
+  height: 225px;
+  border-radius: 100%;
+  border: 30px solid #0a63bc;
+  top: -15px;
+  left: -15px;
+  position: absolute;
+  animation: pulse 3s ease 0s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
