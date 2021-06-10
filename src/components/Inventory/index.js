@@ -45,7 +45,6 @@ function Inventory() {
         <Box display="flex" flexDir="row">
           <Image
             src={item.img}
-            alt="Segun Adebayo"
             borderRadius="100"
             width="75"
             height="75"

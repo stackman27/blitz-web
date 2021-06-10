@@ -104,16 +104,13 @@ function InventoryDetails() {
           justifyContent="space-between"
           alignItems="center"
         >
+          
           <Image
             src={
               item.img
-                ? { uri: item.img }
-                : {
-                    uri:
-                      "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png",
-                  }
-            }
-            alt={item.product_name}
+                ? item.img 
+                : "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+              }
             width={100}
             height={100}
           />

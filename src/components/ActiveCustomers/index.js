@@ -107,7 +107,6 @@ function RenderUser({
         <Box width="14" height="14">
           <Image
             src={item.img}
-            alt={item.product_name}
             borderRadius="100"
             fit="contain"
             background="#ddd"
@@ -150,7 +149,6 @@ function RenderUser({
                 <Box width="14" height="14">
                   <Image
                     src={i.uImage}
-                    alt={"Sishir"}
                     borderRadius="100"
                     fit="contain"
                     background="#ddd"

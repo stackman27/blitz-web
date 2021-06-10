@@ -37,7 +37,6 @@ function TotalSales() {
           <Box width="20" height="20">
             <Image
               src={item.purchaseInfo.userImg}
-              alt={item.purchaseInfo.userName}
               borderRadius="100"
               fit="contain"
               background="#ddd"

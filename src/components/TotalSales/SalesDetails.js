@@ -43,7 +43,6 @@ function SalesDetails() {
         <Box width="20" height="20">
           <Image
             src={itemImg}
-            alt={itemLabel}
             borderRadius="100"
             fit="contain"
             background="#ddd"
@@ -88,8 +87,7 @@ function SalesDetails() {
           >
             <Box width="20" height="20">
               <Image
-                src={sales.purchaseInfo && sales.purchaseInfo.userImg}
-                alt={sales.purchaseInfo && sales.purchaseInfo.userName}
+                src={sales.purchaseInfo?.userImg}
                 borderRadius="100"
                 fit="contain"
                 background="#ddd"

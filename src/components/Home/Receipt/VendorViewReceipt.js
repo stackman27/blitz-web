@@ -57,7 +57,6 @@ function VendorViewReceipt({ purchaseInfo }) {
         <Box width="20" height="20">
           <Image
             src={itemImg}
-            alt={itemLabel}
             borderRadius="100"
             fit="contain"
             background="#ddd"
