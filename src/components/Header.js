@@ -20,7 +20,7 @@ function Header() {
   const logOutTrigger = () => {
     logOut().then(() => {
       localStorage.setItem("loginToken", null);
-      history.push("/home");
+      history.push("/");
       window.location.reload(); // trigger page reload to go to the directed page
     });
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Text,
@@ -10,9 +10,34 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { IoCart, IoArrowForwardCircle } from "react-icons/io5";
+import { runPostCheckout } from "../FirebaseVHome";
 
-function VendorViewReceipt() {
+function VendorViewReceipt({ purchaseInfo }) {
+  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+
+  const approvePurchase = () => {
+    setIsLoading(true);
+    // store the vendor information in some local storage
+    runPostCheckout(
+      purchaseInfo.purchaseInfo.vendorUid,
+      purchaseInfo.userId,
+      purchaseInfo.receiptId,
+      purchaseInfo
+    ).then(() => {
+      setIsLoading(false);
+      toast({
+        title: `Successfully approved`,
+        status: "success",
+        position: "top",
+        isClosable: true,
+        duration: 2000,
+      });
+      setTimeout(function () {
+        window.location.reload();
+      }, 2500);
+    });
+  };
 
   const RenderCheckoutItems = ({
     itemLabel,
@@ -76,21 +101,25 @@ function VendorViewReceipt() {
             justifyContent="center"
             alignItems="center"
           >
-            <Image
-              src="https://bit.ly/sage-adebayo"
-              alt="Segun Adebayo"
-              borderRadius="100"
-              width="75"
-              height="75"
-            />
+            <Box width="16" height="16">
+              <Image
+                src={purchaseInfo?.userImg}
+                borderRadius="100"
+                fit="contain"
+                background="#ddd"
+                width={"100%"}
+                height={"100%"}
+              />
+            </Box>
+
             <Box mx="2">
               <Text fontSize="22" fontWeight="bold">
-                Segun Adebayo
+                {purchaseInfo?.userName}
               </Text>
               <Box display="flex" flexDir="row">
                 <IoCart color="#222222" size="25" />
                 <Text fontSize="18" fontWeight="500" mx={1}>
-                  1 Items
+                  {purchaseInfo.purchaseInfo?.cartItems.length} Items
                 </Text>
               </Box>
             </Box>
@@ -109,7 +138,7 @@ function VendorViewReceipt() {
                 textAlign="right"
                 color="#0A63BC"
               >
-                $3.43
+                ${purchaseInfo.purchaseInfo?.total.toFixed(2)}
               </Text>
               <Text fontSize="16" textAlign="right">
                 Total with Tax + Fee
@@ -121,24 +150,14 @@ function VendorViewReceipt() {
         <Box borderBottom="1px" borderBottomColor="gray.200">
           <List height="500" overflow="auto">
             <ListItem>
-              <RenderCheckoutItems
-                itemLabel={"Taste Nirvana:Real Coconut Water with Pulp (Glass)"}
-                itemImg={
-                  "https://i5.walmartimages.com/asr/c28cd672-d72f-46f1-8f44-1477f930654f_1.d164bbb2fa9c9ef06337deeb491578fa.jpeg?odnHeight=450&odnWidth=450&odnBg=ffffff"
-                }
-                itemWeight={"1.00LT"}
-                itemPrice={3.24}
-              />
-              <RenderCheckoutItems
-                itemLabel={
-                  "MANGOES SWEET & TANGY SUPERSNACKS ORGANIC DRIED FRUIT"
-                }
-                itemImg={
-                  "https://i5.walmartimages.com/asr/90f0e452-1c6e-4f5b-ac17-438f1476d40e_3.abe7ed801568d5f66dd98f773099826f.png?odnHeight=450&odnWidth=450&odnBg=ffffff"
-                }
-                itemWeight={"1.1 Pounds"}
-                itemPrice={2.5}
-              />
+              {purchaseInfo.purchaseInfo?.cartItems.map((item, index) => (
+                <RenderCheckoutItems
+                  itemLabel={item.product_name}
+                  itemImg={item.img}
+                  itemWeight={item.size}
+                  itemPrice={item.sell_price}
+                />
+              ))}
             </ListItem>
           </List>
         </Box>
@@ -147,15 +166,9 @@ function VendorViewReceipt() {
           <Button
             colorScheme="green"
             size="lg"
+            isLoading={isLoading}
             rightIcon={<IoArrowForwardCircle size={25} />}
-            onClick={() =>
-              toast({
-                title: `Successfully approved`,
-                status: "success",
-                position: "top",
-                isClosable: true,
-              })
-            }
+            onClick={() => approvePurchase()}
           >
             Approve transaction
           </Button>

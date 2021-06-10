@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useToast } from "@chakra-ui/react";
 import "../App.css";
 import Header from "./Header.js";
 import HomeBody from "./Home/HomeBody.js";
@@ -16,8 +15,6 @@ import {
 import LoginScreen from "./Login/LoginScreen.js";
 
 function VendorHome() {
-  const toast = useToast();
-  const audio = new Audio("/newactivecustomer.mp3");
   const token = getToken();
 
   useEffect(() => {
@@ -37,7 +34,6 @@ function VendorHome() {
   return (
     <Router>
       <Header />
-
       <Switch>
         <Route path="/home" component={HomeBody}>
           <HomeBody />
