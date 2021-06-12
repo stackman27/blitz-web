@@ -7,11 +7,16 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  useToast,
   MenuList,
+  MenuOptionGroup,
+  MenuItemOption,
+  MenuDivider,
   Button,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { updatetoNFC, updatetoQR } from "./FirebaseGlobal";
 import { logOut } from "./Home/FirebaseVHome";
 
 function Header() {
@@ -19,6 +24,7 @@ function Header() {
 
   const logOutTrigger = () => {
     logOut().then(() => {
+      localStorage.setItem("vendorUId", null);
       localStorage.setItem("loginToken", null);
       history.push("/");
       window.location.reload(); // trigger page reload to go to the directed page
@@ -56,11 +62,11 @@ function Header() {
         paddingBottom="5"
         paddingTop="5"
         alignItems={"center"}
-        justifyContent={"space-between"}
+        justifyContent={"space-evenly"}
       >
         <Box>
           <Link
-            fontSize="3xl"
+            fontSize="4xl"
             color="#0A63BC"
             fontWeight="extrabold"
             fontStyle="italic"
@@ -75,7 +81,7 @@ function Header() {
           display="flex"
           flexDir={"row"}
           justifyContent="space-evenly"
-          width="50%"
+          width="60%"
         >
           <Box display={"flex"} position="relative" justifyContent={"center"}>
             <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
@@ -101,14 +107,39 @@ function Header() {
           </Box>
           <NavLink key={"2"} label={"Total Sales"} href={"/sales"} />
           <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
-          <ProfileMenu logOut={logOutTrigger} />
+          <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />
         </Box>
+        <ProfileMenu logOut={logOutTrigger} />
       </Flex>
     </Flex>
   );
 }
 
 function ProfileMenu({ logOut }) {
+  const toast = useToast();
+  const updateCheckoutType = (type) => {
+    if (type === "nfc") {
+      updatetoNFC().then(() => {
+        toast({
+          title: "Successfully updated to NFC",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+      });
+    } else {
+      updatetoQR().then(() => {
+        toast({
+          title: "Successfully updated to QR Code",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+      });
+    }
+  };
   return (
     <Menu>
       <MenuButton
@@ -116,10 +147,24 @@ function ProfileMenu({ logOut }) {
         rightIcon={<IoChevronDownOutline />}
         style={{ height: 33 }}
       >
-        {"Derby Food Center".split(" ")[0]}...
+        {"Derby Food Center"}
       </MenuButton>
       <MenuList>
         <MenuItem>Derby Food Center</MenuItem>
+        <MenuDivider />
+        <MenuOptionGroup
+          defaultValue="asc"
+          title="Default Checkout Type"
+          type="radio"
+        >
+          <MenuItemOption value="asc" onClick={() => updateCheckoutType("nfc")}>
+            NFC
+          </MenuItemOption>
+          <MenuItemOption value="desc" onClick={() => updateCheckoutType("qr")}>
+            QR Code
+          </MenuItemOption>
+        </MenuOptionGroup>
+        <MenuDivider />
         <MenuItem onClick={() => logOut()}>Log Out</MenuItem>
       </MenuList>
     </Menu>
