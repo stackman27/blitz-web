@@ -10,19 +10,24 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { IoPricetag, IoLayers } from "react-icons/io5";
 import { getInventory } from "./FirebaseInventory";
-import { IoLayers } from "react-icons/io5";
+import FilterOptions from "./components/FilterOptions";
 
 function Inventory() {
   const [items, setItems] = useState([]);
   const [numItems, setNumItems] = useState(0);
 
   useEffect(() => {
-    getInventory().then((res) => {
+    appliedFilterData();
+  }, []);
+
+  const appliedFilterData = (filterValue) => {
+    getInventory(filterValue).then((res) => {
       setItems(res[0]);
       setNumItems(res[1]);
     });
-  }, []);
+  };
 
   const RenderInventoryItems = ({ item }) => (
     <Link
@@ -40,11 +45,15 @@ function Inventory() {
         flexDir="row"
         alignItems="flex-start"
         borderBottom="1px"
-        borderBottomColor="gray.100"
+        borderBottomColor="lightgray"
       >
         <Box display="flex" flexDir="row">
           <Image
-            src={item.img}
+            src={
+              item.img
+                ? item.img
+                : "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+            }
             borderRadius="100"
             width="75"
             height="75"
@@ -57,9 +66,16 @@ function Inventory() {
               <Text fontWeight="400">Weight: {item.size}</Text>
               <Stack direction="row" my={2}>
                 {item.department && (
-                  <Badge bgColor="#2C528C30" px={2}>
-                    {item.department}
-                  </Badge>
+                  <Flex
+                    flexDir="row"
+                    bgColor="#2C528C10"
+                    alignItems="center"
+                    justifyContent="center"
+                    px={1}
+                  >
+                    <IoPricetag size={12} color="gray" />
+                    <Badge px={2}>{item.department}</Badge>
+                  </Flex>
                 )}
                 {item.has_crv && (
                   <Badge bgColor="#1aa26030" px={2}>
@@ -114,6 +130,8 @@ function Inventory() {
             </Text>
           </Box>
         </Box>
+
+        <FilterOptions dataFilter={appliedFilterData} />
 
         <Box>
           <List>

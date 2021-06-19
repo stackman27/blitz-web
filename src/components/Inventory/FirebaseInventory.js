@@ -1,21 +1,34 @@
 import firebase from "../../Firebase";
+import { vendorUid } from "../Variables";
 
-async function getInventory() {
+async function getInventory(filterOption) {
   var inventory = [];
   var totalInventory = 0;
-  await firebase
-    .firestore()
-    .collection("blitz_vendors")
-    .doc("xMDIkMRFrTSpBD4q2mLzNaUeDUm1")
-    .collection("inventory")
-    .limit(25)
-    .get()
-    .then((res) => {
-      res.forEach((doc) => {
-        inventory.push(doc.data());
-      });
-      totalInventory = res.size;
+  var dbRef = null;
+
+  if (!filterOption || filterOption === "All") {
+    dbRef = firebase
+      .firestore()
+      .collection("blitz_vendors")
+      .doc(vendorUid)
+      .collection("inventory")
+      .limit(25);
+  } else {
+    dbRef = firebase
+      .firestore()
+      .collection("blitz_vendors")
+      .doc(vendorUid)
+      .collection("inventory")
+      .where("department", "==", filterOption)
+      .limit(25);
+  }
+
+  await dbRef.get().then((res) => {
+    res.forEach((doc) => {
+      inventory.push(doc.data());
     });
+    totalInventory = res.size;
+  });
 
   return [inventory, totalInventory];
 }
@@ -24,7 +37,7 @@ async function getProductDetails(bId) {
   const snapshot = await firebase
     .firestore()
     .collection("blitz_vendors")
-    .doc("xMDIkMRFrTSpBD4q2mLzNaUeDUm1")
+    .doc(vendorUid)
     .collection("inventory")
     .doc(JSON.stringify(bId))
     .get();
@@ -39,7 +52,7 @@ async function updateInventory(bId, item) {
   await firebase
     .firestore()
     .collection("blitz_vendors")
-    .doc("xMDIkMRFrTSpBD4q2mLzNaUeDUm1")
+    .doc(vendorUid)
     .collection("inventory")
     .doc(JSON.stringify(bId))
     .update(item);
@@ -49,7 +62,7 @@ async function removeItem(bId) {
   await firebase
     .firestore()
     .collection("blitz_vendors")
-    .doc("xMDIkMRFrTSpBD4q2mLzNaUeDUm1")
+    .doc(vendorUid)
     .collection("inventory")
     .doc(JSON.stringify(bId))
     .delete();

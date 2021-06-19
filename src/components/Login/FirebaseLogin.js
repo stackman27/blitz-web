@@ -23,7 +23,6 @@ async function checkifVendor(vendorUid) {
 function saveToken(res) {
   var credential = res.credential;
   var token = credential.accessToken;
-  localStorage.setItem("vendorUId", JSON.stringify(res.user.uid));
   localStorage.setItem("loginToken", JSON.stringify(token));
 }
 

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../App.css";
-import Header from "./Header.js";
+import Header from "./Header/index.js";
 import HomeBody from "./Home/HomeBody.js";
 import TotalSales from "./TotalSales/index.js";
 import ActiveCustomers from "./ActiveCustomers/index.js";
 import Inventory from "./Inventory/index.js";
-import InventoryDetails from "./Inventory/InventoryDetails.js";
+import InventoryDetails from "./Inventory/InventoryDetails";
 import SalesDetails from "./TotalSales/SalesDetails.js";
 import {
   requestPermissionNotificationWeb,

@@ -27,7 +27,7 @@ import {
   getProductDetails,
   updateInventory,
   removeItem,
-} from "./FirebaseInventory";
+} from "../FirebaseInventory";
 
 function InventoryDetails() {
   const { state } = useLocation();
@@ -104,13 +104,12 @@ function InventoryDetails() {
           justifyContent="space-between"
           alignItems="center"
         >
-          
           <Image
             src={
               item.img
-                ? item.img 
+                ? item.img
                 : "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
-              }
+            }
             width={100}
             height={100}
           />

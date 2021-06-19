@@ -1,19 +1,15 @@
 import firebase from "../Firebase";
 
-const vendorUid = JSON.parse(localStorage.getItem("vendorUId"));
-const blitz_vendor_ref = firebase
-  .firestore()
-  .collection("blitz_vendors")
-  .doc(vendorUid);
+const blitz_vendor_ref = firebase.firestore().collection("blitz_vendors");
 
-async function updatetoNFC() {
-  await blitz_vendor_ref.update({
+async function updatetoNFC(vendorUId) {
+  await blitz_vendor_ref.doc(vendorUId).update({
     checkout_type: "nfc",
   });
 }
 
-async function updatetoQR() {
-  await blitz_vendor_ref.update({
+async function updatetoQR(vendorUId) {
+  await blitz_vendor_ref.doc(vendorUId).update({
     checkout_type: "qr",
   });
 }

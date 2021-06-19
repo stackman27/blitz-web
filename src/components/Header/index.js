@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Flex,
-  Text,
   Box,
   Link,
   Menu,
@@ -16,15 +15,15 @@ import {
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
-import { updatetoNFC, updatetoQR } from "./FirebaseGlobal";
-import { logOut } from "./Home/FirebaseVHome";
+import { updatetoNFC, updatetoQR } from "../FirebaseGlobal";
+import { logOut } from "../Home/FirebaseVHome";
+import { vendorUid } from "../Variables";
 
 function Header() {
   const history = useHistory();
 
   const logOutTrigger = () => {
     logOut().then(() => {
-      localStorage.setItem("vendorUId", null);
       localStorage.setItem("loginToken", null);
       history.push("/");
       window.location.reload(); // trigger page reload to go to the directed page
@@ -85,7 +84,7 @@ function Header() {
         >
           <Box display={"flex"} position="relative" justifyContent={"center"}>
             <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
-            <Text
+            {/* <Text
               style={{
                 position: "absolute",
                 top: 0,
@@ -103,7 +102,7 @@ function Header() {
               }}
             >
               2
-            </Text>
+            </Text> */}
           </Box>
           <NavLink key={"2"} label={"Total Sales"} href={"/sales"} />
           <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
@@ -119,7 +118,7 @@ function ProfileMenu({ logOut }) {
   const toast = useToast();
   const updateCheckoutType = (type) => {
     if (type === "nfc") {
-      updatetoNFC().then(() => {
+      updatetoNFC(vendorUid).then(() => {
         toast({
           title: "Successfully updated to NFC",
           status: "success",
@@ -129,7 +128,7 @@ function ProfileMenu({ logOut }) {
         });
       });
     } else {
-      updatetoQR().then(() => {
+      updatetoQR(vendorUid).then(() => {
         toast({
           title: "Successfully updated to QR Code",
           status: "success",
@@ -147,7 +146,7 @@ function ProfileMenu({ logOut }) {
         rightIcon={<IoChevronDownOutline />}
         style={{ height: 33 }}
       >
-        {"Derby Food Center"}
+        {"Derby Food Center".replace(/(.{21})..+/, "$1…")}
       </MenuButton>
       <MenuList>
         <MenuItem>Derby Food Center</MenuItem>
