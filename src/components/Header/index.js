@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Box,
@@ -8,6 +8,7 @@ import {
   MenuItem,
   useToast,
   MenuList,
+  Skeleton,
   MenuOptionGroup,
   MenuItemOption,
   MenuDivider,
@@ -16,11 +17,18 @@ import {
 import { useHistory } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { updatetoNFC, updatetoQR } from "../FirebaseGlobal";
-import { logOut } from "../Home/FirebaseVHome";
+import { getVendorInfo, logOut } from "../Home/FirebaseVHome";
 import { vendorUid } from "../Variables";
 
 function Header() {
   const history = useHistory();
+  const [vendorInfo, setVendorInfo] = useState({});
+
+  useEffect(() => {
+    getVendorInfo().then((res) => {
+      setVendorInfo(res);
+    });
+  }, []);
 
   const logOutTrigger = () => {
     logOut().then(() => {
@@ -109,14 +117,15 @@ function Header() {
           <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
           <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />
         </Box>
-        <ProfileMenu logOut={logOutTrigger} />
+        <ProfileMenu vendorInfo={vendorInfo} logOut={logOutTrigger} />
       </Flex>
     </Flex>
   );
 }
 
-function ProfileMenu({ logOut }) {
+function ProfileMenu({ vendorInfo, logOut }) {
   const toast = useToast();
+
   const updateCheckoutType = (type) => {
     if (type === "nfc") {
       updatetoNFC(vendorUid).then(() => {
@@ -142,15 +151,19 @@ function ProfileMenu({ logOut }) {
   };
   return (
     <Menu>
-      <MenuButton
-        as={Button}
-        rightIcon={<IoChevronDownOutline />}
-        style={{ height: 33 }}
-      >
-        {"Derby Food Center".replace(/(.{21})..+/, "$1…")}
-      </MenuButton>
+      <Skeleton isLoaded>
+        <MenuButton
+          as={Button}
+          minW={170}
+          rightIcon={<IoChevronDownOutline />}
+          style={{ height: 33 }}
+        >
+          {vendorInfo.storeName &&
+            vendorInfo.storeName.replace(/(.{21})..+/, "$1…")}
+        </MenuButton>
+      </Skeleton>
       <MenuList>
-        <MenuItem>Derby Food Center</MenuItem>
+        <MenuItem>{vendorInfo.storeName}</MenuItem>
         <MenuDivider />
         <MenuOptionGroup
           defaultValue="asc"

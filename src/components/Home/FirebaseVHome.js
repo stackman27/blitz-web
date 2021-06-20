@@ -3,6 +3,15 @@ import { vendorUid } from "../Variables";
 
 const availableTags = ["047D5B02700000"];
 
+async function getVendorInfo() {
+  const snapshot = await firebase
+    .firestore()
+    .collection("blitz_vendors")
+    .doc(vendorUid)
+    .get();
+  return snapshot.data();
+}
+
 async function requestPermissionNotificationWeb() {
   const messaging = firebase.messaging();
   await messaging
@@ -187,4 +196,5 @@ export {
   waitingPaymentReceipt,
   removeActiveUser,
   runPostCheckout,
+  getVendorInfo,
 };
