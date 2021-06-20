@@ -25,6 +25,7 @@ function Header() {
   const logOutTrigger = () => {
     logOut().then(() => {
       localStorage.setItem("loginToken", null);
+      localStorage.setItem("user", null);
       history.push("/");
       window.location.reload(); // trigger page reload to go to the directed page
     });

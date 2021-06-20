@@ -1,1 +1,2 @@
-export const vendorUid = "xMDIkMRFrTSpBD4q2mLzNaUeDUm1";
+const getUser = JSON.parse(localStorage.getItem("user"));
+export const vendorUid = getUser.uid;

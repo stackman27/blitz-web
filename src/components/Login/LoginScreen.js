@@ -6,6 +6,7 @@ import {
   signInWithGoogle,
   checkifVendor,
   saveToken,
+  saveUser,
 } from "../Login/FirebaseLogin";
 
 function LoginScreen() {
@@ -18,6 +19,7 @@ function LoginScreen() {
         if (vRes) {
           // user is a vendor
           saveToken(res);
+          saveUser(res.user);
           history.push("/home");
           window.location.reload(); // trigger page reload to go to the directed url
         } else {

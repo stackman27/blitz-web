@@ -26,4 +26,8 @@ function saveToken(res) {
   localStorage.setItem("loginToken", JSON.stringify(token));
 }
 
-export { signInWithGoogle, checkifVendor, saveToken };
+function saveUser(res) {
+  localStorage.setItem("user", JSON.stringify(res));
+}
+
+export { signInWithGoogle, checkifVendor, saveToken, saveUser };
