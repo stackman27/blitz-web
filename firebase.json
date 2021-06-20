@@ -7,11 +7,17 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "public",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
   "storage": {
@@ -32,9 +38,16 @@
     },
     "ui": {
       "enabled": true
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
     }
   },
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
+  "remoteconfig": {},
+  "functions": {
+    "source": "functions"
   }
 }
