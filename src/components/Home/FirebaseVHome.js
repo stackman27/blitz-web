@@ -39,6 +39,11 @@ function getToken() {
   return userToken;
 }
 
+function getUser() {
+  const userInfo = JSON.parse(localStorage.getItem("user"));
+  return userInfo;
+}
+
 async function logOut() {
   return await firebase.auth().signOut();
 }
@@ -192,6 +197,7 @@ async function removePaymentsCollVendor(vendorUid, receiptId) {
 export {
   requestPermissionNotificationWeb,
   getToken,
+  getUser,
   logOut,
   waitingPaymentReceipt,
   removeActiveUser,

@@ -11,17 +11,19 @@ import SalesDetails from "./TotalSales/SalesDetails.js";
 import {
   requestPermissionNotificationWeb,
   getToken,
+  getUser,
 } from "./Home/FirebaseVHome";
-import LoginScreen from "./Login/LoginScreen.js";
+import LoginScreen from "../Layout/Login/LoginScreen.js";
 
 function VendorHome() {
   const token = getToken();
+  const user = getUser();
 
   useEffect(() => {
     requestPermissionNotificationWeb();
   }, []);
 
-  if (!token) {
+  if (!token || !user) {
     return (
       <Router>
         <Route path="/" component={LoginScreen}>
