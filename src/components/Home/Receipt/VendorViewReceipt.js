@@ -25,7 +25,6 @@ function VendorViewReceipt({ purchaseInfo }) {
       purchaseInfo.receiptId,
       purchaseInfo
     ).then(() => {
-      setIsLoading(false);
       toast({
         title: `Successfully approved`,
         status: "success",
@@ -34,8 +33,9 @@ function VendorViewReceipt({ purchaseInfo }) {
         duration: 2000,
       });
       setTimeout(function () {
+        setIsLoading(false);
         window.location.reload();
-      }, 2500);
+      }, 1500);
     });
   };
 

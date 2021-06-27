@@ -49,6 +49,7 @@ async function logOut() {
 }
 
 function waitingPaymentReceipt(vendorUid) {
+  console.log(vendorUid);
   return firebase
     .firestore()
     .collection("blitz_vendors")

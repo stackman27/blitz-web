@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "react-native-stripe-cb5f9"
+    "default": "react-native-stripe-cb5f9",
+    "development": "blitz-checkout-dev"
   }
 }

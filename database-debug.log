@@ -1,7 +1,9 @@
-00:09:26.821 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-00:09:27.025 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
-00:35:05.304 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
-00:35:05.320 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.Terminator$Terminator - 1 actors left to terminate: react-native-stripe-cb5f9-default-rtdb
-00:35:05.343 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for react-native-stripe-cb5f9-default-rtdb
-00:35:05.344 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for react-native-stripe-cb5f9-default-rtdb
-00:35:05.351 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
+19:15:38.921 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+19:15:39.131 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
+19:36:39.583 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+19:36:39.612 [NamespaceSystem-akka.actor.default-dispatcher-8] INFO com.firebase.core.namespace.Terminator$Terminator - 2 actors left to terminate: react-native-stripe-cb5f9-default-rtdb, react-native-stripe-cb5f9
+19:36:39.659 [NamespaceSystem-akka.actor.default-dispatcher-8] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for react-native-stripe-cb5f9
+19:36:39.659 [NamespaceSystem-akka.actor.default-dispatcher-12] INFO com.firebase.core.namespace.NamespaceActor - Stopping namespace actor for react-native-stripe-cb5f9-default-rtdb
+19:36:39.660 [NamespaceSystem-akka.actor.default-dispatcher-8] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for react-native-stripe-cb5f9
+19:36:39.662 [NamespaceSystem-akka.actor.default-dispatcher-12] INFO com.firebase.core.namespace.NamespaceActor - Gauges removed for react-native-stripe-cb5f9-default-rtdb
+19:36:39.674 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.
