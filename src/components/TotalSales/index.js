@@ -6,7 +6,7 @@ import moment from "moment";
 
 function TotalSales() {
   const [receipts, setReceipts] = useState([]);
-  const [numReceipts, setNumReceipts] = useState(0);
+  const [, setNumReceipts] = useState(0);
 
   useEffect(() => {
     getSalesReceipts().then((res) => {
