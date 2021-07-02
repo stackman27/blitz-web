@@ -20,7 +20,7 @@ function HomeBody() {
 
           setTimeout(() => {
             setScannedReceipt(false);
-          }, 10000);
+          }, 30000);
         }
       });
     });
