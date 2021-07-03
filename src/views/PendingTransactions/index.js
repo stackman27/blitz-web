@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Text, Flex, Box, Image, List, ListItem } from "@chakra-ui/react";
+import { Text, Flex, Box, List, ListItem, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { getSalesReceipts } from "../../fb-api-calls/FirebaseSales.js";
+import {
+  getPendingTransactions,
+  getTransactionDetails,
+} from "./FirebasePending";
 import moment from "moment";
 
-function TotalSales() {
+function PendingTransactions() {
   const [receipts, setReceipts] = useState([]);
   const [, setNumReceipts] = useState(0);
 
   useEffect(() => {
-    getSalesReceipts().then((res) => {
+    getPendingTransactions().then((res) => {
       setReceipts(res[0]);
       setNumReceipts(res[1]);
     });
   }, []);
 
-  const RenderSalesReceipts = ({ item }) => (
+  const RenderPendingTransactions = ({ item }) => (
     <Link
       to={{
-        pathname: "/salesDetail",
+        pathname: "/pendingDetail",
         state: { rId: item.receiptId },
       }}
     >
@@ -36,7 +39,7 @@ function TotalSales() {
         <Box display="flex" flexDir="row">
           <Box width="16" height="16">
             <Image
-              src={item.purchaseInfo.userImg}
+              src={item.userImg}
               borderRadius="100"
               fit="contain"
               background="#ddd"
@@ -46,7 +49,7 @@ function TotalSales() {
           </Box>
           <Box mx="2" display="flex" justifyContent="center" flexDir="column">
             <Text fontWeight="500" fontSize="20">
-              {item.purchaseInfo.userName}
+              {item.userName}
             </Text>
             <Text fontSize="18" fontWeight="400">
               {moment(item.timestamp.toDate()).format("MMMM Do YYYY")}
@@ -57,9 +60,9 @@ function TotalSales() {
         <Box display="flex" flexDir="row">
           <Box mx="2">
             <Text fontSize="22" fontWeight="600" textAlign="right">
-              ${item.purchaseInfo.purchaseInfo.total.toFixed(2)}
+              ${item.purchaseInfo.total.toFixed(2)}
             </Text>
-            {item.purchaseInfo.purchaseInfo.discountUsed ? (
+            {item.purchaseInfo.discountUsed ? (
               <Text
                 fontSize="18"
                 fontWeight="500"
@@ -92,7 +95,7 @@ function TotalSales() {
           paddingBottom="1"
         >
           <Text fontSize={30} fontWeight="bold">
-            Sales History
+            Pending Transactions
           </Text>
           <Box display="flex" flexDir="row" alignItems="center"></Box>
         </Box>
@@ -101,7 +104,7 @@ function TotalSales() {
           <List>
             <ListItem>
               {receipts.map((i, index) => (
-                <RenderSalesReceipts item={i} />
+                <RenderPendingTransactions item={i} />
               ))}
             </ListItem>
           </List>
@@ -111,4 +114,4 @@ function TotalSales() {
   );
 }
 
-export default TotalSales;
+export default PendingTransactions;

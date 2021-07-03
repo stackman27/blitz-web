@@ -72,6 +72,12 @@ function VendorHome() {
         <Route path="/sales" component={TotalSales}>
           <TotalSales />
         </Route>
+        <Route path="/pending" component={TotalSales}>
+          <PendingTransactions />
+        </Route>
+        <Route path="/pendingDetail" component={TotalSales}>
+          <PendingTransactionsDetail />
+        </Route>
         <Route path="/inventory" component={Inventory}>
           <Inventory />
         </Route>
