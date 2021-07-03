@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Text, Flex, Box, List, ListItem, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import {
-  getPendingTransactions,
-  getTransactionDetails,
-} from "./FirebasePending";
 import moment from "moment";
+import { getPendingTransactions } from "../../fb-api-calls/FirebasePendingTransaction";
+import { IoReloadCircle } from "react-icons/io5";
 
 function PendingTransactions() {
   const [receipts, setReceipts] = useState([]);
-  const [, setNumReceipts] = useState(0);
+  const [numTransactions, setNumTransactions] = useState(0);
 
   useEffect(() => {
     getPendingTransactions().then((res) => {
       setReceipts(res[0]);
-      setNumReceipts(res[1]);
+      setNumTransactions(res[1]);
     });
   }, []);
 
@@ -97,7 +95,12 @@ function PendingTransactions() {
           <Text fontSize={30} fontWeight="bold">
             Pending Transactions
           </Text>
-          <Box display="flex" flexDir="row" alignItems="center"></Box>
+          <Box display="flex" flexDir="row" alignItems="center">
+            <IoReloadCircle size={28} color="purple" />
+            <Text fontSize={22} fontWeight="600">
+              &nbsp;{numTransactions}
+            </Text>
+          </Box>
         </Box>
 
         <Box>

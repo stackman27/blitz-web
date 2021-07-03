@@ -1,5 +1,5 @@
-import firebase from "../../Firebase";
-import { vendorUid } from "../Variables";
+import firebase from "../Firebase";
+import { vendorUid } from "../constants/Variables";
 
 async function getPendingTransactions() {
   var pending_transactions = [];

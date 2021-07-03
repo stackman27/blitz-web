@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useHistory } from "react-router-dom";
 import { IoCart, IoArrowForwardCircle } from "react-icons/io5";
-import { getTransactionDetails } from "../PendingTransactions/FirebasePending";
-import { runPostCheckout } from "../Home/FirebaseVHome";
+import { getTransactionDetails } from "../../fb-api-calls/FirebasePendingTransaction";
+import { runPostCheckout } from "../../fb-api-calls/FirebaseHome";
 
 function PendingTransactionsDetail() {
   const { state } = useLocation();
