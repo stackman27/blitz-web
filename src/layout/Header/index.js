@@ -6,7 +6,11 @@ import {
   Menu,
   MenuButton,
   MenuItem,
+  Stack,
   useToast,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
   MenuList,
   Skeleton,
   MenuOptionGroup,
@@ -91,28 +95,7 @@ function Header() {
           justifyContent="space-evenly"
           width="60%"
         >
-          <Box display={"flex"} position="relative" justifyContent={"center"}>
-            <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
-            {/* <Text
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                width: 20,
-                height: 20,
-                fontWeight: "bold",
-                textAlign: "center",
-                alignItems: "center",
-                borderWidth: 0,
-                fontSize: 13,
-                borderRadius: 100,
-                background: "red",
-                color: "#fff",
-              }}
-            >
-              2
-            </Text> */}
-          </Box>
+          <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
           <NavLink key={"2"} label={"Total Sales"} href={"/sales"} />
           <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
           <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />

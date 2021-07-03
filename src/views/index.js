@@ -24,17 +24,18 @@ function VendorHome() {
 
   useEffect(() => {
     requestPermissionNotificationWeb();
-  }, []);
-
-  navigator.serviceWorker.addEventListener("message", (message) => {
-    try {
-      triggerActiveUser(
-        message.data["firebase-messaging-msg-data"].notification
-      );
-    } catch (err) {
-      console.log("Error", err);
+    if (token) {
+      navigator.serviceWorker.addEventListener("message", (message) => {
+        try {
+          triggerActiveUser(
+            message.data["firebase-messaging-msg-data"].notification
+          );
+        } catch (err) {
+          console.log("Error", err);
+        }
+      });
     }
-  });
+  }, []);
 
   const triggerActiveUser = (data) => {
     audio.play();

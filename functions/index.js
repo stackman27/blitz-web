@@ -27,3 +27,31 @@ exports.newActiveCustomer = functions.firestore
       console.log(err);
     }
   });
+
+// exports.newActiveCustomer = functions.firestore
+//   .document("blitz_vendors/{vendorId}/payments_completed/{receiptId}")
+//   .onCreate(async (snap) => {
+//     const data = snap.data();
+//     if (data.status === "verifying") {
+//       try {
+//         const payload = {
+//           notification: {
+//             title: "Verify Customer",
+//             body: `${data.userName} wants to verify their receipt.`,
+//           },
+//         };
+//         return admin
+//           .messaging()
+//           .sendToDevice(
+//             `dfP5zFs7sjb0Uqhiif-px5:APA91bEu4Seb36WL7JhWfayq5NINdDX1evkt3RS2rD7jgfwoboagy-8Kwmo47wi5Sr2kJYljQTGAETwllCubqeCOC3wyGeAncsZOft_r5iGehf8IGzVqn-Gqtt2GOlXkr6mvk9-tdR2y`,
+//             payload
+//           )
+//           .then(() => {
+//             console.log("Notification sent!");
+//             return null;
+//           });
+//       } catch (err) {
+//         console.log(err);
+//       }
+//     }
+//   });
