@@ -24,3 +24,6 @@ yarn-error.log*
 
 # API keys
 .env
+
+# firebase setup file
+Firebase.js
