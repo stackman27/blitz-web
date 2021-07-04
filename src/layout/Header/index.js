@@ -13,6 +13,10 @@ import {
   MenuItemOption,
   MenuDivider,
   Button,
+  PopoverContent,
+  Popover,
+  PopoverTrigger,
+  Stack,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
@@ -92,7 +96,64 @@ function Header() {
           width="60%"
         >
           <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
-          <NavLink key={"2"} label={"Total Sales"} href={"/sales"} />
+          <Popover trigger="hover" placement="bottom-start">
+            <PopoverTrigger>
+              <Link
+                px={2}
+                py={1}
+                as={Flex}
+                flexDir="row"
+                alignItems="center"
+                rounded={"md"}
+                fontWeight={500}
+                fontFamily="Avenir"
+                color={"#222222"}
+                _hover={{
+                  textDecoration: "none",
+                  bg: "#0A63BC10",
+                }}
+                rel="noopener noreferrer"
+              >
+                Sales {"&"} Receipts&nbsp;
+                <IoChevronDownOutline />
+              </Link>
+            </PopoverTrigger>
+            <PopoverContent width="56">
+              <Stack margin={0}>
+                <Link
+                  fontWeight={500}
+                  px={3}
+                  py={3}
+                  fontFamily="Avenir"
+                  color={"#222222"}
+                  _hover={{
+                    textDecoration: "none",
+                    bg: "#0A63BC10",
+                  }}
+                  href={"/sales"}
+                  rel="noopener noreferrer"
+                >
+                  Total Sales
+                </Link>
+                <Link
+                  fontWeight={500}
+                  px={3}
+                  py={3}
+                  fontFamily="Avenir"
+                  color={"#222222"}
+                  _hover={{
+                    textDecoration: "none",
+                    bg: "#0A63BC10",
+                  }}
+                  href={"/pending"}
+                  rel="noopener noreferrer"
+                >
+                  Pending Transactions
+                </Link>
+              </Stack>
+            </PopoverContent>
+          </Popover>
+
           <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
           <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />
         </Box>
