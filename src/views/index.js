@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../App.css";
 import Header from "../layout/Header";
@@ -18,10 +19,35 @@ import LoginScreen from "../views/Login/LoginScreen.js";
 function VendorHome() {
   const token = getToken();
   const user = getUser();
+  const toast = useToast();
+  let audio = new Audio("/newactivecustomer.mp3");
 
   useEffect(() => {
     requestPermissionNotificationWeb();
+    if (token) {
+      navigator.serviceWorker.addEventListener("message", (message) => {
+        try {
+          triggerActiveUser(
+            message.data["firebase-messaging-msg-data"].notification
+          );
+        } catch (err) {
+          console.log("Error", err);
+        }
+      });
+    }
   }, []);
+
+  const triggerActiveUser = (data) => {
+    audio.play();
+    toast({
+      title: data.title,
+      description: data.body,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "top",
+    });
+  };
 
   if (!token || !user) {
     return (
