@@ -39,12 +39,7 @@ function VendorViewReceipt({ purchaseInfo }) {
     });
   };
 
-  const RenderCheckoutItems = ({
-    itemLabel,
-    itemPrice,
-    itemImg,
-    itemWeight,
-  }) => (
+  const RenderCheckoutItems = ({ item }) => (
     <Box
       display="flex"
       flex={1}
@@ -56,7 +51,7 @@ function VendorViewReceipt({ purchaseInfo }) {
       <Box display="flex" flexDir="row">
         <Box width="20" height="20">
           <Image
-            src={itemImg}
+            src={item.img}
             borderRadius="100"
             fit="contain"
             background="#ddd"
@@ -66,16 +61,24 @@ function VendorViewReceipt({ purchaseInfo }) {
         </Box>
         <Box mx="2">
           <Text fontWeight="500" fontSize="20">
-            {itemLabel}
+            {item.product_name}
           </Text>
-          <Text fontWeight="400">Weight: {itemWeight}</Text>
+          <Flex flexDir="row">
+            <Text fontWeight="400">Weight: {item.size}</Text>
+            &nbsp; &nbsp;
+            <Text style={{ color: "#bbb" }}>|</Text>
+            &nbsp; &nbsp;
+            <Text fontWeight="600" color="#0A63BC">
+              Count: x{item.purchaseCount}
+            </Text>
+          </Flex>
         </Box>
       </Box>
 
       <Box display="flex" flexDir="row">
         <Box mx="2">
           <Text fontSize="22" fontWeight="600" textAlign="right">
-            ${itemPrice.toFixed(2)}
+            ${item.sell_price.toFixed(2)}
           </Text>
         </Box>
       </Box>
@@ -150,12 +153,7 @@ function VendorViewReceipt({ purchaseInfo }) {
           <List height="500" overflow="auto">
             <ListItem>
               {purchaseInfo.purchaseInfo?.cartItems.map((item, index) => (
-                <RenderCheckoutItems
-                  itemLabel={item.product_name}
-                  itemImg={item.img}
-                  itemWeight={item.size}
-                  itemPrice={item.sell_price}
-                />
+                <RenderCheckoutItems item={item} />
               ))}
             </ListItem>
           </List>

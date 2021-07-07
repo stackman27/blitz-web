@@ -14,12 +14,7 @@ function SalesDetails() {
     });
   }, []);
 
-  const RenderCheckoutItems = ({
-    itemLabel,
-    itemPrice,
-    itemImg,
-    itemWeight,
-  }) => (
+  const RenderCheckoutItems = ({ item }) => (
     <Box
       display="flex"
       flex={1}
@@ -31,7 +26,7 @@ function SalesDetails() {
       <Box display="flex" flexDir="row">
         <Box width="20" height="20">
           <Image
-            src={itemImg}
+            src={item.img}
             borderRadius="100"
             fit="contain"
             background="#ddd"
@@ -42,16 +37,24 @@ function SalesDetails() {
 
         <Box mx="2">
           <Text fontWeight="500" fontSize={20}>
-            {itemLabel}
+            {item.product_name}
           </Text>
-          <Text fontWeight="400">Weight: {itemWeight}</Text>
+          <Flex flexDir="row">
+            <Text fontWeight="400">Weight: {item.size}</Text>
+            &nbsp; &nbsp;
+            <Text style={{ color: "#bbb" }}>|</Text>
+            &nbsp; &nbsp;
+            <Text fontWeight="600" color="#0A63BC">
+              Count: x{item.purchaseCount ? item.purchaseCount : 1}
+            </Text>
+          </Flex>
         </Box>
       </Box>
 
       <Box display="flex" flexDir="row">
         <Box mx="2">
           <Text fontSize={20} fontWeight="600" textAlign="right">
-            ${itemPrice.toFixed(2)}
+            ${item.sell_price.toFixed(2)}
           </Text>
         </Box>
       </Box>
@@ -150,6 +153,18 @@ function SalesDetails() {
               />
             )}
 
+          {sales.purchaseInfo &&
+            sales.purchaseInfo.purchaseInfo.sugarTax > 0 && (
+              <ShowTaxesInfo
+                purchaseInfo={
+                  sales.purchaseInfo
+                    ? sales.purchaseInfo.purchaseInfo.sugarTax
+                    : 0
+                }
+                labelDesc={"Sugar Tax"}
+              />
+            )}
+
           <ShowTaxesInfo
             purchaseInfo={
               sales.purchaseInfo ? sales.purchaseInfo.purchaseInfo.blitzFee : 0
@@ -157,17 +172,14 @@ function SalesDetails() {
             labelDesc={"Blitz Fee"}
           />
 
-          {sales.purchaseInfo &&
-            sales.purchaseInfo.purchaseInfo.blitzFee > 0 && (
-              <ShowTaxesInfo
-                purchaseInfo={
-                  sales.purchaseInfo
-                    ? sales.purchaseInfo.purchaseInfo.crvFee
-                    : 0
-                }
-                labelDesc={"CRV Fee"}
-              />
-            )}
+          {sales.purchaseInfo && sales.purchaseInfo.purchaseInfo.crvFee > 0 && (
+            <ShowTaxesInfo
+              purchaseInfo={
+                sales.purchaseInfo ? sales.purchaseInfo.purchaseInfo.crvFee : 0
+              }
+              labelDesc={"CRV Fee"}
+            />
+          )}
 
           {sales.purchaseInfo &&
             sales.purchaseInfo.purchaseInfo.blitzDiscount > 0 && (
@@ -198,12 +210,7 @@ function SalesDetails() {
             <ListItem>
               {sales.purchaseInfo &&
                 sales.purchaseInfo.purchaseInfo.cartItems.map((item, index) => (
-                  <RenderCheckoutItems
-                    itemLabel={item.product_name}
-                    itemImg={item.img}
-                    itemWeight={item.size}
-                    itemPrice={item.sell_price}
-                  />
+                  <RenderCheckoutItems item={item} />
                 ))}
             </ListItem>
           </List>
