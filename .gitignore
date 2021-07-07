@@ -26,4 +26,4 @@ yarn-error.log*
 .env
 
 # firebase setup file
-Firebase.js
+src/Firebase.js
