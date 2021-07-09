@@ -16,7 +16,6 @@ function LoginScreen() {
 
   const signIn = () => {
     signInWithGoogle().then((res) => {
-      console.log("RESSS", res.user);
       checkifVendor(res.user.uid).then((vRes) => {
         if (vRes) {
           // user is a vendor

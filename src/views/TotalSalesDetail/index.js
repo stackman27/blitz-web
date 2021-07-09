@@ -10,7 +10,6 @@ function SalesDetails() {
 
   useEffect(() => {
     getSalesDetails(state.rId).then((res) => {
-      console.log(res);
       setSales(res);
     });
   }, []);

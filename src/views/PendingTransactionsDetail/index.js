@@ -23,7 +23,6 @@ function PendingTransactionsDetail() {
 
   useEffect(() => {
     getTransactionDetails(state.rId).then((res) => {
-      console.log(res);
       setPendingTx(res);
     });
   }, []);
