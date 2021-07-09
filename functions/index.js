@@ -4,7 +4,7 @@ admin.initializeApp();
 
 exports.newActiveCustomer = functions.firestore
   .document("blitz_vendors/{vendorId}/active_customers/{userId}")
-  .onCreate(async (snap) => {
+  .onCreate(async (snap, context) => {
     const data = snap.data();
     try {
       const payload = {
@@ -13,45 +13,49 @@ exports.newActiveCustomer = functions.firestore
           body: `${data.uName} started shopping in your store.`,
         },
       };
-      return admin
-        .messaging()
-        .sendToDevice(
-          `dfP5zFs7sjb0Uqhiif-px5:APA91bEu4Seb36WL7JhWfayq5NINdDX1evkt3RS2rD7jgfwoboagy-8Kwmo47wi5Sr2kJYljQTGAETwllCubqeCOC3wyGeAncsZOft_r5iGehf8IGzVqn-Gqtt2GOlXkr6mvk9-tdR2y`,
-          payload
-        )
-        .then(() => {
-          console.log("Notification sent!");
-          return null;
+      await admin
+        .firestore()
+        .collection("blitz_vendors")
+        .doc(context.params.vendorId)
+        .get()
+        .then((res) => {
+          sendNotification(payload, res.data().web_notif_token);
         });
     } catch (err) {
       console.log(err);
     }
   });
 
-// exports.newActiveCustomer = functions.firestore
-//   .document("blitz_vendors/{vendorId}/payments_completed/{receiptId}")
-//   .onCreate(async (snap) => {
-//     const data = snap.data();
-//     if (data.status === "verifying") {
-//       try {
-//         const payload = {
-//           notification: {
-//             title: "Verify Customer",
-//             body: `${data.userName} wants to verify their receipt.`,
-//           },
-//         };
-//         return admin
-//           .messaging()
-//           .sendToDevice(
-//             `dfP5zFs7sjb0Uqhiif-px5:APA91bEu4Seb36WL7JhWfayq5NINdDX1evkt3RS2rD7jgfwoboagy-8Kwmo47wi5Sr2kJYljQTGAETwllCubqeCOC3wyGeAncsZOft_r5iGehf8IGzVqn-Gqtt2GOlXkr6mvk9-tdR2y`,
-//             payload
-//           )
-//           .then(() => {
-//             console.log("Notification sent!");
-//             return null;
-//           });
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     }
-//   });
+exports.customerPaid = functions.firestore
+  .document("blitz_vendors/{vendorId}/payments_completed/{receiptId}")
+  .onCreate(async (snap) => {
+    const data = snap.data();
+    try {
+      const payload = {
+        notification: {
+          title: "Payment Completed",
+          body: `${data.userName} paid you 
+          ${data.purchaseInfo.total.toFixed(2)}.`,
+        },
+      };
+      await admin
+        .firestore()
+        .collection("blitz_vendors")
+        .doc(data.purchaseInfo.vendorUid)
+        .get()
+        .then((res) => {
+          sendNotification(payload, res.data().web_notif_token);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+async function sendNotification(payload, deviceId) {
+  return await admin
+    .messaging()
+    .sendToDevice(deviceId, payload)
+    .then(() => {
+      console.log("Notification sent!");
+    });
+}
