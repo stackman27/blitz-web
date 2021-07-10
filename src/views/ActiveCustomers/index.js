@@ -122,12 +122,6 @@ function RenderUser({
           </Text>
           <Flex flexDir="row">
             <Text fontWeight="400">Weight: {item.size}</Text>
-            &nbsp; &nbsp;
-            <Text style={{ color: "#bbb" }}>|</Text>
-            &nbsp; &nbsp;
-            <Text fontWeight="600" color="#0A63BC">
-              Count: x{item.purchaseCount}
-            </Text>
           </Flex>
         </Box>
       </Box>
