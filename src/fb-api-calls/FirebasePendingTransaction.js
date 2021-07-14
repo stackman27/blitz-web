@@ -2,8 +2,8 @@ import firebase from "../Firebase";
 import { vendorUid } from "../constants/Variables";
 
 async function getPendingTransactions() {
-  var pending_transactions = [];
-  var totalTransactions = 0;
+  let pending_transactions = [];
+  let totalTransactions = 0;
   await firebase
     .firestore()
     .collection("blitz_vendors")

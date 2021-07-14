@@ -7,6 +7,7 @@ import {
   List,
   Stack,
   ListItem,
+  Spinner,
   Badge,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ import { getInventory } from "../../fb-api-calls/FirebaseInventory";
 import FilterOptions from "./components/FilterOptions";
 
 function Inventory() {
+  const [isLoading, setIsLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [numItems, setNumItems] = useState(0);
 
@@ -26,6 +28,7 @@ function Inventory() {
     getInventory(filterValue).then((res) => {
       setItems(res[0]);
       setNumItems(res[1]);
+      setIsLoading(false);
     });
   };
 
@@ -107,6 +110,14 @@ function Inventory() {
       </Box>
     </Link>
   );
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
 
   return (
     <Flex justifyContent={"center"} my="10">

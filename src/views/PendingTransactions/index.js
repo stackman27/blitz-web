@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Text, Flex, Box, List, ListItem, Image } from "@chakra-ui/react";
+import {
+  Text,
+  Flex,
+  Box,
+  List,
+  ListItem,
+  Image,
+  Spinner,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { getPendingTransactions } from "../../fb-api-calls/FirebasePendingTransaction";
 import { IoReloadCircle } from "react-icons/io5";
 
 function PendingTransactions() {
+  const [isLoading, setIsLoading] = useState(true);
   const [receipts, setReceipts] = useState([]);
   const [numTransactions, setNumTransactions] = useState(0);
 
@@ -13,6 +22,7 @@ function PendingTransactions() {
     getPendingTransactions().then((res) => {
       setReceipts(res[0]);
       setNumTransactions(res[1]);
+      setIsLoading(false);
     });
   }, []);
 
@@ -79,6 +89,24 @@ function PendingTransactions() {
       </Box>
     </Link>
   );
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
+
+  if (receipts.length <= 0) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
+          No Pending Transactions
+        </Text>
+      </Flex>
+    );
+  }
 
   return (
     <Flex justifyContent={"center"} my="10">

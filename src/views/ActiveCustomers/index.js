@@ -4,6 +4,7 @@ import {
   Flex,
   Box,
   Image,
+  Spinner,
   Link,
   List,
   ListItem,
@@ -30,6 +31,7 @@ import { IoPersonCircle, IoCart } from "react-icons/io5";
 import moment from "moment";
 
 function ActiveCustomers() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeUser, setactiveUser] = useState([]);
   const [remUid, setRemUid] = useState("");
 
@@ -37,6 +39,7 @@ function ActiveCustomers() {
     const unsubscribe = getVendorActiveUserInfo().onSnapshot((snap) => {
       const data = snap.docs.map((doc) => doc.data());
       setactiveUser(data);
+      setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -52,6 +55,24 @@ function ActiveCustomers() {
       .startOf("seconds")
       .fromNow(true);
   };
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
+
+  if (activeUser.length <= 0) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
+          No Active Customers
+        </Text>
+      </Flex>
+    );
+  }
 
   return (
     <Flex justifyContent={"center"} my="10">

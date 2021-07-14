@@ -34,7 +34,7 @@ exports.customerPaid = functions.firestore
       const payload = {
         notification: {
           title: "Payment Completed",
-          body: `${data.userName} paid you 
+          body: `$${data.userName} paid you 
           ${data.purchaseInfo.total.toFixed(2)}.`,
         },
       };

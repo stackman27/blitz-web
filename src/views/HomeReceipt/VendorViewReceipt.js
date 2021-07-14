@@ -24,14 +24,26 @@ function VendorViewReceipt({ purchaseInfo }) {
       purchaseInfo.userId,
       purchaseInfo.receiptId,
       purchaseInfo
-    ).then(() => {
-      toast({
-        title: `Successfully approved`,
-        status: "success",
-        position: "top",
-        isClosable: true,
-        duration: 2000,
-      });
+    ).then((res) => {
+      if (res) {
+        toast({
+          title: "Successfully approved",
+          status: "success",
+          position: "top",
+          isClosable: true,
+          duration: 2000,
+        });
+      } else {
+        toast({
+          title: "Transaction doesnot exist",
+          description:
+            "The transaction is either already approved or hasnot been processed",
+          status: "error",
+          position: "top",
+          isClosable: true,
+          duration: 7000,
+        });
+      }
       setTimeout(function () {
         setIsLoading(false);
         window.location.reload();

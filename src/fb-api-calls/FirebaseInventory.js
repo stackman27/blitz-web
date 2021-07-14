@@ -2,9 +2,9 @@ import firebase from "../Firebase";
 import { vendorUid } from "../constants/Variables";
 
 async function getInventory(filterOption) {
-  var inventory = [];
-  var totalInventory = 0;
-  var dbRef = null;
+  let inventory = [];
+  let totalInventory = 0;
+  let dbRef = null;
 
   if (!filterOption || filterOption === "All") {
     dbRef = firebase

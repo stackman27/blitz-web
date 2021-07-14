@@ -67,16 +67,36 @@ async function runPostCheckout(
   receiptId,
   purchaseInfo
 ) {
-  await saveDiscountAmount(vendorUid, purchaseInfo);
-  await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
-  await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
-  await removeActiveUser(vendorUid, customerUid);
-  await removePaymentsCustomer(customerUid);
-  await removePaymentsCollCustomer(customerUid, receiptId);
-  await removePaymentsCollVendor(vendorUid, receiptId);
+  const res_value = await checkIfRecieptVerified(vendorUid, receiptId).then(
+    async (res) => {
+      if (res) {
+        await saveDiscountAmount(vendorUid, purchaseInfo);
+        await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
+        await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
+        await removeActiveUser(vendorUid, customerUid);
+        await removePaymentsCustomer(customerUid);
+        await removePaymentsCollCustomer(customerUid, receiptId);
+        await removePaymentsCollVendor(vendorUid, receiptId);
+        await userCartActive_false(customerUid);
+      }
+      return res;
+    }
+  );
 
-  // make the clear cart to false
-  userCartActive_false(customerUid);
+  return res_value;
+}
+
+async function checkIfRecieptVerified(vendorUid, receiptId) {
+  const ref = firebase
+    .firestore()
+    .collection("blitz_vendors")
+    .doc(vendorUid)
+    .collection("payments_completed")
+    .doc(receiptId)
+    .get();
+
+  const data = (await ref).exists;
+  return data;
 }
 
 async function userCartActive_false(customerUid) {

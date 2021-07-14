@@ -1,19 +1,51 @@
 import React, { useState, useEffect } from "react";
-import { Text, Flex, Box, Image, List, ListItem } from "@chakra-ui/react";
+import {
+  Text,
+  Flex,
+  Box,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Button,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { getSalesReceipts } from "../../fb-api-calls/FirebaseSales.js";
 import moment from "moment";
 
 function TotalSales() {
+  const [isLoading, setIsLoading] = useState(true);
   const [receipts, setReceipts] = useState([]);
   const [, setNumReceipts] = useState(0);
 
   useEffect(() => {
+    getLimitedReceipts();
+  }, []);
+
+  const getLimitedReceipts = () => {
     getSalesReceipts().then((res) => {
       setReceipts(res[0]);
       setNumReceipts(res[1]);
+      setIsLoading(false);
     });
-  }, []);
+  };
+
+  if (isLoading) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
+  if (receipts.length <= 0) {
+    return (
+      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+        <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
+          No Sales Receipts
+        </Text>
+      </Flex>
+    );
+  }
 
   const RenderSalesReceipts = ({ item }) => (
     <Link
@@ -100,11 +132,21 @@ function TotalSales() {
         <Box>
           <List>
             <ListItem>
-              {receipts.map((i, index) => (
+              {receipts?.map((i, index) => (
                 <RenderSalesReceipts item={i} />
               ))}
             </ListItem>
           </List>
+          <Flex alignItems="center" justifyContent="center" my="50">
+            <Button
+              colorScheme="blue"
+              size="lg"
+              px={"28"}
+              onClick={() => getLimitedReceipts()}
+            >
+              Load More
+            </Button>
+          </Flex>
         </Box>
       </Flex>
     </Flex>

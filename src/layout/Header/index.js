@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Flex,
   Box,
-  Link,
+  Text,
   Menu,
   MenuButton,
   MenuItem,
@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
   Stack,
 } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { updatetoNFC, updatetoQR } from "../../fb-api-calls/FirebaseGlobal.js";
 import { getVendorInfo, logOut } from "../../fb-api-calls/FirebaseHome";
@@ -42,22 +42,14 @@ function Header() {
       window.location.reload(); // trigger page reload to go to the directed page
     });
   };
+  const headerStyles = {
+    padding: 5,
+    fontFamily: "Avenir",
+    fontWeight: 500,
+  };
 
   const NavLink = ({ label, href }) => (
-    <Link
-      px={2}
-      py={1}
-      rounded={"md"}
-      fontWeight={500}
-      fontFamily="Avenir"
-      color={"#222222"}
-      _hover={{
-        textDecoration: "none",
-        bg: "#0A63BC10",
-      }}
-      href={href}
-      rel="noopener noreferrer"
-    >
+    <Link style={headerStyles} to={href} rel="noopener noreferrer">
       {label}
     </Link>
   );
@@ -77,15 +69,15 @@ function Header() {
         justifyContent={"space-evenly"}
       >
         <Box>
-          <Link
-            fontSize="4xl"
-            color="#0A63BC"
-            fontWeight="extrabold"
-            fontStyle="italic"
-            _hover={{ textDecoration: "none" }}
-            href={"/home"}
-          >
-            Blitz
+          <Link to={"/home"}>
+            <Text
+              fontSize="4xl"
+              color="#0A63BC"
+              fontWeight="extrabold"
+              fontStyle="italic"
+            >
+              Blitz
+            </Text>
           </Link>
         </Box>
 
@@ -95,10 +87,14 @@ function Header() {
           justifyContent="space-evenly"
           width="60%"
         >
-          <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
+          <NavLink
+            key={Math.random()}
+            label={"Active Customers"}
+            href={"/active"}
+          />
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
-              <Link
+              <Text
                 px={2}
                 py={1}
                 as={Flex}
@@ -112,50 +108,38 @@ function Header() {
                   textDecoration: "none",
                   bg: "#0A63BC10",
                 }}
-                rel="noopener noreferrer"
               >
                 Sales {"&"} Receipts&nbsp;
                 <IoChevronDownOutline />
-              </Link>
+              </Text>
             </PopoverTrigger>
             <PopoverContent width="56">
               <Stack margin={0}>
-                <Link
-                  fontWeight={500}
-                  px={3}
-                  py={3}
-                  fontFamily="Avenir"
-                  color={"#222222"}
-                  _hover={{
-                    textDecoration: "none",
-                    bg: "#0A63BC10",
-                  }}
+                <NavLink
+                  key={Math.random()}
+                  label={"Total Sales"}
                   href={"/sales"}
-                  rel="noopener noreferrer"
-                >
-                  Total Sales
-                </Link>
-                <Link
-                  fontWeight={500}
-                  px={3}
-                  py={3}
-                  fontFamily="Avenir"
-                  color={"#222222"}
-                  _hover={{
-                    textDecoration: "none",
-                    bg: "#0A63BC10",
-                  }}
+                />
+
+                <NavLink
+                  key={Math.random()}
+                  label={"Pending Transactions"}
                   href={"/pending"}
-                  rel="noopener noreferrer"
-                >
-                  Pending Transactions
-                </Link>
+                />
               </Stack>
             </PopoverContent>
           </Popover>
 
-          <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
-          <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />
+          <NavLink
+            key={Math.random()}
+            label={"Inventory"}
+            href={"/inventory"}
+          />
+          <NavLink
+            key={Math.random()}
+            label={"Analytics"}
+            href={"/analytics"}
+          />
         </Box>
         <ProfileMenu vendorInfo={vendorInfo} logOut={logOutTrigger} />
       </Flex>
@@ -189,6 +173,7 @@ function ProfileMenu({ vendorInfo, logOut }) {
       });
     }
   };
+
   return (
     <Menu>
       <Skeleton isLoaded>
