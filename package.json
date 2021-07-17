@@ -26,8 +26,13 @@
     "web-vitals": "^1.0.1"
   },
   "lint-staged": {
-    "*.{js,mjs,cjs}": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,jsx}": "eslint --cache --fix ./src",
+    "*.{js,json,css,md}": "prettier --write ./src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "scripts": {
     "start": "react-scripts start",
@@ -58,6 +63,7 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
     "husky": "^7.0.1",
-    "lint-staged": ">=10"
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2"
   }
 }
