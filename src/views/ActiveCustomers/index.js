@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   Flex,
   Box,
   Image,
+  Spinner,
   Link,
   List,
   ListItem,
@@ -21,22 +23,24 @@ import {
   ModalContent,
   ModalCloseButton,
   useDisclosure,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   getVendorActiveUserInfo,
   removeActiveUser,
-} from "../../fb-api-calls/FirebaseActiveCustomers.js";
-import { IoPersonCircle, IoCart } from "react-icons/io5";
-import moment from "moment";
+} from '../../fb-calls/FirebaseActiveCustomers.js';
+import { IoPersonCircle, IoCart } from 'react-icons/io5';
+import moment from 'moment';
 
 function ActiveCustomers() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeUser, setactiveUser] = useState([]);
-  const [remUid, setRemUid] = useState("");
+  const [remUid, setRemUid] = useState('');
 
   useEffect(() => {
     const unsubscribe = getVendorActiveUserInfo().onSnapshot((snap) => {
       const data = snap.docs.map((doc) => doc.data());
       setactiveUser(data);
+      setIsLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -49,13 +53,31 @@ function ActiveCustomers() {
     return moment
       .utc(new Date(timestamp.toDate()).toUTCString())
       .local()
-      .startOf("seconds")
+      .startOf('seconds')
       .fromNow(true);
   };
 
+  if (isLoading) {
+    return (
+      <Flex justifyContent={'center'} height="50vh" alignItems="center">
+        <Spinner />
+      </Flex>
+    );
+  }
+
+  if (activeUser.length <= 0) {
+    return (
+      <Flex justifyContent={'center'} height="50vh" alignItems="center">
+        <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
+          No Active Customers
+        </Text>
+      </Flex>
+    );
+  }
+
   return (
-    <Flex justifyContent={"center"} my="10">
-      <Flex width="55%" fontFamily="Avenir" flexDirection={"column"}>
+    <Flex justifyContent={'center'} my="10">
+      <Flex width="55%" fontFamily="Avenir" flexDirection={'column'}>
         <Box
           display="flex"
           flexDir="row"
@@ -63,15 +85,14 @@ function ActiveCustomers() {
           justifyContent="space-between"
           borderBottom="1px"
           borderBottomColor="gray.200"
-          paddingBottom="1"
-        >
+          paddingBottom="1">
           <Text fontSize={30} fontWeight="bold">
             Active Customers
           </Text>
           <Box display="flex" flexDir="row" alignItems="center">
             <IoPersonCircle size={28} color="green" />
             <Text fontSize={22} fontWeight="600">
-              &nbsp;{activeUser.filter((item) => item.active === true).length}{" "}
+              &nbsp;{activeUser.filter((item) => item.active === true).length}{' '}
             </Text>
           </Box>
         </Box>
@@ -101,10 +122,9 @@ function RenderUser({
       display="flex"
       flex={1}
       py={3}
-      justifyContent={"space-between"}
+      justifyContent={'space-between'}
       flexDir="row"
-      alignItems="flex-start"
-    >
+      alignItems="flex-start">
       <Box display="flex" flexDir="row">
         <Box width="14" height="14">
           <Image
@@ -112,15 +132,17 @@ function RenderUser({
             borderRadius="100"
             fit="contain"
             background="#ddd"
-            width={"100%"}
-            height={"100%"}
+            width={'100%'}
+            height={'100%'}
           />
         </Box>
         <Box mx="2">
           <Text fontWeight="400" fontSize="18">
             {item.product_name}
           </Text>
-          <Text fontWeight="400">Weight: {item.size}</Text>
+          <Flex flexDir="row">
+            <Text fontWeight="400">Weight: {item.size}</Text>
+          </Flex>
         </Box>
       </Box>
 
@@ -137,16 +159,15 @@ function RenderUser({
   return (
     <Accordion allowMultiple>
       {activeUser.map((i, index) => (
-        <AccordionItem background={i.active ? "#fff" : "#ddd"}>
+        <AccordionItem key={index} background={i.active ? '#fff' : '#ddd'}>
           <AccordionButton>
             <Box
               display="flex"
               flex={1}
               py={3}
-              justifyContent={"space-between"}
+              justifyContent={'space-between'}
               flexDir="row"
-              alignItems="flex-start"
-            >
+              alignItems="flex-start">
               <Box display="flex" flexDir="row">
                 <Box width="14" height="14">
                   <Image
@@ -154,8 +175,8 @@ function RenderUser({
                     borderRadius="100"
                     fit="contain"
                     background="#ddd"
-                    width={"100%"}
-                    height={"100%"}
+                    width={'100%'}
+                    height={'100%'}
                   />
                 </Box>
 
@@ -163,9 +184,8 @@ function RenderUser({
                   <Text
                     fontWeight="500"
                     fontSize="20"
-                    color={i.active ? "green" : "gray"}
-                    textAlign="left"
-                  >
+                    color={i.active ? 'green' : 'gray'}
+                    textAlign="left">
                     {i.active
                       ? i.uName
                       : i.uName +
@@ -175,8 +195,7 @@ function RenderUser({
                     display="flex"
                     flexDir="row"
                     justifyContent="flex-start"
-                    alignItems="baseline"
-                  >
+                    alignItems="baseline">
                     <Box display="flex" flexDir="row">
                       <IoCart color="#222222" size="22" />
                       <Text fontWeight="400" fontSize="17">
@@ -186,15 +205,14 @@ function RenderUser({
                     {!i.active && (
                       <Link
                         style={{
-                          alignSelf: "flex-start",
-                          color: "red",
+                          alignSelf: 'flex-start',
+                          color: 'red',
                           marginLeft: 10,
                         }}
                         onClick={() => {
                           onOpen();
                           setRemUid(i.uId);
-                        }}
-                      >
+                        }}>
                         Remove User
                       </Link>
                     )}
@@ -215,7 +233,9 @@ function RenderUser({
             <List>
               <ListItem>
                 {i.cart.length > 0 &&
-                  i.cart.map((it, index) => <RenderUserItem item={it} />)}
+                  i.cart.map((it, index) => (
+                    <RenderUserItem key={index} item={it} />
+                  ))}
               </ListItem>
             </List>
           </AccordionPanel>

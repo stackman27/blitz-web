@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, Box } from "@chakra-ui/react";
+import React from 'react';
+import { Text, Box } from '@chakra-ui/react';
 
 function BlitzCheckout() {
   return (
@@ -11,14 +11,12 @@ function BlitzCheckout() {
       width="85%"
       margin="auto"
       paddingTop="28"
-      paddingBottom="20"
-    >
+      paddingBottom="20">
       <Text
         color="#0A63BC"
         fontWeight="extrabold"
         fontSize="large"
-        letterSpacing={2.5}
-      >
+        letterSpacing={2.5}>
         BLITZ CHECKOUT
       </Text>
       <Text
@@ -26,9 +24,8 @@ function BlitzCheckout() {
         textAlign="center"
         paddingTop="5"
         fontSize="52"
-        width="60%"
-      >
-        Scan, Pay, Verify and Leave. It's that simple
+        width="60%">
+        Scan, Pay, Verify and Leave. It&apos;s that simple
       </Text>
     </Box>
   );

@@ -1,0 +1,10 @@
+.headerlink-title {
+  display: inline-block;
+  font-family: 'Avenir';
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 7px;
+}
+.headerlink-title:hover {
+  background-color: #0a63bc15;
+}

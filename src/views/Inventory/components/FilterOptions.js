@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Flex, Select } from "@chakra-ui/react";
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import { Flex, Select } from '@chakra-ui/react';
 
 function FilterOptions({ dataFilter }) {
-  const [filterInventory, setFilterInventory] = useState("");
+  const [filterInventory, setFilterInventory] = useState('');
 
   const changeFilter = (e) => {
     setFilterInventory(e.target.value);
@@ -12,19 +13,17 @@ function FilterOptions({ dataFilter }) {
   return (
     <Flex
       style={{
-        justifyContent: "flex-end",
+        justifyContent: 'flex-end',
         paddingTop: 10,
         paddingBottom: 10,
-      }}
-    >
+      }}>
       <Flex>
         <Select
           variant="filled"
           size="sm"
-          placeholder={"All"}
+          placeholder={'All'}
           value={filterInventory}
-          onChange={changeFilter}
-        >
+          onChange={changeFilter}>
           <option value="Food">Food</option>
           <option value="Energy Drink">Energy Drink</option>
           <option value="Sports Drinks">Sports Drinks</option>

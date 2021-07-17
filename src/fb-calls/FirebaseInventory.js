@@ -1,25 +1,25 @@
-import firebase from "../Firebase";
-import { vendorUid } from "../constants/Variables";
+import firebase from '../Firebase';
+import { vendorUid } from '../constants/Variables';
 
 async function getInventory(filterOption) {
-  var inventory = [];
-  var totalInventory = 0;
-  var dbRef = null;
+  const inventory = [];
+  let totalInventory = 0;
+  let dbRef = null;
 
-  if (!filterOption || filterOption === "All") {
+  if (!filterOption || filterOption === 'All') {
     dbRef = firebase
       .firestore()
-      .collection("blitz_vendors")
+      .collection('blitz_vendors')
       .doc(vendorUid)
-      .collection("inventory")
+      .collection('inventory')
       .limit(25);
   } else {
     dbRef = firebase
       .firestore()
-      .collection("blitz_vendors")
+      .collection('blitz_vendors')
       .doc(vendorUid)
-      .collection("inventory")
-      .where("department", "==", filterOption)
+      .collection('inventory')
+      .where('department', '==', filterOption)
       .limit(25);
   }
 
@@ -36,9 +36,9 @@ async function getInventory(filterOption) {
 async function getProductDetails(bId) {
   const snapshot = await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("inventory")
+    .collection('inventory')
     .doc(JSON.stringify(bId))
     .get();
 
@@ -51,9 +51,9 @@ async function updateInventory(bId, item) {
   item.sugar_tax = Number(item.sugar_tax);
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("inventory")
+    .collection('inventory')
     .doc(JSON.stringify(bId))
     .update(item);
 }
@@ -61,9 +61,9 @@ async function updateInventory(bId, item) {
 async function removeItem(bId) {
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("inventory")
+    .collection('inventory')
     .doc(JSON.stringify(bId))
     .delete();
 }

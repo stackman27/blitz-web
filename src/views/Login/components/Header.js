@@ -1,32 +1,35 @@
-import React from "react";
-import { Text, Box, Flex, Image, Button } from "@chakra-ui/react";
-import { IoLogoApple } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { Text, Box, Flex, Image, Button } from '@chakra-ui/react';
+import { IoLogoApple } from 'react-icons/io5';
+import { FcGoogle } from 'react-icons/fc';
 
 function Header({ signIn }) {
   return (
     <Flex
-      justifyContent={"center"}
-      flexDir={"row"}
+      justifyContent={'center'}
+      flexDir={'row'}
       width="100%"
       height="10%"
       borderBottom="1px"
       borderBottomColor="gray.200"
-    >
+      position="sticky"
+      top="0"
+      background="#fefefe"
+      zIndex={9}>
       <Flex
         width="85%"
         paddingBottom="5"
         paddingTop="5"
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
+        alignItems={'center'}
+        justifyContent={'space-between'}>
         <Flex flexDir="row" justifyContent="start" alignItems="center">
           <Image
-            src={"/img/blitzlogo.png"}
+            src={'/img/blitzlogo.png'}
             fit="contain"
-            width={"14%"}
+            width={'14%'}
             borderRadius="8"
-            height={"14%"}
+            height={'14%'}
             background="red"
           />
           &nbsp; &nbsp; &nbsp;
@@ -36,20 +39,18 @@ function Header({ signIn }) {
             color="#0A63BC"
             fontWeight="extrabold"
             fontStyle="italic"
-            _hover={{ textDecoration: "none" }}
-            href={"/"}
-          >
+            _hover={{ textDecoration: 'none' }}
+            href={'/'}>
             Blitz
           </Text>
         </Flex>
 
         <Box
           display="flex"
-          flexDir={"row"}
+          flexDir={'row'}
           alignItems="center"
           justifyContent="space-evenly"
-          width="60%"
-        >
+          width="60%">
           <Text fontFamily="Avenir" fontWeight="500">
             About us
           </Text>
@@ -62,8 +63,7 @@ function Header({ signIn }) {
               size="sm"
               onClick={() => signIn()}
               boxShadow="base"
-              leftIcon={<FcGoogle />}
-            >
+              leftIcon={<FcGoogle />}>
               <Text color="#444444"> Sign in</Text>
             </Button>
             &nbsp; &nbsp; &nbsp;
@@ -72,8 +72,7 @@ function Header({ signIn }) {
               background="#222222"
               onClick={() => signIn()}
               boxShadow="base"
-              leftIcon={<IoLogoApple color="#fff" />}
-            >
+              leftIcon={<IoLogoApple color="#fff" />}>
               <Text color="#fff"> Sign in</Text>
             </Button>
           </Flex>

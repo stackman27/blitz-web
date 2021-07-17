@@ -1,12 +1,12 @@
-import firebase from "../Firebase";
-import { vendorUid } from "../constants/Variables";
+import firebase from '../Firebase';
+import { vendorUid } from '../constants/Variables';
 
-const availableTags = ["047D5B02700000"];
+const availableTags = ['047D5B02700000'];
 
 async function getVendorInfo() {
   const snapshot = await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
     .get();
   return snapshot.data();
@@ -28,19 +28,19 @@ async function requestPermissionNotificationWeb() {
 }
 
 async function storeWebNotifToken(token) {
-  await firebase.firestore().collection("blitz_vendors").doc(vendorUid).update({
+  await firebase.firestore().collection('blitz_vendors').doc(vendorUid).update({
     web_notif_token: token,
   });
 }
 
 function getToken() {
-  const tokenString = localStorage.getItem("loginToken");
+  const tokenString = localStorage.getItem('loginToken');
   const userToken = JSON.parse(tokenString);
   return userToken;
 }
 
 function getUser() {
-  const userInfo = JSON.parse(localStorage.getItem("user"));
+  const userInfo = JSON.parse(localStorage.getItem('user'));
   return userInfo;
 }
 
@@ -51,12 +51,12 @@ async function logOut() {
 function waitingPaymentReceipt(vendorUid) {
   return firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("payments_completed")
-    .where("nfc_id", "in", availableTags) // maybe need to do like array contain
-    .where("status", "==", "verifying")
-    .orderBy("timestamp", "desc")
+    .collection('payments_completed')
+    .where('nfc_id', 'in', availableTags) // maybe need to do like array contain
+    .where('status', '==', 'verifying')
+    .orderBy('timestamp', 'desc')
     .limit(1);
 }
 
@@ -65,24 +65,44 @@ async function runPostCheckout(
   vendorUid,
   customerUid,
   receiptId,
-  purchaseInfo
+  purchaseInfo,
 ) {
-  await saveDiscountAmount(vendorUid, purchaseInfo);
-  await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
-  await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
-  await removeActiveUser(vendorUid, customerUid);
-  await removePaymentsCustomer(customerUid);
-  await removePaymentsCollCustomer(customerUid, receiptId);
-  await removePaymentsCollVendor(vendorUid, receiptId);
+  const resValue = await checkIfRecieptVerified(vendorUid, receiptId).then(
+    async (res) => {
+      if (res) {
+        await saveDiscountAmount(vendorUid, purchaseInfo);
+        await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
+        await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
+        await removeActiveUser(vendorUid, customerUid);
+        await removePaymentsCustomer(customerUid);
+        await removePaymentsCollCustomer(customerUid, receiptId);
+        await removePaymentsCollVendor(vendorUid, receiptId);
+        await userCartActiveFalse(customerUid);
+      }
+      return res;
+    },
+  );
 
-  // make the clear cart to false
-  userCartActive_false(customerUid);
+  return resValue;
 }
 
-async function userCartActive_false(customerUid) {
+async function checkIfRecieptVerified(vendorUid, receiptId) {
+  const ref = firebase
+    .firestore()
+    .collection('blitz_vendors')
+    .doc(vendorUid)
+    .collection('payments_completed')
+    .doc(receiptId)
+    .get();
+
+  const data = (await ref).exists;
+  return data;
+}
+
+async function userCartActiveFalse(customerUid) {
   await firebase
     .firestore()
-    .collection("blitz_customers")
+    .collection('blitz_customers')
     .doc(customerUid)
     .update({
       clearcart: false,
@@ -92,11 +112,11 @@ async function userCartActive_false(customerUid) {
 async function saveDiscountAmount(vendorUid, purchaseInfo) {
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
     .update({
       discount_total: firebase.firestore.FieldValue.increment(
-        purchaseInfo.purchaseInfo.blitzDiscount
+        purchaseInfo.purchaseInfo.blitzDiscount,
       ),
     });
 }
@@ -104,9 +124,9 @@ async function saveDiscountAmount(vendorUid, purchaseInfo) {
 async function storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo) {
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("sales_receipts")
+    .collection('sales_receipts')
     .doc(receiptId)
     .set({
       receiptId: receiptId,
@@ -118,9 +138,9 @@ async function storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo) {
 async function storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo) {
   await firebase
     .firestore()
-    .collection("blitz_customers")
+    .collection('blitz_customers')
     .doc(customerUid)
-    .collection("purchase_receipts")
+    .collection('purchase_receipts')
     .doc(receiptId)
     .set({
       receiptId: receiptId,
@@ -132,19 +152,19 @@ async function storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo) {
 async function removeActiveUser(vendorUid, customerUid) {
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("active_customers")
+    .collection('active_customers')
     .doc(customerUid)
     .delete();
 
-  toggleUserCartActive_true(customerUid); // sets to true called from firebaseVendors
+  toggleUserCartActiveTrue(customerUid); // sets to true called from firebaseVendors
 }
 
-async function toggleUserCartActive_true(customerUid) {
+async function toggleUserCartActiveTrue(customerUid) {
   await firebase
     .firestore()
-    .collection("blitz_customers")
+    .collection('blitz_customers')
     .doc(customerUid)
     .update({
       clearcart: true,
@@ -155,18 +175,18 @@ async function toggleUserCartActive_true(customerUid) {
 async function removePaymentsCustomer(customerUid) {
   const ref = await firebase
     .firestore()
-    .collection("blitz_customers")
+    .collection('blitz_customers')
     .doc(customerUid);
 
-  const unsubscribe = ref.collection("payments").onSnapshot((snapshot) => {
-    let total_count = snapshot.size;
+  const unsubscribe = ref.collection('payments').onSnapshot((snapshot) => {
+    let totalCount = snapshot.size;
     snapshot.docs.forEach((doc) => {
       // Keep only one doc in payment collection to prevent buggy apple pay button
-      if (total_count <= 1) {
+      if (totalCount <= 1) {
         unsubscribe();
       } else {
-        ref.collection("payments").doc(doc.id).delete();
-        total_count -= 1;
+        ref.collection('payments').doc(doc.id).delete();
+        totalCount -= 1;
       }
     });
   });
@@ -175,9 +195,9 @@ async function removePaymentsCustomer(customerUid) {
 async function removePaymentsCollCustomer(customerUid, receiptId) {
   await firebase
     .firestore()
-    .collection("blitz_customers")
+    .collection('blitz_customers')
     .doc(customerUid)
-    .collection("payments_completed")
+    .collection('payments_completed')
     .doc(receiptId)
     .delete();
 }
@@ -186,9 +206,9 @@ async function removePaymentsCollCustomer(customerUid, receiptId) {
 async function removePaymentsCollVendor(vendorUid, receiptId) {
   await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("payments_completed")
+    .collection('payments_completed')
     .doc(receiptId)
     .delete();
 }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Flex,
   Box,
-  Link,
+  Text,
   Menu,
   MenuButton,
   MenuItem,
@@ -17,12 +17,14 @@ import {
   Popover,
   PopoverTrigger,
   Stack,
-} from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
-import { IoChevronDownOutline } from "react-icons/io5";
-import { updatetoNFC, updatetoQR } from "../../fb-api-calls/FirebaseGlobal.js";
-import { getVendorInfo, logOut } from "../../fb-api-calls/FirebaseHome";
-import { vendorUid } from "../../constants/Variables";
+} from '@chakra-ui/react';
+import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { IoChevronDownOutline } from 'react-icons/io5';
+import { updatetoNFC, updatetoQR } from '../../fb-calls/FirebaseGlobal.js';
+import { getVendorInfo, logOut } from '../../fb-calls/FirebaseHome';
+import { vendorUid } from '../../constants/Variables';
+import '../../css/Header.css';
 
 function Header() {
   const history = useHistory();
@@ -36,126 +38,109 @@ function Header() {
 
   const logOutTrigger = () => {
     logOut().then(() => {
-      localStorage.setItem("loginToken", null);
-      localStorage.setItem("user", null);
-      history.push("/");
+      localStorage.setItem('loginToken', null);
+      localStorage.setItem('user', null);
+      history.push('/');
       window.location.reload(); // trigger page reload to go to the directed page
     });
   };
 
-  const NavLink = ({ label, href }) => (
+  const NavLink = ({ label, href, style }) => (
     <Link
-      px={2}
-      py={1}
-      rounded={"md"}
-      fontWeight={500}
-      fontFamily="Avenir"
-      color={"#222222"}
-      _hover={{
-        textDecoration: "none",
-        bg: "#0A63BC10",
-      }}
-      href={href}
+      className="headerlink-title"
+      to={href}
       rel="noopener noreferrer"
-    >
+      style={{ ...style }}>
       {label}
     </Link>
   );
 
   return (
     <Flex
-      justifyContent={"center"}
-      flexDir={"row"}
+      justifyContent={'center'}
+      flexDir={'row'}
       borderBottom="1px"
       borderBottomColor="gray.200"
-    >
+      position="sticky"
+      top="0"
+      background="#fefefe">
       <Flex
         width="85%"
         paddingBottom="5"
         paddingTop="5"
-        alignItems={"center"}
-        justifyContent={"space-evenly"}
-      >
+        alignItems={'center'}
+        justifyContent={'space-evenly'}>
         <Box>
-          <Link
-            fontSize="4xl"
-            color="#0A63BC"
-            fontWeight="extrabold"
-            fontStyle="italic"
-            _hover={{ textDecoration: "none" }}
-            href={"/home"}
-          >
-            Blitz
+          <Link to={'/home'}>
+            <Text
+              fontSize="4xl"
+              color="#0A63BC"
+              fontWeight="extrabold"
+              fontStyle="italic">
+              Blitz
+            </Text>
           </Link>
         </Box>
 
         <Box
           display="flex"
-          flexDir={"row"}
+          flexDir={'row'}
           justifyContent="space-evenly"
-          width="60%"
-        >
-          <NavLink key={"1"} label={"Active Customers"} href={"/active"} />
+          width="60%">
+          <NavLink
+            key={Math.random()}
+            label={'Active Customers'}
+            href={'/active'}
+          />
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
-              <Link
+              <Text
                 px={2}
                 py={1}
                 as={Flex}
                 flexDir="row"
                 alignItems="center"
-                rounded={"md"}
+                rounded={'md'}
                 fontWeight={500}
                 fontFamily="Avenir"
-                color={"#222222"}
+                color={'#222222'}
                 _hover={{
-                  textDecoration: "none",
-                  bg: "#0A63BC10",
-                }}
-                rel="noopener noreferrer"
-              >
-                Sales {"&"} Receipts&nbsp;
+                  textDecoration: 'none',
+                  bg: '#0A63BC10',
+                }}>
+                Sales {'&'} Receipts&nbsp;
                 <IoChevronDownOutline />
-              </Link>
+              </Text>
             </PopoverTrigger>
             <PopoverContent width="56">
               <Stack margin={0}>
-                <Link
-                  fontWeight={500}
-                  px={3}
-                  py={3}
-                  fontFamily="Avenir"
-                  color={"#222222"}
-                  _hover={{
-                    textDecoration: "none",
-                    bg: "#0A63BC10",
-                  }}
-                  href={"/sales"}
-                  rel="noopener noreferrer"
-                >
-                  Total Sales
-                </Link>
-                <Link
-                  fontWeight={500}
-                  px={3}
-                  py={3}
-                  fontFamily="Avenir"
-                  color={"#222222"}
-                  _hover={{
-                    textDecoration: "none",
-                    bg: "#0A63BC10",
-                  }}
-                  href={"/pending"}
-                  rel="noopener noreferrer"
-                >
-                  Pending Transactions
-                </Link>
+                <NavLink
+                  key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
+                  label={'Total Sales'}
+                  href={'/sales'}
+                />
+
+                <NavLink
+                  key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
+                  label={'Pending Transactions'}
+                  href={'/pending'}
+                />
               </Stack>
             </PopoverContent>
           </Popover>
 
-          <NavLink key={"3"} label={"Inventory"} href={"/inventory"} />
-          <NavLink key={"3"} label={"Analytics"} href={"/analytics"} />
+          <NavLink
+            key={Math.random()}
+            label={'Inventory'}
+            href={'/inventory'}
+          />
+          <NavLink
+            key={Math.random()}
+            label={'Analytics'}
+            href={'/analytics'}
+          />
         </Box>
         <ProfileMenu vendorInfo={vendorInfo} logOut={logOutTrigger} />
       </Flex>
@@ -167,28 +152,29 @@ function ProfileMenu({ vendorInfo, logOut }) {
   const toast = useToast();
 
   const updateCheckoutType = (type) => {
-    if (type === "nfc") {
+    if (type === 'nfc') {
       updatetoNFC(vendorUid).then(() => {
         toast({
-          title: "Successfully updated to NFC",
-          status: "success",
+          title: 'Successfully updated to NFC',
+          status: 'success',
           duration: 3000,
           isClosable: true,
-          position: "top",
+          position: 'top',
         });
       });
     } else {
       updatetoQR(vendorUid).then(() => {
         toast({
-          title: "Successfully updated to QR Code",
-          status: "success",
+          title: 'Successfully updated to QR Code',
+          status: 'success',
           duration: 3000,
           isClosable: true,
-          position: "top",
+          position: 'top',
         });
       });
     }
   };
+
   return (
     <Menu>
       <Skeleton isLoaded>
@@ -196,10 +182,9 @@ function ProfileMenu({ vendorInfo, logOut }) {
           as={Button}
           minW={170}
           rightIcon={<IoChevronDownOutline />}
-          style={{ height: 33 }}
-        >
+          style={{ height: 33 }}>
           {vendorInfo.storeName &&
-            vendorInfo.storeName.replace(/(.{21})..+/, "$1…")}
+            vendorInfo.storeName.replace(/(.{21})..+/, '$1…')}
         </MenuButton>
       </Skeleton>
       <MenuList>
@@ -208,12 +193,11 @@ function ProfileMenu({ vendorInfo, logOut }) {
         <MenuOptionGroup
           defaultValue="asc"
           title="Default Checkout Type"
-          type="radio"
-        >
-          <MenuItemOption value="asc" onClick={() => updateCheckoutType("nfc")}>
+          type="radio">
+          <MenuItemOption value="asc" onClick={() => updateCheckoutType('nfc')}>
             NFC
           </MenuItemOption>
-          <MenuItemOption value="desc" onClick={() => updateCheckoutType("qr")}>
+          <MenuItemOption value="desc" onClick={() => updateCheckoutType('qr')}>
             QR Code
           </MenuItemOption>
         </MenuOptionGroup>
@@ -223,5 +207,16 @@ function ProfileMenu({ vendorInfo, logOut }) {
     </Menu>
   );
 }
+
+Header.propTypes = {
+  label: PropTypes.string,
+  href: PropTypes.string,
+  style: PropTypes.object,
+};
+
+ProfileMenu.propTypes = {
+  vendorInfo: PropTypes.any,
+  logOut: PropTypes.func,
+};
 
 export default Header;
