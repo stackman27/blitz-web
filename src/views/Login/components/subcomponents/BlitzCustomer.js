@@ -1,9 +1,10 @@
-import React from "react";
-import { Text, Box, Flex, Image } from "@chakra-ui/react";
-import { IoChevronForwardSharp, IoChevronBackSharp } from "react-icons/io5";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { Text, Box, Flex, Image } from '@chakra-ui/react';
+import { IoChevronForwardSharp, IoChevronBackSharp } from 'react-icons/io5';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function BlitzCustomer() {
   const settings = {
@@ -26,23 +27,22 @@ function BlitzCustomer() {
           fontWeight="extrabold"
           fontSize="large"
           textAlign="center"
-          letterSpacing={2.5}
-        >
+          letterSpacing={2.5}>
           BLITZ FOR CUSTOMERS
         </Text>
-        <Box width={"80%"} margin="auto">
+        <Box width={'80%'} margin="auto">
           <Slider {...settings}>
             <ImageContentContainer
-              titleLabel={"Keep track of your customers and their purchases"}
-              imgUrl={"/img/customer2.png"}
+              titleLabel={'Keep track of your customers and their purchases'}
+              imgUrl={'/img/customer2.png'}
             />
             <ImageContentContainer
-              titleLabel={"Manage your Sales and Inventory"}
-              imgUrl={"/img/customer2.png"}
+              titleLabel={'Manage your Sales and Inventory'}
+              imgUrl={'/img/customer2.png'}
             />
             <ImageContentContainer
-              titleLabel={"Manage your Sales and Inventory"}
-              imgUrl={"/img/vendor1.png"}
+              titleLabel={'Manage your Sales and Inventory'}
+              imgUrl={'/img/vendor1.png'}
             />
           </Slider>
         </Box>
@@ -63,8 +63,7 @@ function ImageContentContainer(props) {
           fontSize="32"
           width="80%"
           margin="auto"
-          color="#444444"
-        >
+          color="#444444">
           {titleLabel}
         </Text>
       </Flex>
@@ -73,8 +72,8 @@ function ImageContentContainer(props) {
         <Image
           src={imgUrl}
           fit="contain"
-          width={"60%"}
-          height={"55%"}
+          width={'60%'}
+          height={'55%'}
           background="transparent"
           margin="auto"
         />

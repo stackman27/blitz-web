@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   Flex,
@@ -9,11 +10,11 @@ import {
   ListItem,
   Spinner,
   Badge,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { IoPricetag, IoLayers } from "react-icons/io5";
-import { getInventory } from "../../fb-calls/FirebaseInventory";
-import FilterOptions from "./components/FilterOptions";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { IoPricetag, IoLayers } from 'react-icons/io5';
+import { getInventory } from '../../fb-calls/FirebaseInventory';
+import FilterOptions from './components/FilterOptions';
 
 function Inventory() {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,27 +36,25 @@ function Inventory() {
   const RenderInventoryItems = ({ item }) => (
     <Link
       to={{
-        pathname: "/inventoryDetail",
+        pathname: '/inventoryDetail',
         state: { pId: Number(item.upc) },
-      }}
-    >
+      }}>
       <Box
         display="flex"
         flex={1}
         paddingTop={5}
         paddingBottom={5}
-        justifyContent={"space-between"}
+        justifyContent={'space-between'}
         flexDir="row"
         alignItems="flex-start"
         borderBottom="1px"
-        borderBottomColor="lightgray"
-      >
+        borderBottomColor="lightgray">
         <Box display="flex" flexDir="row">
           <Image
             src={
               item.img
                 ? item.img
-                : "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                : 'https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png'
             }
             borderRadius="100"
             width="75"
@@ -74,8 +73,7 @@ function Inventory() {
                     bgColor="#2C528C10"
                     alignItems="center"
                     justifyContent="center"
-                    px={1}
-                  >
+                    px={1}>
                     <IoPricetag size={12} color="gray" />
                     <Badge px={2}>{item.department}</Badge>
                   </Flex>
@@ -113,15 +111,15 @@ function Inventory() {
 
   if (isLoading) {
     return (
-      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+      <Flex justifyContent={'center'} height="50vh" alignItems="center">
         <Spinner />
       </Flex>
     );
   }
 
   return (
-    <Flex justifyContent={"center"} my="10">
-      <Flex width="60%" fontFamily="Avenir" flexDirection={"column"}>
+    <Flex justifyContent={'center'} my="10">
+      <Flex width="60%" fontFamily="Avenir" flexDirection={'column'}>
         <Box
           display="flex"
           flexDir="row"
@@ -129,8 +127,7 @@ function Inventory() {
           justifyContent="space-between"
           borderBottom="1px"
           borderBottomColor="gray.200"
-          paddingBottom="1"
-        >
+          paddingBottom="1">
           <Text fontSize={30} fontWeight="bold">
             Inventory
           </Text>
@@ -148,7 +145,7 @@ function Inventory() {
           <List>
             <ListItem>
               {items.map((i, index) => (
-                <RenderInventoryItems item={i} />
+                <RenderInventoryItems key={index} item={i} />
               ))}
             </ListItem>
           </List>

@@ -1,39 +1,39 @@
-import firebase from "../Firebase";
-import { vendorUid } from "../constants/Variables";
+import firebase from '../Firebase';
+import { vendorUid } from '../constants/Variables';
 
 async function getSalesReceipts() {
-  let sales_receipts = [];
+  const salesReceipts = [];
   let totalSales = 0;
 
   const docRef = firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("sales_receipts")
-    .orderBy("timestamp", "desc");
+    .collection('sales_receipts')
+    .orderBy('timestamp', 'desc');
 
-  //let latestDoc = (await docRef.get()).docs[0].id;
+  // let latestDoc = (await docRef.get()).docs[0].id;
 
   await docRef
     .limit(10)
     .get()
     .then((res) => {
       res.forEach((doc) => {
-        sales_receipts.push(doc.data());
+        salesReceipts.push(doc.data());
       });
-      //latestDoc = res.docs[res.docs.length - 1].id;
+      // latestDoc = res.docs[res.docs.length - 1].id;
       totalSales = res.size;
     });
 
-  return [sales_receipts, totalSales];
+  return [salesReceipts, totalSales];
 }
 
 async function getSalesDetails(rId) {
   const snapshot = await firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid)
-    .collection("sales_receipts")
+    .collection('sales_receipts')
     .doc(rId)
     .get();
 

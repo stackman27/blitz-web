@@ -1,9 +1,10 @@
-import React from "react";
-import { Text, Button, Flex, Box } from "@chakra-ui/react";
-import { IoLogoApple } from "react-icons/io5";
-import { FcGoogle } from "react-icons/fc";
-import BlitzVendor from "./BlitzVendor";
-import BlitzCustomer from "./BlitzCustomer";
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { Flex, Box } from '@chakra-ui/react';
+// import { IoLogoApple } from "react-icons/io5";
+// import { FcGoogle } from "react-icons/fc";
+import BlitzVendor from './BlitzVendor';
+import BlitzCustomer from './BlitzCustomer';
 
 function TwoSides({ signIn }) {
   return (
@@ -15,15 +16,13 @@ function TwoSides({ signIn }) {
       width="100%"
       height="150vh"
       paddingTop="28"
-      paddingBottom="20"
-    >
+      paddingBottom="20">
       <Flex
         width="50%"
         height="100%"
         flexDir="column"
         background="#0A63BC"
-        justifyContent="space-evenly"
-      >
+        justifyContent="space-evenly">
         <BlitzVendor />
         {/* 
         <Flex justifyContent="center" paddingBottom="5">
@@ -52,8 +51,7 @@ function TwoSides({ signIn }) {
         height="100%"
         flexDir="column"
         background="#fafafa"
-        justifyContent="space-evenly"
-      >
+        justifyContent="space-evenly">
         <BlitzCustomer />
 
         {/* <Flex justifyContent="center" paddingBottom="5">

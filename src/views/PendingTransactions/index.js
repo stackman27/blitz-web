@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   Flex,
@@ -7,11 +8,11 @@ import {
   ListItem,
   Image,
   Spinner,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import moment from "moment";
-import { getPendingTransactions } from "../../fb-calls/FirebasePendingTransaction";
-import { IoReloadCircle } from "react-icons/io5";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+import { getPendingTransactions } from '../../fb-calls/FirebasePendingTransaction';
+import { IoReloadCircle } from 'react-icons/io5';
 
 function PendingTransactions() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,21 +30,19 @@ function PendingTransactions() {
   const RenderPendingTransactions = ({ item }) => (
     <Link
       to={{
-        pathname: "/pendingDetail",
+        pathname: '/pendingDetail',
         state: { rId: item.receiptId },
-      }}
-    >
+      }}>
       <Box
         display="flex"
         flex={1}
         paddingTop={5}
         paddingBottom={5}
-        justifyContent={"space-between"}
+        justifyContent={'space-between'}
         flexDir="row"
         alignItems="flex-start"
         borderBottom="1px"
-        borderBottomColor="gray.100"
-      >
+        borderBottomColor="gray.100">
         <Box display="flex" flexDir="row">
           <Box width="16" height="16">
             <Image
@@ -51,8 +50,8 @@ function PendingTransactions() {
               borderRadius="100"
               fit="contain"
               background="#ddd"
-              width={"100%"}
-              height={"100%"}
+              width={'100%'}
+              height={'100%'}
             />
           </Box>
           <Box mx="2" display="flex" justifyContent="center" flexDir="column">
@@ -60,7 +59,7 @@ function PendingTransactions() {
               {item.userName}
             </Text>
             <Text fontSize="18" fontWeight="400">
-              {moment(item.timestamp.toDate()).format("MMMM Do YYYY")}
+              {moment(item.timestamp.toDate()).format('MMMM Do YYYY')}
             </Text>
           </Box>
         </Box>
@@ -75,8 +74,7 @@ function PendingTransactions() {
                 fontSize="18"
                 fontWeight="500"
                 textAlign="end"
-                color="green"
-              >
+                color="green">
                 20% off Blitz
               </Text>
             ) : (
@@ -92,7 +90,7 @@ function PendingTransactions() {
 
   if (isLoading) {
     return (
-      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+      <Flex justifyContent={'center'} height="50vh" alignItems="center">
         <Spinner />
       </Flex>
     );
@@ -100,7 +98,7 @@ function PendingTransactions() {
 
   if (receipts.length <= 0) {
     return (
-      <Flex justifyContent={"center"} height="50vh" alignItems="center">
+      <Flex justifyContent={'center'} height="50vh" alignItems="center">
         <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
           No Pending Transactions
         </Text>
@@ -109,8 +107,8 @@ function PendingTransactions() {
   }
 
   return (
-    <Flex justifyContent={"center"} my="10">
-      <Flex width="55%" fontFamily="Avenir" flexDirection={"column"}>
+    <Flex justifyContent={'center'} my="10">
+      <Flex width="55%" fontFamily="Avenir" flexDirection={'column'}>
         <Box
           display="flex"
           flexDir="row"
@@ -118,8 +116,7 @@ function PendingTransactions() {
           justifyContent="space-between"
           borderBottom="1px"
           borderBottomColor="gray.200"
-          paddingBottom="1"
-        >
+          paddingBottom="1">
           <Text fontSize={30} fontWeight="bold">
             Pending Transactions
           </Text>
@@ -135,7 +132,7 @@ function PendingTransactions() {
           <List>
             <ListItem>
               {receipts.map((i, index) => (
-                <RenderPendingTransactions item={i} />
+                <RenderPendingTransactions key={index} item={i} />
               ))}
             </ListItem>
           </List>

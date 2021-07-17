@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-children-prop */
+import React, { useState, useEffect } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
   Text,
   Flex,
@@ -22,28 +24,28 @@ import {
   InputGroup,
   InputLeftElement,
   useDisclosure,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   getProductDetails,
   updateInventory,
   removeItem,
-} from "../../fb-calls/FirebaseInventory";
+} from '../../fb-calls/FirebaseInventory';
 
 function InventoryDetails() {
   const { state } = useLocation();
-  let history = useHistory();
+  const history = useHistory();
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [originalVal, setOriginalVal] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [item, setItem] = useState({
-    product_name: "",
-    upc: "",
-    size: "",
-    upce: "",
-    department: "",
-    img: "",
+    product_name: '',
+    upc: '',
+    size: '',
+    upce: '',
+    department: '',
+    img: '',
     has_crv: false,
     sell_price: 0,
     sugar_tax: 0,
@@ -70,11 +72,11 @@ function InventoryDetails() {
     setIsLoading(true);
     updateInventory(state.pId, item).then(() => {
       toast({
-        title: "Successfully updated.",
-        status: "success",
+        title: 'Successfully updated.',
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       });
       getAllData();
       setIsLoading(false);
@@ -84,11 +86,11 @@ function InventoryDetails() {
   const deleteItem = () => {
     removeItem(state.pId).then(() => {
       toast({
-        title: "Successfully deleted.",
-        status: "success",
+        title: 'Successfully deleted.',
+        status: 'success',
         duration: 3000,
         isClosable: true,
-        position: "top",
+        position: 'top',
       });
 
       history.goBack();
@@ -96,31 +98,30 @@ function InventoryDetails() {
   };
 
   return (
-    <Flex justifyContent={"center"} my="10">
-      <Flex width="50%" fontFamily="Avenir" flexDirection={"column"}>
+    <Flex justifyContent={'center'} my="10">
+      <Flex width="50%" fontFamily="Avenir" flexDirection={'column'}>
         <Flex
           flex={1}
           flexDir="row"
           justifyContent="space-between"
-          alignItems="center"
-        >
+          alignItems="center">
           <Image
             src={
               item.img
                 ? item.img
-                : "https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png"
+                : 'https://westsiderc.org/wp-content/uploads/2019/08/Image-Not-Available.png'
             }
             width={100}
             height={100}
           />
           <Input
             variant="flushed"
-            placeholder={"Product Name"}
+            placeholder={'Product Name'}
             value={item.product_name}
             onChange={(e) => setItem({ ...item, product_name: e.target.value })}
             fontSize={20}
             marginLeft={10}
-            textAlign={"right"}
+            textAlign={'right'}
             fontWeight="500"
           />
         </Flex>
@@ -130,21 +131,20 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             UPC
           </Text>
           <Box display="flex" flexDir="row" alignItems="center">
             <Input
               variant="flushed"
-              name={"upc"}
-              placeholder={"UPC"}
+              name={'upc'}
+              placeholder={'UPC'}
               onChange={(e) => setItem({ ...item, upc: e.target.value })}
               value={item.upc}
               fontSize={20}
-              textAlign={"right"}
-              fontWeight={"500"}
+              textAlign={'right'}
+              fontWeight={'500'}
             />
           </Box>
         </Flex>
@@ -154,21 +154,20 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             Weight
           </Text>
           <Box display="flex" flexDir="row" alignItems="center">
             <Input
               variant="flushed"
-              name={"size"}
-              placeholder={"Item size"}
+              name={'size'}
+              placeholder={'Item size'}
               onChange={(e) => setItem({ ...item, size: e.target.value })}
               value={item.size}
               fontSize={20}
-              textAlign={"right"}
-              fontWeight={"500"}
+              textAlign={'right'}
+              fontWeight={'500'}
             />
           </Box>
         </Flex>
@@ -178,19 +177,17 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             Department
           </Text>
           <Box display="flex" flexDir="row" alignItems="center">
             <Select
               variant="filled"
-              placeholder={"Select an item..."}
+              placeholder={'Select an item...'}
               value={item.department}
               onChange={(e) => setItem({ ...item, department: e.target.value })}
-              required
-            >
+              required>
               <option value="Food">Food</option>
               <option value="Energy Drink">Energy Drink</option>
               <option value="Sports Drinks">Sports Drinks</option>
@@ -217,8 +214,7 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             Sell Price
           </Text>
@@ -238,8 +234,8 @@ function InventoryDetails() {
                   setItem({ ...item, sell_price: e.target.value })
                 }
                 fontSize={20}
-                textAlign={"right"}
-                fontWeight={"500"}
+                textAlign={'right'}
+                fontWeight={'500'}
               />
             </InputGroup>
           </Box>
@@ -250,8 +246,7 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             CRV Fee
           </Text>
@@ -275,8 +270,8 @@ function InventoryDetails() {
                   })
                 }
                 fontSize={20}
-                textAlign={"right"}
-                fontWeight={"500"}
+                textAlign={'right'}
+                fontWeight={'500'}
               />
             </InputGroup>
           </Box>
@@ -287,8 +282,7 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             Sugar tax
           </Text>
@@ -312,8 +306,8 @@ function InventoryDetails() {
                   })
                 }
                 fontSize={20}
-                textAlign={"right"}
-                fontWeight={"500"}
+                textAlign={'right'}
+                fontWeight={'500'}
               />
             </InputGroup>
           </Box>
@@ -324,8 +318,7 @@ function InventoryDetails() {
           flexDir="row"
           alignItems="center"
           justifyContent="space-between"
-          py={3}
-        >
+          py={3}>
           <Text fontSize={18} fontWeight="500" color="gray">
             Sales Tax
           </Text>
@@ -374,8 +367,7 @@ function InventoryDetails() {
             disabled={Object.is(item, originalVal)}
             mx={5}
             onClick={() => updateItem()}
-            isLoading={isLoading}
-          >
+            isLoading={isLoading}>
             Update Item
           </Button>
 

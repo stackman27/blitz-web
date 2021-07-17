@@ -1,4 +1,4 @@
-import firebase from "../Firebase";
+import firebase from '../Firebase';
 
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -10,7 +10,7 @@ async function signInWithGoogle() {
 async function checkifVendor(vendorUid) {
   const docRef = firebase
     .firestore()
-    .collection("blitz_vendors")
+    .collection('blitz_vendors')
     .doc(vendorUid);
   const doc = await docRef.get();
   if (!doc.exists) {
@@ -21,13 +21,13 @@ async function checkifVendor(vendorUid) {
 }
 
 function saveToken(res) {
-  let credential = res.credential;
-  let token = credential.accessToken;
-  localStorage.setItem("loginToken", JSON.stringify(token));
+  const credential = res.credential;
+  const token = credential.accessToken;
+  localStorage.setItem('loginToken', JSON.stringify(token));
 }
 
 function saveUser(res) {
-  localStorage.setItem("user", JSON.stringify(res));
+  localStorage.setItem('user', JSON.stringify(res));
 }
 
 export { signInWithGoogle, checkifVendor, saveToken, saveUser };
