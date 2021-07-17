@@ -25,7 +25,7 @@ function BlitzCheckout() {
         paddingTop="5"
         fontSize="52"
         width="60%">
-        Scan, Pay, Verify and Leave. It`&apos;`,s that simple
+        Scan, Pay, Verify and Leave. It&apos;s that simple
       </Text>
     </Box>
   );
