@@ -139,8 +139,10 @@ function TotalSales() {
           </List>
           <Flex alignItems="center" justifyContent="center" my="50">
             <Button
-              colorScheme="blue"
-              size="lg"
+              background="#eee"
+              borderColor="#ddd"
+              borderWidth="1px"
+              size="md"
               px={"28"}
               onClick={() => getLimitedReceipts()}
             >

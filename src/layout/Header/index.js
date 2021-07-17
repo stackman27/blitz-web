@@ -61,6 +61,9 @@ function Header() {
       flexDir={"row"}
       borderBottom="1px"
       borderBottomColor="gray.200"
+      position="sticky"
+      top="0"
+      background="#fefefe"
     >
       <Flex
         width="85%"
