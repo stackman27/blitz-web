@@ -6,7 +6,7 @@ import {
   checkifVendor,
   saveToken,
   saveUser,
-} from "../../fb-api-calls/FirebaseLogin";
+} from "../../fb-calls/FirebaseLogin";
 import Header from "./components/Header";
 import Body from "./components/Body";
 

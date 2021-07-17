@@ -6,7 +6,7 @@ import {
   requestPermissionNotificationWeb,
   getToken,
   getUser,
-} from "../fb-api-calls/FirebaseHome";
+} from "../fb-calls/FirebaseHome";
 import Header from "../layout/Header";
 import HomeBody from "./Home";
 import TotalSales from "./TotalSales";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { vendorUid } from "../../constants/Variables";
 import VendorViewReceipt from "../HomeReceipt/VendorViewReceipt";
 import WaitingReceipt from "../HomeWaiting/WaitingReceipt";
-import { waitingPaymentReceipt } from "../../fb-api-calls/FirebaseHome";
+import { waitingPaymentReceipt } from "../../fb-calls/FirebaseHome";
 
 function HomeBody() {
   const [purchaseInfo, setPurchaseInfo] = useState({});

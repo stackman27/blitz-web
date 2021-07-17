@@ -20,9 +20,10 @@ import {
 } from "@chakra-ui/react";
 import { useHistory, Link } from "react-router-dom";
 import { IoChevronDownOutline } from "react-icons/io5";
-import { updatetoNFC, updatetoQR } from "../../fb-api-calls/FirebaseGlobal.js";
-import { getVendorInfo, logOut } from "../../fb-api-calls/FirebaseHome";
+import { updatetoNFC, updatetoQR } from "../../fb-calls/FirebaseGlobal.js";
+import { getVendorInfo, logOut } from "../../fb-calls/FirebaseHome";
 import { vendorUid } from "../../constants/Variables";
+import "../../css/Header.css";
 
 function Header() {
   const history = useHistory();
@@ -42,14 +43,14 @@ function Header() {
       window.location.reload(); // trigger page reload to go to the directed page
     });
   };
-  const headerStyles = {
-    padding: 5,
-    fontFamily: "Avenir",
-    fontWeight: 500,
-  };
 
-  const NavLink = ({ label, href }) => (
-    <Link style={headerStyles} to={href} rel="noopener noreferrer">
+  const NavLink = ({ label, href, style }) => (
+    <Link
+      className="headerlink-title"
+      to={href}
+      rel="noopener noreferrer"
+      style={{ ...style }}
+    >
       {label}
     </Link>
   );
@@ -117,12 +118,14 @@ function Header() {
               <Stack margin={0}>
                 <NavLink
                   key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
                   label={"Total Sales"}
                   href={"/sales"}
                 />
 
                 <NavLink
                   key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
                   label={"Pending Transactions"}
                   href={"/pending"}
                 />

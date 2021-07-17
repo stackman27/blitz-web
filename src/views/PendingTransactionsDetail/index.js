@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, useHistory } from "react-router-dom";
 import { IoCart, IoArrowForwardCircle } from "react-icons/io5";
-import { getTransactionDetails } from "../../fb-api-calls/FirebasePendingTransaction";
-import { runPostCheckout } from "../../fb-api-calls/FirebaseHome";
+import { getTransactionDetails } from "../../fb-calls/FirebasePendingTransaction";
+import { runPostCheckout } from "../../fb-calls/FirebaseHome";
 
 function PendingTransactionsDetail() {
   const { state } = useLocation();
@@ -35,14 +35,26 @@ function PendingTransactionsDetail() {
       pendingTx.userId,
       pendingTx.receiptId,
       pendingTx
-    ).then(() => {
-      toast({
-        title: `Successfully approved`,
-        status: "success",
-        position: "top",
-        isClosable: true,
-        duration: 2000,
-      });
+    ).then((res) => {
+      if (res) {
+        toast({
+          title: "Successfully approved",
+          status: "success",
+          position: "top",
+          isClosable: true,
+          duration: 2000,
+        });
+      } else {
+        toast({
+          title: "Transaction doesnot exist",
+          description:
+            "The transaction is either already approved or hasnot been processed",
+          status: "error",
+          position: "top",
+          isClosable: true,
+          duration: 7000,
+        });
+      }
       setTimeout(function () {
         setIsLoading(false);
         history.push("/sales");

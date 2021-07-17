@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { getPendingTransactions } from "../../fb-api-calls/FirebasePendingTransaction";
+import { getPendingTransactions } from "../../fb-calls/FirebasePendingTransaction";
 import { IoReloadCircle } from "react-icons/io5";
 
 function PendingTransactions() {

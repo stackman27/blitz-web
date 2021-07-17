@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { IoCart, IoArrowForwardCircle } from "react-icons/io5";
-import { runPostCheckout } from "../../fb-api-calls/FirebaseHome";
+import { runPostCheckout } from "../../fb-calls/FirebaseHome";
 
 function VendorViewReceipt({ purchaseInfo }) {
   const [isLoading, setIsLoading] = useState(false);

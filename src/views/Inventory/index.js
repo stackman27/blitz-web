@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IoPricetag, IoLayers } from "react-icons/io5";
-import { getInventory } from "../../fb-api-calls/FirebaseInventory";
+import { getInventory } from "../../fb-calls/FirebaseInventory";
 import FilterOptions from "./components/FilterOptions";
 
 function Inventory() {

@@ -25,7 +25,7 @@ function TwoSides({ signIn }) {
         justifyContent="space-evenly"
       >
         <BlitzVendor />
-
+        {/* 
         <Flex justifyContent="center" paddingBottom="5">
           <Button
             background="#fff"
@@ -44,7 +44,7 @@ function TwoSides({ signIn }) {
           >
             <Text color="#fff"> Sign in</Text>
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
 
       <Flex
@@ -56,7 +56,7 @@ function TwoSides({ signIn }) {
       >
         <BlitzCustomer />
 
-        <Flex justifyContent="center" paddingBottom="5">
+        {/* <Flex justifyContent="center" paddingBottom="5">
           <Button background="#fff" boxShadow="base" leftIcon={<FcGoogle />}>
             <Text color="#444444"> Play Store</Text>
           </Button>
@@ -68,7 +68,7 @@ function TwoSides({ signIn }) {
           >
             <Text color="#fff"> App Store</Text>
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Box>
   );

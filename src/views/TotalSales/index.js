@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { getSalesReceipts } from "../../fb-api-calls/FirebaseSales.js";
+import { getSalesReceipts } from "../../fb-calls/FirebaseSales.js";
 import moment from "moment";
 
 function TotalSales() {

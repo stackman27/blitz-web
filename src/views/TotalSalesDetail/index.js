@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, Flex, Box, Image, List, ListItem } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
-import { getSalesDetails } from "../../fb-api-calls/FirebaseSales";
+import { getSalesDetails } from "../../fb-calls/FirebaseSales";
 import { IoCart } from "react-icons/io5";
 
 function SalesDetails() {

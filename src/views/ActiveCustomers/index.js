@@ -26,7 +26,7 @@ import {
 import {
   getVendorActiveUserInfo,
   removeActiveUser,
-} from "../../fb-api-calls/FirebaseActiveCustomers.js";
+} from "../../fb-calls/FirebaseActiveCustomers.js";
 import { IoPersonCircle, IoCart } from "react-icons/io5";
 import moment from "moment";
 

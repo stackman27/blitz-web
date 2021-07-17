@@ -12,6 +12,10 @@ function Header({ signIn }) {
       height="10%"
       borderBottom="1px"
       borderBottomColor="gray.200"
+      position="sticky"
+      top="0"
+      background="#fefefe"
+      zIndex={9}
     >
       <Flex
         width="85%"

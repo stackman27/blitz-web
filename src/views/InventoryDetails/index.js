@@ -27,7 +27,7 @@ import {
   getProductDetails,
   updateInventory,
   removeItem,
-} from "../../fb-api-calls/FirebaseInventory";
+} from "../../fb-calls/FirebaseInventory";
 
 function InventoryDetails() {
   const { state } = useLocation();
