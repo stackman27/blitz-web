@@ -1,5 +1,5 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables.js';
+import { vendorUid } from '../util/Variables.js';
 
 function getVendorActiveUserInfo() {
   return firebase

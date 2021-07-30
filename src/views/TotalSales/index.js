@@ -11,24 +11,37 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { getSalesReceipts } from '../../fb-calls/FirebaseSales.js';
+import {
+  getSalesReceipts,
+  getMoreReceipts,
+} from '../../fb-calls/FirebaseSales.js';
 import moment from 'moment';
 
 function TotalSales() {
   const [isLoading, setIsLoading] = useState(true);
+  const [showMoreLoading, setShowMoreLoading] = useState(false);
   const [receipts, setReceipts] = useState([]);
+  const [lastDoc, setLastDoc] = useState(null);
   const [, setNumReceipts] = useState(0);
 
   useEffect(() => {
-    getLimitedReceipts();
-  }, []);
-
-  const getLimitedReceipts = () => {
     getSalesReceipts().then((res) => {
       setReceipts(res[0]);
       setNumReceipts(res[1]);
+      setLastDoc(res[2]);
       setIsLoading(false);
     });
+  }, []);
+
+  const getMoreReceiptsCall = () => {
+    if (lastDoc) {
+      setShowMoreLoading(true);
+      getMoreReceipts(lastDoc).then((res) => {
+        setReceipts([...receipts, ...res[0]]);
+        setLastDoc(res[1]);
+        setShowMoreLoading(false);
+      });
+    }
   };
 
   if (isLoading) {
@@ -67,7 +80,7 @@ function TotalSales() {
         <Box display="flex" flexDir="row">
           <Box width="16" height="16">
             <Image
-              src={item.purchaseInfo.userImg}
+              src={item.purchaseInfo?.userImg}
               borderRadius="100"
               fit="contain"
               background="#ddd"
@@ -77,10 +90,10 @@ function TotalSales() {
           </Box>
           <Box mx="2" display="flex" justifyContent="center" flexDir="column">
             <Text fontWeight="500" fontSize="20">
-              {item.purchaseInfo.userName}
+              {item.purchaseInfo?.userName}
             </Text>
             <Text fontSize="18" fontWeight="400">
-              {moment(item.timestamp.toDate()).format('MMMM Do YYYY')}
+              {moment(item.timestamp?.toDate()).format('MMMM Do YYYY')}
             </Text>
           </Box>
         </Box>
@@ -88,9 +101,9 @@ function TotalSales() {
         <Box display="flex" flexDir="row">
           <Box mx="2">
             <Text fontSize="22" fontWeight="600" textAlign="right">
-              ${item.purchaseInfo.purchaseInfo.total.toFixed(2)}
+              ${item.purchaseInfo?.purchaseInfo.total.toFixed(2)}
             </Text>
-            {item.purchaseInfo.purchaseInfo.discountUsed ? (
+            {item.purchaseInfo?.purchaseInfo.discountUsed ? (
               <Text
                 fontSize="18"
                 fontWeight="500"
@@ -141,7 +154,8 @@ function TotalSales() {
               borderWidth="1px"
               size="md"
               px={'28'}
-              onClick={() => getLimitedReceipts()}>
+              onClick={() => getMoreReceiptsCall()}
+              isLoading={showMoreLoading}>
               Load More
             </Button>
           </Flex>

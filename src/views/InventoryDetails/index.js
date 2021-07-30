@@ -343,7 +343,7 @@ function InventoryDetails() {
               {item.department}
             </Badge>
             {item.crv_by_05_cents > 0 && (
-              <Badge bgColor="#1aa26030" px={2}>
+              <Badge bgColor="#FFCD4630" px={2}>
                 CRV
               </Badge>
             )}
@@ -353,7 +353,7 @@ function InventoryDetails() {
               </Badge>
             )}
             {item.has_sales_tax && (
-              <Badge bgColor="#FFCD4630" px={2}>
+              <Badge bgColor="#1aa26030" px={2}>
                 Sales Tax
               </Badge>
             )}

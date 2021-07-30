@@ -1,10 +1,11 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables';
+import { vendorUid } from '../util/Variables';
 
 async function getInventory(filterOption) {
   const inventory = [];
   let totalInventory = 0;
   let dbRef = null;
+  let lastDoc;
 
   if (!filterOption || filterOption === 'All') {
     dbRef = firebase
@@ -27,10 +28,33 @@ async function getInventory(filterOption) {
     res.forEach((doc) => {
       inventory.push(doc.data());
     });
+    lastDoc = res.docs[res.docs.length - 1];
     totalInventory = res.size;
   });
 
-  return [inventory, totalInventory];
+  return [inventory, totalInventory, lastDoc];
+}
+
+async function getMoreInventory(lastDoc, filterOption) {
+  const inventory = [];
+  let dbRef = null;
+
+  dbRef = firebase
+    .firestore()
+    .collection('blitz_vendors')
+    .doc(vendorUid)
+    .collection('inventory')
+    .startAfter(lastDoc)
+    .limit(25);
+
+  await dbRef.get().then((res) => {
+    res.forEach((doc) => {
+      inventory.push(doc.data());
+    });
+    lastDoc = res.docs[res.docs.length - 1];
+  });
+
+  return [inventory, lastDoc];
 }
 
 async function getProductDetails(bId) {
@@ -68,4 +92,10 @@ async function removeItem(bId) {
     .delete();
 }
 
-export { getInventory, getProductDetails, updateInventory, removeItem };
+export {
+  getInventory,
+  getProductDetails,
+  updateInventory,
+  removeItem,
+  getMoreInventory,
+};

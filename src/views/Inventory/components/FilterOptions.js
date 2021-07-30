@@ -16,11 +16,13 @@ function FilterOptions({ dataFilter }) {
         justifyContent: 'flex-end',
         paddingTop: 10,
         paddingBottom: 10,
+        position: 'relative',
       }}>
       <Flex>
         <Select
           variant="filled"
           size="sm"
+          position="relative"
           placeholder={'All'}
           value={filterInventory}
           onChange={changeFilter}>

@@ -23,7 +23,7 @@ import PropTypes from 'prop-types';
 import { IoChevronDownOutline } from 'react-icons/io5';
 import { updatetoNFC, updatetoQR } from '../../fb-calls/FirebaseGlobal.js';
 import { getVendorInfo, logOut } from '../../fb-calls/FirebaseHome';
-import { vendorUid } from '../../constants/Variables';
+import { vendorUid } from '../../util/Variables';
 import '../../css/Header.css';
 
 function Header() {

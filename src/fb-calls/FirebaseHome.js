@@ -1,5 +1,5 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables';
+import { vendorUid } from '../util/Variables';
 
 const availableTags = ['047D5B02700000'];
 
@@ -28,9 +28,13 @@ async function requestPermissionNotificationWeb() {
 }
 
 async function storeWebNotifToken(token) {
-  await firebase.firestore().collection('blitz_vendors').doc(vendorUid).update({
-    web_notif_token: token,
-  });
+  await firebase
+    .firestore()
+    .collection('blitz_vendors')
+    .doc(vendorUid)
+    .update({
+      fcmtoken: firebase.firestore.FieldValue.arrayUnion(token),
+    });
 }
 
 function getToken() {

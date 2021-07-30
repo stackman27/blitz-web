@@ -14,8 +14,9 @@ function TwoSides({ signIn }) {
       flexDir="row"
       alignItems="center"
       width="100%"
-      height="150vh"
-      paddingTop="28"
+      height="140vh"
+      margin="auto"
+      paddingTop="16"
       paddingBottom="20">
       <Flex
         width="50%"
@@ -49,6 +50,7 @@ function TwoSides({ signIn }) {
       <Flex
         width="50%"
         height="100%"
+        borderRightRadius="10"
         flexDir="column"
         background="#fafafa"
         justifyContent="space-evenly">

@@ -25,8 +25,8 @@ function VendorHome() {
   const audio = new Audio('/newactivecustomer.mp3');
 
   useEffect(() => {
-    requestPermissionNotificationWeb();
-    if (token) {
+    if (token && user) {
+      requestPermissionNotificationWeb();
       navigator.serviceWorker.addEventListener('message', (message) => {
         try {
           triggerActiveUser(

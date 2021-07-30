@@ -1,18 +1,14 @@
 {
   "database": {
-    "rules": "database.rules.json"
+    "rules": "config/database.rules.json"
   },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "rules": "config/firestore.rules",
+    "indexes": "config/firestore.indexes.json"
   },
   "hosting": {
     "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -21,7 +17,7 @@
     ]
   },
   "storage": {
-    "rules": "storage.rules"
+    "rules": "config/storage.rules"
   },
   "emulators": {
     "auth": {
@@ -49,5 +45,8 @@
   "remoteconfig": {},
   "functions": {
     "source": "functions"
+  },
+  "react-native": {
+    "messaging_ios_auto_register_for_remote_messages": false
   }
 }

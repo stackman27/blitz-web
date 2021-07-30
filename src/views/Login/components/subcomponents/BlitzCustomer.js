@@ -30,19 +30,19 @@ function BlitzCustomer() {
           letterSpacing={2.5}>
           BLITZ FOR CUSTOMERS
         </Text>
-        <Box width={'80%'} margin="auto">
+        <Box width={'95%'} px={5} margin="auto">
           <Slider {...settings}>
             <ImageContentContainer
-              titleLabel={'Keep track of your customers and their purchases'}
-              imgUrl={'/img/customer2.png'}
+              titleLabel={'Scan products directly from your phone.'}
+              imgUrl={'/img/customer/cust2.png'}
             />
             <ImageContentContainer
-              titleLabel={'Manage your Sales and Inventory'}
-              imgUrl={'/img/customer2.png'}
+              titleLabel={'Use Apple Pay to purchase your products.'}
+              imgUrl={'/img/customer/cust3.png'}
             />
             <ImageContentContainer
-              titleLabel={'Manage your Sales and Inventory'}
-              imgUrl={'/img/vendor1.png'}
+              titleLabel={'Tap your phone and verify your payment.'}
+              imgUrl={'/img/customer/cust4.png'}
             />
           </Slider>
         </Box>
@@ -72,8 +72,8 @@ function ImageContentContainer(props) {
         <Image
           src={imgUrl}
           fit="contain"
-          width={'60%'}
-          height={'55%'}
+          width={'100%'}
+          height={'100%'}
           background="transparent"
           margin="auto"
         />
@@ -87,7 +87,7 @@ function SampleNextArrow(props) {
   return (
     <div>
       <IoChevronForwardSharp
-        color="#444444"
+        color="#555555"
         className={className}
         style={{ ...style }}
         onClick={() => onClick()}
@@ -101,7 +101,7 @@ function SamplePrevArrow(props) {
   return (
     <div>
       <IoChevronBackSharp
-        color="#444444"
+        color="#555555"
         className={className}
         style={{ ...style }}
         onClick={() => onClick()}

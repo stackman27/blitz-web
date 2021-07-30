@@ -1,5 +1,5 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables';
+import { vendorUid } from '../util/Variables';
 
 async function getPendingTransactions() {
   const pendingTransaction = [];

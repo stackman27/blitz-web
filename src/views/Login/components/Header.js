@@ -11,11 +11,11 @@ function Header({ signIn }) {
       flexDir={'row'}
       width="100%"
       height="10%"
-      borderBottom="1px"
-      borderBottomColor="gray.200"
-      position="sticky"
+      position="fixed"
       top="0"
-      background="#fefefe"
+      backgroundImage="url('https://i.pinimg.com/originals/f9/11/d3/f911d38579709636499618b6b3d9b6f6.jpg')"
+      opacity="95%"
+      bgColor="rgba(0, 0, 0, 0.09)"
       zIndex={9}>
       <Flex
         width="85%"

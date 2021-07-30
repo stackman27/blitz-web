@@ -45,7 +45,7 @@ function SalesDetails() {
             <Text style={{ color: '#bbb' }}>|</Text>
             &nbsp; &nbsp;
             <Text fontWeight="600" color="#0A63BC">
-              Count: x{item.purchaseCount ? item.purchaseCount : 1}
+              Count: x{item.purchaseCount || 1}
             </Text>
           </Flex>
         </Box>
@@ -88,14 +88,12 @@ function SalesDetails() {
 
             <Box mx="2">
               <Text fontSize="22" fontWeight="bold">
-                {sales.purchaseInfo && sales.purchaseInfo.userName}
+                {sales.purchaseInfo?.userName}
               </Text>
               <Box display="flex" flexDir="row">
                 <IoCart color="#222222" size="25" />
                 <Text fontSize="18" fontWeight="500" mx={1}>
-                  {sales.purchaseInfo &&
-                    sales.purchaseInfo.purchaseInfo.cartItems.length}{' '}
-                  Items
+                  {sales.purchaseInfo?.purchaseInfo.cartItems.length} Items
                 </Text>
               </Box>
             </Box>
@@ -112,9 +110,7 @@ function SalesDetails() {
                 fontWeight="bold"
                 textAlign="right"
                 color="#0A63BC">
-                $
-                {sales.purchaseInfo &&
-                  sales.purchaseInfo.purchaseInfo.total.toFixed(2)}
+                ${sales.purchaseInfo?.purchaseInfo.total.toFixed(2)}
               </Text>
               <Text fontSize="16" textAlign="right">
                 Total with Tax + Fee
@@ -130,85 +126,66 @@ function SalesDetails() {
           borderBottomColor="gray.200"
           px={2}>
           <ShowTaxesInfo
-            purchaseInfo={
-              sales.purchaseInfo ? sales.purchaseInfo.purchaseInfo.subTotal : 0
-            }
+            purchaseInfo={sales.purchaseInfo?.purchaseInfo.subTotal || 0}
             labelDesc={'Sub Total'}
           />
 
-          {sales.purchaseInfo &&
-            sales.purchaseInfo.purchaseInfo.salesTax > 0 && (
-              <ShowTaxesInfo
-                purchaseInfo={
-                  sales.purchaseInfo
-                    ? sales.purchaseInfo.purchaseInfo.salesTax
-                    : 0
-                }
-                labelDesc={'Sales Tax'}
-              />
-            )}
+          {sales.purchaseInfo?.purchaseInfo.salesTax > 0 && (
+            <ShowTaxesInfo
+              purchaseInfo={sales.purchaseInfo?.purchaseInfo.salesTax || 0}
+              labelDesc={'Sales Tax'}
+            />
+          )}
 
-          {sales.purchaseInfo &&
-            sales.purchaseInfo.purchaseInfo.sugarTax > 0 && (
-              <ShowTaxesInfo
-                purchaseInfo={
-                  sales.purchaseInfo
-                    ? sales.purchaseInfo.purchaseInfo.sugarTax
-                    : 0
-                }
-                labelDesc={'Sugar Tax'}
-              />
-            )}
+          {sales.purchaseInfo?.purchaseInfo.sugarTax > 0 && (
+            <ShowTaxesInfo
+              purchaseInfo={sales.purchaseInfo?.purchaseInfo.sugarTax || 0}
+              labelDesc={'Sugar Tax'}
+            />
+          )}
 
           <ShowTaxesInfo
-            purchaseInfo={
-              sales.purchaseInfo ? sales.purchaseInfo.purchaseInfo.blitzFee : 0
-            }
+            purchaseInfo={sales.purchaseInfo?.purchaseInfo.blitzFee || 0}
             labelDesc={'Blitz Fee'}
           />
 
-          {sales.purchaseInfo && sales.purchaseInfo.purchaseInfo.crvFee > 0 && (
+          {sales.purchaseInfo?.purchaseInfo.crvFee > 0 && (
             <ShowTaxesInfo
-              purchaseInfo={
-                sales.purchaseInfo ? sales.purchaseInfo.purchaseInfo.crvFee : 0
-              }
+              purchaseInfo={sales.purchaseInfo?.purchaseInfo.crvFee || 0}
               labelDesc={'CRV Fee'}
             />
           )}
 
-          {sales.purchaseInfo &&
-            sales.purchaseInfo.purchaseInfo.blitzDiscount > 0 && (
-              <Flex flexDir="row" justifyContent="space-between" py={1}>
-                <Text
-                  style={{
-                    fontFamily: 'Avenir',
-                    fontSize: 16,
-                    color: 'green',
-                  }}>
-                  Blitz 20% Off
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: 'Avenir',
-                    fontSize: 18,
-                    fontWeight: '500',
-                    color: 'green',
-                  }}>
-                  -$
-                  {sales.purchaseInfo.purchaseInfo &&
-                    sales.purchaseInfo.purchaseInfo.blitzDiscount.toFixed(2)}
-                </Text>
-              </Flex>
-            )}
+          {sales.purchaseInfo?.purchaseInfo.blitzDiscount > 0 && (
+            <Flex flexDir="row" justifyContent="space-between" py={1}>
+              <Text
+                style={{
+                  fontFamily: 'Avenir',
+                  fontSize: 16,
+                  color: 'green',
+                }}>
+                Blitz 20% Off
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'Avenir',
+                  fontSize: 18,
+                  fontWeight: '500',
+                  color: 'green',
+                }}>
+                -$
+                {sales.purchaseInfo.purchaseInfo?.blitzDiscount.toFixed(2)}
+              </Text>
+            </Flex>
+          )}
         </Flex>
 
         <Box borderBottom="1px" borderBottomColor="gray.200">
           <List height="500" overflow="auto">
             <ListItem>
-              {sales.purchaseInfo &&
-                sales.purchaseInfo.purchaseInfo.cartItems.map((item, index) => (
-                  <RenderCheckoutItems key={index} item={item} />
-                ))}
+              {sales.purchaseInfo?.purchaseInfo.cartItems.map((item, index) => (
+                <RenderCheckoutItems key={index} item={item} />
+              ))}
             </ListItem>
           </List>
         </Box>
