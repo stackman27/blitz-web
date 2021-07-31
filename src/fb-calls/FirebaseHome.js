@@ -1,15 +1,10 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../util/Variables';
+import { loggedInVendor } from '../util/Variables';
 
-const availableTags = ['047D5B02700000'];
-
-async function getVendorInfo() {
-  const snapshot = await firebase
-    .firestore()
-    .collection('blitz_vendors')
-    .doc(vendorUid)
-    .get();
-  return snapshot.data();
+function storeNfcIds(res) {
+  const vendorObject = JSON.parse(localStorage.getItem('loggedInVendor')) || {};
+  vendorObject.nfc_ids = res.nfc_ids;
+  localStorage.setItem('loggedInVendor', JSON.stringify(vendorObject));
 }
 
 async function requestPermissionNotificationWeb() {
@@ -31,7 +26,7 @@ async function storeWebNotifToken(token) {
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .update({
       fcmtoken: firebase.firestore.FieldValue.arrayUnion(token),
     });
@@ -44,7 +39,7 @@ function getToken() {
 }
 
 function getUser() {
-  const userInfo = JSON.parse(localStorage.getItem('user'));
+  const userInfo = JSON.parse(localStorage.getItem('loggedInVendor'));
   return userInfo;
 }
 
@@ -52,11 +47,11 @@ async function logOut() {
   return await firebase.auth().signOut();
 }
 
-function waitingPaymentReceipt(vendorUid) {
+function waitingPaymentReceipt(availableTags) {
   return firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .collection('payments_completed')
     .where('nfc_id', 'in', availableTags) // maybe need to do like array contain
     .where('status', '==', 'verifying')
@@ -74,6 +69,7 @@ async function runPostCheckout(
   const resValue = await checkIfRecieptVerified(vendorUid, receiptId).then(
     async (res) => {
       if (res) {
+        purchaseInfo.status = 'verified';
         await saveDiscountAmount(vendorUid, purchaseInfo);
         await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
         await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
@@ -219,6 +215,7 @@ async function removePaymentsCollVendor(vendorUid, receiptId) {
 // Post checkout end
 
 export {
+  storeNfcIds,
   requestPermissionNotificationWeb,
   getToken,
   getUser,
@@ -226,5 +223,4 @@ export {
   waitingPaymentReceipt,
   removeActiveUser,
   runPostCheckout,
-  getVendorInfo,
 };

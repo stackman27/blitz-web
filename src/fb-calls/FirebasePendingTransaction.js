@@ -1,5 +1,5 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../util/Variables';
+import { loggedInVendor } from '../util/Variables';
 
 async function getPendingTransactions() {
   const pendingTransaction = [];
@@ -7,7 +7,7 @@ async function getPendingTransactions() {
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .collection('payments_completed')
     .orderBy('timestamp', 'desc')
     .limit(25)
@@ -26,7 +26,7 @@ async function getTransactionDetails(rId) {
   const snapshot = await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .collection('payments_completed')
     .doc(rId)
     .get();

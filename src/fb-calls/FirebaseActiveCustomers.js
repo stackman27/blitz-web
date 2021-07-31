@@ -1,11 +1,11 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../util/Variables.js';
+import { loggedInVendor } from '../util/Variables.js';
 
 function getVendorActiveUserInfo() {
   return firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .collection('active_customers');
 }
 
@@ -13,7 +13,7 @@ async function removeActiveUser(customerUid) {
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(vendorUid)
+    .doc(loggedInVendor.uid)
     .collection('active_customers')
     .doc(customerUid)
     .delete();
