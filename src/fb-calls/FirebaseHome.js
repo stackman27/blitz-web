@@ -1,13 +1,6 @@
 import firebase from '../Firebase';
-import { loggedInVendor } from '../util/Variables';
 
-function storeNfcIds(res) {
-  const vendorObject = JSON.parse(localStorage.getItem('loggedInVendor')) || {};
-  vendorObject.nfc_ids = res.nfc_ids;
-  localStorage.setItem('loggedInVendor', JSON.stringify(vendorObject));
-}
-
-async function requestPermissionNotificationWeb() {
+async function requestPermissionNotificationWeb(vendorUid) {
   const messaging = firebase.messaging();
   await messaging
     .requestPermission()
@@ -15,18 +8,18 @@ async function requestPermissionNotificationWeb() {
       return messaging.getToken();
     })
     .then((token) => {
-      storeWebNotifToken(token);
+      storeWebNotifToken(vendorUid, token);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-async function storeWebNotifToken(token) {
+async function storeWebNotifToken(vendorUid, token) {
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .update({
       fcmtoken: firebase.firestore.FieldValue.arrayUnion(token),
     });
@@ -38,20 +31,15 @@ function getToken() {
   return userToken;
 }
 
-function getUser() {
-  const userInfo = JSON.parse(localStorage.getItem('loggedInVendor'));
-  return userInfo;
-}
-
 async function logOut() {
   return await firebase.auth().signOut();
 }
 
-function waitingPaymentReceipt(availableTags) {
+function waitingPaymentReceipt(vendorUid, availableTags) {
   return firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('payments_completed')
     .where('nfc_id', 'in', availableTags) // maybe need to do like array contain
     .where('status', '==', 'verifying')
@@ -215,10 +203,8 @@ async function removePaymentsCollVendor(vendorUid, receiptId) {
 // Post checkout end
 
 export {
-  storeNfcIds,
   requestPermissionNotificationWeb,
   getToken,
-  getUser,
   logOut,
   waitingPaymentReceipt,
   removeActiveUser,

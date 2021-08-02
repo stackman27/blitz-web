@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import VendorViewReceipt from '../HomeReceipt/VendorViewReceipt';
 import WaitingReceipt from '../HomeWaiting/WaitingReceipt';
 import { waitingPaymentReceipt } from '../../fb-calls/FirebaseHome';
-import { loggedInVendor } from '../../util/Variables';
+import { UserContext } from '../../context/UserContext';
 
 function HomeBody() {
+  const currentUser = useContext(UserContext);
   const [purchaseInfo, setPurchaseInfo] = useState({});
   const [scannedReceipt, setScannedReceipt] = useState(false);
   /**
@@ -13,8 +14,11 @@ function HomeBody() {
    */
 
   useEffect(() => {
-    const getTags = loggedInVendor.nfc_ids || ['0'];
-    const unsubscribe = waitingPaymentReceipt(getTags).onSnapshot((snap) => {
+    const getTags = currentUser.nfc_ids || ['0'];
+    const unsubscribe = waitingPaymentReceipt(
+      currentUser.uid,
+      getTags,
+    ).onSnapshot((snap) => {
       snap.forEach((doc) => {
         if (doc.data()) {
           setScannedReceipt(true);

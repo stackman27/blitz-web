@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Flex,
@@ -19,6 +19,7 @@ import {
   getMoreInventory,
 } from '../../fb-calls/FirebaseInventory';
 import FilterOptions from './components/FilterOptions';
+import { UserContext } from '../../context/UserContext';
 
 function Inventory() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,13 +27,14 @@ function Inventory() {
   const [items, setItems] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [, setNumItems] = useState(0);
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
     appliedFilterData();
   }, []);
 
   const appliedFilterData = (filterValue) => {
-    getInventory(filterValue).then((res) => {
+    getInventory(currentUser.uid, filterValue).then((res) => {
       setItems(res[0]);
       setNumItems(res[1]);
       setLastDoc(res[2]);
@@ -43,7 +45,7 @@ function Inventory() {
   const getMoreInventoryCall = () => {
     if (lastDoc) {
       setShowMoreLoading(true);
-      getMoreInventory(lastDoc).then((res) => {
+      getMoreInventory(currentUser.uid, lastDoc).then((res) => {
         setItems([...items, ...res[0]]);
         setLastDoc(res[1]);
         setShowMoreLoading(false);
