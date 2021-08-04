@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
   Flex,
   Box,
@@ -22,24 +22,17 @@ import { useHistory, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IoChevronDownOutline } from 'react-icons/io5';
 import { updatetoNFC, updatetoQR } from '../../fb-calls/FirebaseGlobal.js';
-import { getVendorInfo, logOut } from '../../fb-calls/FirebaseHome';
-import { vendorUid } from '../../constants/Variables';
+import { logOut } from '../../fb-calls/FirebaseHome';
+import { UserContext } from '../../context/UserContext';
 import '../../css/Header.css';
 
 function Header() {
+  const currentUser = useContext(UserContext);
   const history = useHistory();
-  const [vendorInfo, setVendorInfo] = useState({});
-
-  useEffect(() => {
-    getVendorInfo().then((res) => {
-      setVendorInfo(res);
-    });
-  }, []);
 
   const logOutTrigger = () => {
     logOut().then(() => {
       localStorage.setItem('loginToken', null);
-      localStorage.setItem('user', null);
       history.push('/');
       window.location.reload(); // trigger page reload to go to the directed page
     });
@@ -142,7 +135,7 @@ function Header() {
             href={'/analytics'}
           />
         </Box>
-        <ProfileMenu vendorInfo={vendorInfo} logOut={logOutTrigger} />
+        <ProfileMenu vendorInfo={currentUser} logOut={logOutTrigger} />
       </Flex>
     </Flex>
   );
@@ -153,7 +146,7 @@ function ProfileMenu({ vendorInfo, logOut }) {
 
   const updateCheckoutType = (type) => {
     if (type === 'nfc') {
-      updatetoNFC(vendorUid).then(() => {
+      updatetoNFC(vendorInfo.uid).then(() => {
         toast({
           title: 'Successfully updated to NFC',
           status: 'success',
@@ -163,7 +156,7 @@ function ProfileMenu({ vendorInfo, logOut }) {
         });
       });
     } else {
-      updatetoQR(vendorUid).then(() => {
+      updatetoQR(vendorInfo.uid).then(() => {
         toast({
           title: 'Successfully updated to QR Code',
           status: 'success',

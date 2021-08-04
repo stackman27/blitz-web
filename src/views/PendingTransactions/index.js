@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Flex,
@@ -13,14 +13,16 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { getPendingTransactions } from '../../fb-calls/FirebasePendingTransaction';
 import { IoReloadCircle } from 'react-icons/io5';
+import { UserContext } from '../../context/UserContext';
 
 function PendingTransactions() {
+  const currentUser = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [receipts, setReceipts] = useState([]);
   const [numTransactions, setNumTransactions] = useState(0);
 
   useEffect(() => {
-    getPendingTransactions().then((res) => {
+    getPendingTransactions(currentUser.uid).then((res) => {
       setReceipts(res[0]);
       setNumTransactions(res[1]);
       setIsLoading(false);

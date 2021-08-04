@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Flex,
@@ -10,27 +10,47 @@ import {
   ListItem,
   Spinner,
   Badge,
+  Button,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { IoPricetag, IoLayers } from 'react-icons/io5';
-import { getInventory } from '../../fb-calls/FirebaseInventory';
+import {
+  getInventory,
+  getMoreInventory,
+} from '../../fb-calls/FirebaseInventory';
 import FilterOptions from './components/FilterOptions';
+import { UserContext } from '../../context/UserContext';
 
 function Inventory() {
   const [isLoading, setIsLoading] = useState(true);
+  const [showMoreLoading, setShowMoreLoading] = useState(false);
   const [items, setItems] = useState([]);
-  const [numItems, setNumItems] = useState(0);
+  const [lastDoc, setLastDoc] = useState(null);
+  const [, setNumItems] = useState(0);
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
     appliedFilterData();
   }, []);
 
   const appliedFilterData = (filterValue) => {
-    getInventory(filterValue).then((res) => {
+    getInventory(currentUser.uid, filterValue).then((res) => {
       setItems(res[0]);
       setNumItems(res[1]);
+      setLastDoc(res[2]);
       setIsLoading(false);
     });
+  };
+
+  const getMoreInventoryCall = () => {
+    if (lastDoc) {
+      setShowMoreLoading(true);
+      getMoreInventory(currentUser.uid, lastDoc).then((res) => {
+        setItems([...items, ...res[0]]);
+        setLastDoc(res[1]);
+        setShowMoreLoading(false);
+      });
+    }
   };
 
   const RenderInventoryItems = ({ item }) => (
@@ -79,7 +99,7 @@ function Inventory() {
                   </Flex>
                 )}
                 {item.has_crv && (
-                  <Badge bgColor="#1aa26030" px={2}>
+                  <Badge bgColor="#FFCD4630" px={2}>
                     CRV
                   </Badge>
                 )}
@@ -89,7 +109,7 @@ function Inventory() {
                   </Badge>
                 )}
                 {item.has_sales_tax && (
-                  <Badge bgColor="#FFCD4630" px={2}>
+                  <Badge bgColor="#1aa26030" px={2}>
                     Sales Tax
                   </Badge>
                 )}
@@ -133,8 +153,8 @@ function Inventory() {
           </Text>
           <Box display="flex" flexDir="row" alignItems="center">
             <IoLayers size={25} />
-            <Text fontSize={28} fontWeight="500">
-              &nbsp; {numItems} items
+            <Text fontSize={24} fontWeight="500">
+              &nbsp; 1000+ items
             </Text>
           </Box>
         </Box>
@@ -149,6 +169,18 @@ function Inventory() {
               ))}
             </ListItem>
           </List>
+          <Flex alignItems="center" justifyContent="center" my="50">
+            <Button
+              background="#eee"
+              borderColor="#ddd"
+              borderWidth="1px"
+              size="md"
+              px={'28'}
+              onClick={() => getMoreInventoryCall()}
+              isLoading={showMoreLoading}>
+              Load More
+            </Button>
+          </Flex>
         </Box>
       </Flex>
     </Flex>

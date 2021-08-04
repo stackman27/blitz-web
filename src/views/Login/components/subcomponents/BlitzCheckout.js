@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Box } from '@chakra-ui/react';
+import { Text, Box, Button } from '@chakra-ui/react';
 
 function BlitzCheckout() {
   return (
@@ -10,7 +10,7 @@ function BlitzCheckout() {
       alignItems="center"
       width="85%"
       margin="auto"
-      paddingTop="28"
+      paddingTop="44"
       paddingBottom="20">
       <Text
         color="#0A63BC"
@@ -27,6 +27,30 @@ function BlitzCheckout() {
         width="60%">
         Scan, Pay, Verify and Leave. It&apos;s that simple
       </Text>
+      <br />
+      <Text
+        width="55%"
+        textAlign="center"
+        fontSize="22"
+        color="gray"
+        fontWeight="500"
+        letterSpacing={0.3}>
+        Provide a fast and modern checkout service to your customers, including
+        an enhanced Point of Sale system.
+      </Text>
+      <br />
+      <Button
+        bg="#0A63BC"
+        color="#fff"
+        px={10}
+        py={6}
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href =
+            'https://docs.google.com/forms/d/1EqQw8G-vQ-_65z5RdVIW9iOsazyo4JzmXrcpqWKXHVg/edit';
+        }}>
+        Request a Demo
+      </Button>
     </Box>
   );
 }

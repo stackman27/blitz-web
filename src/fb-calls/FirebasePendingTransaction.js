@@ -1,7 +1,6 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables';
 
-async function getPendingTransactions() {
+async function getPendingTransactions(vendorUid) {
   const pendingTransaction = [];
   let totalTransactions = 0;
   await firebase
@@ -22,7 +21,7 @@ async function getPendingTransactions() {
   return [pendingTransaction, totalTransactions];
 }
 
-async function getTransactionDetails(rId) {
+async function getTransactionDetails(vendorUid, rId) {
   const snapshot = await firebase
     .firestore()
     .collection('blitz_vendors')

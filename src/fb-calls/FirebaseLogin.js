@@ -7,6 +7,15 @@ async function signInWithGoogle() {
   return await auth.signInWithPopup(googleProvider);
 }
 
+async function getVendorInfo(vendorUid) {
+  const snapshot = await firebase
+    .firestore()
+    .collection('blitz_vendors')
+    .doc(vendorUid)
+    .get();
+  return snapshot.data();
+}
+
 async function checkifVendor(vendorUid) {
   const docRef = firebase
     .firestore()
@@ -26,8 +35,4 @@ function saveToken(res) {
   localStorage.setItem('loginToken', JSON.stringify(token));
 }
 
-function saveUser(res) {
-  localStorage.setItem('user', JSON.stringify(res));
-}
-
-export { signInWithGoogle, checkifVendor, saveToken, saveUser };
+export { getVendorInfo, signInWithGoogle, checkifVendor, saveToken };

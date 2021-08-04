@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-children-prop */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import {
   Text,
@@ -30,8 +30,10 @@ import {
   updateInventory,
   removeItem,
 } from '../../fb-calls/FirebaseInventory';
+import { UserContext } from '../../context/UserContext';
 
 function InventoryDetails() {
+  const currentUser = useContext(UserContext);
   const { state } = useLocation();
   const history = useHistory();
   const toast = useToast();
@@ -61,7 +63,7 @@ function InventoryDetails() {
   }, []);
 
   const getAllData = () => {
-    getProductDetails(state.pId).then((res) => {
+    getProductDetails(currentUser.uid, state.pId).then((res) => {
       res.crv_by_05_cents = res.crv_by_05_cents * 0.05;
       setOriginalVal(res);
       setItem(res);
@@ -70,7 +72,7 @@ function InventoryDetails() {
 
   const updateItem = () => {
     setIsLoading(true);
-    updateInventory(state.pId, item).then(() => {
+    updateInventory(currentUser.uid, state.pId, item).then(() => {
       toast({
         title: 'Successfully updated.',
         status: 'success',
@@ -84,7 +86,7 @@ function InventoryDetails() {
   };
 
   const deleteItem = () => {
-    removeItem(state.pId).then(() => {
+    removeItem(currentUser.uid, state.pId).then(() => {
       toast({
         title: 'Successfully deleted.',
         status: 'success',
@@ -343,7 +345,7 @@ function InventoryDetails() {
               {item.department}
             </Badge>
             {item.crv_by_05_cents > 0 && (
-              <Badge bgColor="#1aa26030" px={2}>
+              <Badge bgColor="#FFCD4630" px={2}>
                 CRV
               </Badge>
             )}
@@ -353,7 +355,7 @@ function InventoryDetails() {
               </Badge>
             )}
             {item.has_sales_tax && (
-              <Badge bgColor="#FFCD4630" px={2}>
+              <Badge bgColor="#1aa26030" px={2}>
                 Sales Tax
               </Badge>
             )}

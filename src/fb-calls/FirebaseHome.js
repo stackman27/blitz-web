@@ -1,18 +1,6 @@
 import firebase from '../Firebase';
-import { vendorUid } from '../constants/Variables';
 
-const availableTags = ['047D5B02700000'];
-
-async function getVendorInfo() {
-  const snapshot = await firebase
-    .firestore()
-    .collection('blitz_vendors')
-    .doc(vendorUid)
-    .get();
-  return snapshot.data();
-}
-
-async function requestPermissionNotificationWeb() {
+async function requestPermissionNotificationWeb(vendorUid) {
   const messaging = firebase.messaging();
   await messaging
     .requestPermission()
@@ -20,17 +8,21 @@ async function requestPermissionNotificationWeb() {
       return messaging.getToken();
     })
     .then((token) => {
-      storeWebNotifToken(token);
+      storeWebNotifToken(vendorUid, token);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-async function storeWebNotifToken(token) {
-  await firebase.firestore().collection('blitz_vendors').doc(vendorUid).update({
-    web_notif_token: token,
-  });
+async function storeWebNotifToken(vendorUid, token) {
+  await firebase
+    .firestore()
+    .collection('blitz_vendors')
+    .doc(vendorUid)
+    .update({
+      fcmtoken: firebase.firestore.FieldValue.arrayUnion(token),
+    });
 }
 
 function getToken() {
@@ -39,16 +31,11 @@ function getToken() {
   return userToken;
 }
 
-function getUser() {
-  const userInfo = JSON.parse(localStorage.getItem('user'));
-  return userInfo;
-}
-
 async function logOut() {
   return await firebase.auth().signOut();
 }
 
-function waitingPaymentReceipt(vendorUid) {
+function waitingPaymentReceipt(vendorUid, availableTags) {
   return firebase
     .firestore()
     .collection('blitz_vendors')
@@ -70,6 +57,7 @@ async function runPostCheckout(
   const resValue = await checkIfRecieptVerified(vendorUid, receiptId).then(
     async (res) => {
       if (res) {
+        purchaseInfo.status = 'verified';
         await saveDiscountAmount(vendorUid, purchaseInfo);
         await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
         await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
@@ -217,10 +205,8 @@ async function removePaymentsCollVendor(vendorUid, receiptId) {
 export {
   requestPermissionNotificationWeb,
   getToken,
-  getUser,
   logOut,
   waitingPaymentReceipt,
   removeActiveUser,
   runPostCheckout,
-  getVendorInfo,
 };

@@ -31,19 +31,19 @@ function BlitzVendor() {
           BLITZ FOR VENDORS
         </Text>
 
-        <Box width={'80%'} margin="auto">
+        <Box width={'95%'} px={5} margin="auto">
           <Slider {...settings}>
             <ImageContentContainer
-              titleLabel={'Keep track of your customers and their purchases'}
-              imgUrl={'/img/vendor1.png'}
+              titleLabel={'View your stores data from our dashboard.'}
+              imgUrl={'/img/vendor/vend1.png'}
             />
             <ImageContentContainer
-              titleLabel={'Manage your Sales and Inventory'}
-              imgUrl={'/img/vendor2.png'}
+              titleLabel={'Manage your Inventory from Blitz.'}
+              imgUrl={'/img/vendor/vend2.png'}
             />
             <ImageContentContainer
-              titleLabel={'Manage your Sales and Inventory'}
-              imgUrl={'/img/vendor1.png'}
+              titleLabel={'Keep track of your Sales and Transactions.'}
+              imgUrl={'/img/vendor/vend3.png'}
             />
           </Slider>
         </Box>
@@ -73,8 +73,8 @@ function ImageContentContainer(props) {
         <Image
           src={imgUrl}
           fit="contain"
-          width={'60%'}
-          height={'55%'}
+          width={'100%'}
+          height={'100%'}
           background="transparent"
           margin="auto"
         />

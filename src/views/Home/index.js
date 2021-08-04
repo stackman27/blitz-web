@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { vendorUid } from '../../constants/Variables';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useEffect, useState } from 'react';
 import VendorViewReceipt from '../HomeReceipt/VendorViewReceipt';
 import WaitingReceipt from '../HomeWaiting/WaitingReceipt';
 import { waitingPaymentReceipt } from '../../fb-calls/FirebaseHome';
+import { UserContext } from '../../context/UserContext';
 
 function HomeBody() {
+  const currentUser = useContext(UserContext);
   const [purchaseInfo, setPurchaseInfo] = useState({});
   const [scannedReceipt, setScannedReceipt] = useState(false);
-
   /**
    * TODO: need to change timeout logic becuase it's independent to database action
    */
+
   useEffect(() => {
-    const unsubscribe = waitingPaymentReceipt(vendorUid).onSnapshot((snap) => {
+    const getTags = currentUser.nfc_ids || ['0'];
+    const unsubscribe = waitingPaymentReceipt(
+      currentUser.uid,
+      getTags,
+    ).onSnapshot((snap) => {
       snap.forEach((doc) => {
         if (doc.data()) {
           setScannedReceipt(true);
           setPurchaseInfo(doc.data());
-
           setTimeout(() => {
             setScannedReceipt(false);
           }, 30000);

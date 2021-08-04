@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import '../App.css';
 import {
   requestPermissionNotificationWeb,
   getToken,
-  getUser,
 } from '../fb-calls/FirebaseHome';
+import { UserContext } from '../context/UserContext';
 import Header from '../layout/Header';
 import HomeBody from './Home';
 import TotalSales from './TotalSales';
@@ -20,16 +20,16 @@ import PendingTransactionsDetail from '../views/PendingTransactionsDetail';
 
 function VendorHome() {
   const token = getToken();
-  const user = getUser();
+  const currentUser = useContext(UserContext);
   const toast = useToast();
   const audio = new Audio('/newactivecustomer.mp3');
 
   useEffect(() => {
-    requestPermissionNotificationWeb();
     if (token) {
+      requestPermissionNotificationWeb(currentUser?.uid);
       navigator.serviceWorker.addEventListener('message', (message) => {
         try {
-          triggerActiveUser(
+          triggerNotificationToast(
             message.data['firebase-messaging-msg-data'].notification,
           );
         } catch (err) {
@@ -39,7 +39,7 @@ function VendorHome() {
     }
   }, []);
 
-  const triggerActiveUser = (data) => {
+  const triggerNotificationToast = (data) => {
     audio.play();
     toast({
       title: data.title,
@@ -51,7 +51,7 @@ function VendorHome() {
     });
   };
 
-  if (!token || !user) {
+  if (!token || !currentUser) {
     return (
       <Router>
         <Route path="/" component={LoginScreen}>
