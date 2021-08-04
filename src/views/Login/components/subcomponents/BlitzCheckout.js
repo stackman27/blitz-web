@@ -39,7 +39,16 @@ function BlitzCheckout() {
         an enhanced Point of Sale system.
       </Text>
       <br />
-      <Button bg="#0A63BC" color="#fff" px={10} py={6}>
+      <Button
+        bg="#0A63BC"
+        color="#fff"
+        px={10}
+        py={6}
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href =
+            'https://docs.google.com/forms/d/1EqQw8G-vQ-_65z5RdVIW9iOsazyo4JzmXrcpqWKXHVg/edit';
+        }}>
         Request a Demo
       </Button>
     </Box>

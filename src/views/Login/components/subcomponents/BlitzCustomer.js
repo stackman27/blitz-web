@@ -33,6 +33,10 @@ function BlitzCustomer() {
         <Box width={'95%'} px={5} margin="auto">
           <Slider {...settings}>
             <ImageContentContainer
+              titleLabel={'Select the store you want to shop.'}
+              imgUrl={'/img/customer/cust1.png'}
+            />
+            <ImageContentContainer
               titleLabel={'Scan products directly from your phone.'}
               imgUrl={'/img/customer/cust2.png'}
             />

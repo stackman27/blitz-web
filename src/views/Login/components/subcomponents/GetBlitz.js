@@ -20,8 +20,16 @@ function GetBlitz() {
           </Text>
 
           <Box>
-            <Button bg="#0A63BC" color="#fff" size="md">
-              Contact Blitz Sales
+            <Button
+              bg="#0A63BC"
+              color="#fff"
+              size="md"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href =
+                  'https://docs.google.com/forms/d/1EqQw8G-vQ-_65z5RdVIW9iOsazyo4JzmXrcpqWKXHVg/edit';
+              }}>
+              Contact Blitz now!
             </Button>
           </Box>
         </Flex>

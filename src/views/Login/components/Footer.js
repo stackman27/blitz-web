@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, Box, Flex } from '@chakra-ui/react';
+import { Text, Box, Flex, Image } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Footer() {
   const styles = {
     FooterHeaderBlitz: {
-      margin: '0px 20px 0px 20px',
+      margin: '15px 10px 0px 10px',
       fontWeight: 'bold',
       fontStyle: 'italic',
       fontSize: '42px',
@@ -42,7 +42,16 @@ function Footer() {
           justifyContent: 'space-between',
         }}>
         <Box style={styles.FooterHeaderOptions}>
-          <Text style={styles.FooterHeaderBlitz}>Blitz</Text>
+          <Flex flexDir="row" alignItems="center">
+            <Image
+              src={'/img/blitz-logo-white.png'}
+              fit="contain"
+              width={'10%'}
+              height={'10%'}
+            />
+            <Text style={styles.FooterHeaderBlitz}>Blitz</Text>
+          </Flex>
+
           <Text
             style={{
               marginLeft: 20,
@@ -54,7 +63,7 @@ function Footer() {
           </Text>
         </Box>
 
-        <Flex>
+        <Flex style={{ width: '100%', justifyContent: 'flex-end' }}>
           <Box style={styles.FooterHeader}>
             <Text>EXPLORE</Text>
 
