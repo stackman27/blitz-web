@@ -5,8 +5,6 @@ import {
   signInWithGoogle,
   checkifVendor,
   saveToken,
-  saveUser,
-  getVendorInfo,
 } from '../../fb-calls/FirebaseLogin';
 import Header from './components/Header';
 import Body from './components/Body';
@@ -21,10 +19,8 @@ function LoginScreen() {
         if (vRes) {
           // user is a vendor
           saveToken(res);
-          saveUserInfoLocally(res.user).then(() => {
-            history.push('/home');
-            window.location.reload(); // trigger page reload to go to the directed url
-          });
+          history.push('/home');
+          window.location.reload();
         } else {
           // user is not a vendor
           toast({
@@ -37,12 +33,6 @@ function LoginScreen() {
           });
         }
       });
-    });
-  };
-
-  const saveUserInfoLocally = async (res) => {
-    await getVendorInfo(res.uid).then((res) => {
-      saveUser(res);
     });
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Flex,
   Box,
@@ -23,16 +23,16 @@ import PropTypes from 'prop-types';
 import { IoChevronDownOutline } from 'react-icons/io5';
 import { updatetoNFC, updatetoQR } from '../../fb-calls/FirebaseGlobal.js';
 import { logOut } from '../../fb-calls/FirebaseHome';
-import { loggedInVendor } from '../../util/Variables';
+import { UserContext } from '../../context/UserContext';
 import '../../css/Header.css';
 
 function Header() {
+  const currentUser = useContext(UserContext);
   const history = useHistory();
 
   const logOutTrigger = () => {
     logOut().then(() => {
       localStorage.setItem('loginToken', null);
-      localStorage.setItem('user', null);
       history.push('/');
       window.location.reload(); // trigger page reload to go to the directed page
     });
@@ -135,7 +135,7 @@ function Header() {
             href={'/analytics'}
           />
         </Box>
-        <ProfileMenu vendorInfo={loggedInVendor} logOut={logOutTrigger} />
+        <ProfileMenu vendorInfo={currentUser} logOut={logOutTrigger} />
       </Flex>
     </Flex>
   );
@@ -146,7 +146,7 @@ function ProfileMenu({ vendorInfo, logOut }) {
 
   const updateCheckoutType = (type) => {
     if (type === 'nfc') {
-      updatetoNFC(loggedInVendor.uid).then(() => {
+      updatetoNFC(vendorInfo.uid).then(() => {
         toast({
           title: 'Successfully updated to NFC',
           status: 'success',
@@ -156,7 +156,7 @@ function ProfileMenu({ vendorInfo, logOut }) {
         });
       });
     } else {
-      updatetoQR(loggedInVendor.uid).then(() => {
+      updatetoQR(vendorInfo.uid).then(() => {
         toast({
           title: 'Successfully updated to QR Code',
           status: 'success',

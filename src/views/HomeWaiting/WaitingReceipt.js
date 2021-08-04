@@ -8,7 +8,7 @@ function WaitingReceipt() {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="container.sm">
+      height="90vh">
       <span id="pulse"></span>
     </Box>
   );

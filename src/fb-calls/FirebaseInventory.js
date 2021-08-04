@@ -1,7 +1,6 @@
 import firebase from '../Firebase';
-import { loggedInVendor } from '../util/Variables';
 
-async function getInventory(filterOption) {
+async function getInventory(vendorUid, filterOption) {
   const inventory = [];
   let totalInventory = 0;
   let dbRef = null;
@@ -11,14 +10,14 @@ async function getInventory(filterOption) {
     dbRef = firebase
       .firestore()
       .collection('blitz_vendors')
-      .doc(loggedInVendor.uid)
+      .doc(vendorUid)
       .collection('inventory')
       .limit(25);
   } else {
     dbRef = firebase
       .firestore()
       .collection('blitz_vendors')
-      .doc(loggedInVendor.uid)
+      .doc(vendorUid)
       .collection('inventory')
       .where('department', '==', filterOption)
       .limit(25);
@@ -35,14 +34,14 @@ async function getInventory(filterOption) {
   return [inventory, totalInventory, lastDoc];
 }
 
-async function getMoreInventory(lastDoc, filterOption) {
+async function getMoreInventory(vendorUid, lastDoc) {
   const inventory = [];
   let dbRef = null;
 
   dbRef = firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('inventory')
     .startAfter(lastDoc)
     .limit(25);
@@ -57,11 +56,11 @@ async function getMoreInventory(lastDoc, filterOption) {
   return [inventory, lastDoc];
 }
 
-async function getProductDetails(bId) {
+async function getProductDetails(vendorUid, bId) {
   const snapshot = await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('inventory')
     .doc(JSON.stringify(bId))
     .get();
@@ -69,24 +68,24 @@ async function getProductDetails(bId) {
   return snapshot.data();
 }
 
-async function updateInventory(bId, item) {
+async function updateInventory(vendorUid, bId, item) {
   item.crv_by_05_cents = Number(item.crv_by_05_cents / 0.05);
   item.sell_price = Number(item.sell_price);
   item.sugar_tax = Number(item.sugar_tax);
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('inventory')
     .doc(JSON.stringify(bId))
     .update(item);
 }
 
-async function removeItem(bId) {
+async function removeItem(vendorUid, bId) {
   await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('inventory')
     .doc(JSON.stringify(bId))
     .delete();

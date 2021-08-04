@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Box,
   Text,
@@ -14,6 +14,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { IoCart, IoArrowForwardCircle } from 'react-icons/io5';
 import { getTransactionDetails } from '../../fb-calls/FirebasePendingTransaction';
 import { runPostCheckout } from '../../fb-calls/FirebaseHome';
+import { UserContext } from '../../context/UserContext';
 
 function PendingTransactionsDetail() {
   const { state } = useLocation();
@@ -21,9 +22,10 @@ function PendingTransactionsDetail() {
   const [isLoading, setIsLoading] = useState(false);
   const [pendingTx, setPendingTx] = useState({});
   const toast = useToast();
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
-    getTransactionDetails(state.rId).then((res) => {
+    getTransactionDetails(currentUser.uid, state.rId).then((res) => {
       setPendingTx(res);
     });
   }, []);

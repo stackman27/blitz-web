@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Flex,
@@ -29,24 +29,28 @@ import {
   removeActiveUser,
 } from '../../fb-calls/FirebaseActiveCustomers.js';
 import { IoPersonCircle, IoCart } from 'react-icons/io5';
+import { UserContext } from '../../context/UserContext';
 import moment from 'moment';
 
 function ActiveCustomers() {
+  const currentUser = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [activeUser, setactiveUser] = useState([]);
   const [remUid, setRemUid] = useState('');
 
   useEffect(() => {
-    const unsubscribe = getVendorActiveUserInfo().onSnapshot((snap) => {
-      const data = snap.docs.map((doc) => doc.data());
-      setactiveUser(data);
-      setIsLoading(false);
-    });
+    const unsubscribe = getVendorActiveUserInfo(currentUser.uId).onSnapshot(
+      (snap) => {
+        const data = snap.docs.map((doc) => doc.data());
+        setactiveUser(data);
+        setIsLoading(false);
+      },
+    );
     return () => unsubscribe();
   }, []);
 
   const removeUser = () => {
-    removeActiveUser(remUid);
+    removeActiveUser(currentUser.uId, remUid);
   };
 
   const getTimeUserInactive = (timestamp) => {

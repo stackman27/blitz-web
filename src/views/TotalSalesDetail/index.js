@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, Flex, Box, Image, List, ListItem } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import { getSalesDetails } from '../../fb-calls/FirebaseSales';
 import { IoCart } from 'react-icons/io5';
+import { UserContext } from '../../context/UserContext';
 
 function SalesDetails() {
   const { state } = useLocation();
   const [sales, setSales] = useState({});
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
-    getSalesDetails(state.rId).then((res) => {
+    getSalesDetails(currentUser.uid, state.rId).then((res) => {
       setSales(res);
     });
   }, []);

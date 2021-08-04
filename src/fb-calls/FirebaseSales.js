@@ -1,7 +1,6 @@
 import firebase from '../Firebase';
-import { loggedInVendor } from '../util/Variables';
 
-async function getSalesReceipts() {
+async function getSalesReceipts(vendorUid) {
   const salesReceipts = [];
   let totalSales = 0;
   let lastDoc;
@@ -9,7 +8,7 @@ async function getSalesReceipts() {
   const docRef = firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('sales_receipts')
     .orderBy('timestamp', 'desc');
 
@@ -27,12 +26,12 @@ async function getSalesReceipts() {
   return [salesReceipts, totalSales, lastDoc];
 }
 
-async function getMoreReceipts(lastDoc) {
+async function getMoreReceipts(vendorUid, lastDoc) {
   const salesReceipts = [];
   const docRef = firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('sales_receipts')
     .orderBy('timestamp', 'desc');
 
@@ -50,11 +49,11 @@ async function getMoreReceipts(lastDoc) {
   return [salesReceipts, lastDoc];
 }
 
-async function getSalesDetails(rId) {
+async function getSalesDetails(vendorUid, rId) {
   const snapshot = await firebase
     .firestore()
     .collection('blitz_vendors')
-    .doc(loggedInVendor.uid)
+    .doc(vendorUid)
     .collection('sales_receipts')
     .doc(rId)
     .get();

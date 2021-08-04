@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   Flex,
@@ -16,6 +16,7 @@ import {
   getMoreReceipts,
 } from '../../fb-calls/FirebaseSales.js';
 import moment from 'moment';
+import { UserContext } from '../../context/UserContext';
 
 function TotalSales() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,9 +24,10 @@ function TotalSales() {
   const [receipts, setReceipts] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [, setNumReceipts] = useState(0);
+  const currentUser = useContext(UserContext);
 
   useEffect(() => {
-    getSalesReceipts().then((res) => {
+    getSalesReceipts(currentUser.uid).then((res) => {
       setReceipts(res[0]);
       setNumReceipts(res[1]);
       setLastDoc(res[2]);
@@ -36,7 +38,7 @@ function TotalSales() {
   const getMoreReceiptsCall = () => {
     if (lastDoc) {
       setShowMoreLoading(true);
-      getMoreReceipts(lastDoc).then((res) => {
+      getMoreReceipts(currentUser.uid, lastDoc).then((res) => {
         setReceipts([...receipts, ...res[0]]);
         setLastDoc(res[1]);
         setShowMoreLoading(false);

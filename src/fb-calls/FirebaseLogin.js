@@ -35,8 +35,4 @@ function saveToken(res) {
   localStorage.setItem('loginToken', JSON.stringify(token));
 }
 
-function saveUser(res) {
-  localStorage.setItem('loggedInVendor', JSON.stringify(res));
-}
-
-export { getVendorInfo, signInWithGoogle, checkifVendor, saveToken, saveUser };
+export { getVendorInfo, signInWithGoogle, checkifVendor, saveToken };
