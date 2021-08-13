@@ -7,6 +7,7 @@ function BlitzInAction() {
       flexDir="row"
       width="100%"
       justifyContent="space-between"
+      marginTop={200}
       paddingBottom={50}>
       <Flex width="100%" margin="auto">
         <Box

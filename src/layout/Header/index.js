@@ -110,7 +110,7 @@ function Header() {
                 <NavLink
                   key={Math.random()}
                   style={{ padding: 10, borderRadius: 0 }}
-                  label={'Total Sales'}
+                  label={'All Sales'}
                   href={'/sales'}
                 />
 
@@ -124,11 +124,45 @@ function Header() {
             </PopoverContent>
           </Popover>
 
-          <NavLink
-            key={Math.random()}
-            label={'Inventory'}
-            href={'/inventory'}
-          />
+          <Popover trigger="hover" placement="bottom-start">
+            <PopoverTrigger>
+              <Text
+                px={2}
+                py={1}
+                as={Flex}
+                flexDir="row"
+                alignItems="center"
+                rounded={'md'}
+                fontWeight={500}
+                fontFamily="Avenir"
+                color={'#222222'}
+                _hover={{
+                  textDecoration: 'none',
+                  bg: '#0A63BC10',
+                }}>
+                Inventory&nbsp;
+                <IoChevronDownOutline />
+              </Text>
+            </PopoverTrigger>
+            <PopoverContent width="56">
+              <Stack margin={0}>
+                <NavLink
+                  key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
+                  label={'Inventory Details'}
+                  href={'/Inventory'}
+                />
+
+                <NavLink
+                  key={Math.random()}
+                  style={{ padding: 10, borderRadius: 0 }}
+                  label={'Inventory Batch Items'}
+                  href={'/inventoryBatch'}
+                />
+              </Stack>
+            </PopoverContent>
+          </Popover>
+
           <NavLink
             key={Math.random()}
             label={'Analytics'}

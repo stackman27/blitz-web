@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, Flex } from '@chakra-ui/react';
 
-function Analytics() {
+function NoBatchItemsContainer() {
   return (
     <Flex justifyContent={'center'} height="50vh" alignItems="center">
       <Text fontSize={44} fontWeight="bold" color="#bbbbbb">
-        Analytics Coming soon
+        No Batch Items
       </Text>
     </Flex>
   );
 }
 
-export default Analytics;
+export default NoBatchItemsContainer;

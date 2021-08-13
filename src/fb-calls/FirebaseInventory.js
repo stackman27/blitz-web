@@ -36,6 +36,7 @@ async function getInventory(vendorUid, filterOption) {
 
 async function getMoreInventory(vendorUid, lastDoc) {
   const inventory = [];
+  let totalInventory = 0;
   let dbRef = null;
 
   dbRef = firebase
@@ -51,9 +52,10 @@ async function getMoreInventory(vendorUid, lastDoc) {
       inventory.push(doc.data());
     });
     lastDoc = res.docs[res.docs.length - 1];
+    totalInventory = res.size;
   });
 
-  return [inventory, lastDoc];
+  return [inventory, totalInventory, lastDoc];
 }
 
 async function getProductDetails(vendorUid, bId) {
