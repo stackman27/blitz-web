@@ -17,6 +17,10 @@ import SalesDetails from './TotalSalesDetail';
 import LoginScreen from '../views/Login/LoginScreen.js';
 import PendingTransactions from '../views/PendingTransactions';
 import PendingTransactionsDetail from '../views/PendingTransactionsDetail';
+import Loading from '../components/Loading';
+import InventoryBatch from './InventoryBatch';
+import InventoryBatchDetails from './InventoryBatchDetails';
+import Analytics from './Analytics';
 
 function VendorHome() {
   const token = getToken();
@@ -51,6 +55,10 @@ function VendorHome() {
     });
   };
 
+  if (token && !currentUser) {
+    return <Loading />;
+  }
+
   if (!token || !currentUser) {
     return (
       <Router>
@@ -74,10 +82,13 @@ function VendorHome() {
         <Route path="/sales" component={TotalSales}>
           <TotalSales />
         </Route>
+        <Route path="/analytics" component={Analytics}>
+          <Analytics />
+        </Route>
         <Route path="/pending" component={TotalSales}>
           <PendingTransactions />
         </Route>
-        <Route path="/pendingDetail" component={TotalSales}>
+        <Route path="/pendingDetail" component={PendingTransactionsDetail}>
           <PendingTransactionsDetail />
         </Route>
         <Route path="/inventory" component={Inventory}>
@@ -85,6 +96,12 @@ function VendorHome() {
         </Route>
         <Route path="/inventoryDetail" component={InventoryDetails}>
           <InventoryDetails />
+        </Route>
+        <Route path="/inventoryBatch" component={InventoryBatch}>
+          <InventoryBatch />
+        </Route>
+        <Route path="/inventoryBatchDetail" component={InventoryBatchDetails}>
+          <InventoryBatchDetails />
         </Route>
         <Route path="/salesDetail" component={SalesDetails}>
           <SalesDetails />

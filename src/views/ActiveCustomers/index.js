@@ -39,7 +39,7 @@ function ActiveCustomers() {
   const [remUid, setRemUid] = useState('');
 
   useEffect(() => {
-    const unsubscribe = getVendorActiveUserInfo(currentUser.uId).onSnapshot(
+    const unsubscribe = getVendorActiveUserInfo(currentUser.uid).onSnapshot(
       (snap) => {
         const data = snap.docs.map((doc) => doc.data());
         setactiveUser(data);
@@ -50,7 +50,7 @@ function ActiveCustomers() {
   }, []);
 
   const removeUser = () => {
-    removeActiveUser(currentUser.uId, remUid);
+    removeActiveUser(currentUser.uid, remUid);
   };
 
   const getTimeUserInactive = (timestamp) => {

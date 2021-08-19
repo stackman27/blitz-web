@@ -28,6 +28,7 @@ async function getSalesReceipts(vendorUid) {
 
 async function getMoreReceipts(vendorUid, lastDoc) {
   const salesReceipts = [];
+  let totalSales = 0;
   const docRef = firebase
     .firestore()
     .collection('blitz_vendors')
@@ -44,9 +45,11 @@ async function getMoreReceipts(vendorUid, lastDoc) {
         salesReceipts.push(doc.data());
       });
       lastDoc = res.docs[res.docs.length - 1];
+      totalSales = res.size;
+      lastDoc = res.docs[res.docs.length - 1];
     });
 
-  return [salesReceipts, lastDoc];
+  return [salesReceipts, totalSales, lastDoc];
 }
 
 async function getSalesDetails(vendorUid, rId) {

@@ -83,6 +83,15 @@ function VendorViewReceipt({ purchaseInfo }) {
             <Text fontWeight="600" color="#0A63BC">
               Count: x{item.purchaseCount}
             </Text>
+            &nbsp; &nbsp;
+            {item.batchItemDiscount > 0 && (
+              <>
+                <Text style={{ color: '#bbb' }}>|</Text>
+                <Text fontWeight="600" color="#1aa260" marginLeft="3">
+                  Batch Discount: ${item.batchItemDiscount.toFixed(2)} off
+                </Text>
+              </>
+            )}
           </Flex>
         </Box>
       </Box>

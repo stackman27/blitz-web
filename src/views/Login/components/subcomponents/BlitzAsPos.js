@@ -81,9 +81,9 @@ function BlitzAsPos() {
                 <TabPanel>
                   <TabPanelList
                     tabName="Analytics"
-                    tabDescription="With Blitz, you can know your customer better than ever. Analyze your customer’s purchasing activity by generating 
-                    custom monthly, weekly, or daily data reports. We also have sales and tax reportings where you'll be able to get an entire rundown of 
-                    your business profit and revenue."
+                    tabDescription="With Blitz, you can know your customer better than ever. Analyze your customers’ purchasing activity
+                     by generating custom monthly, weekly, or daily data reports. Blitz also provides sales and tax reporting where you will
+                    be able to get an entire rundown of your business profit and revenue. "
                     tabImg={'/img/blitz-as-pos/analytics.png'}
                   />
                 </TabPanel>
@@ -91,45 +91,43 @@ function BlitzAsPos() {
                 <TabPanel>
                   <TabPanelList
                     tabName="Track and Trace"
-                    tabDescription="Blitz allows vendors to monitor purchasing activity in real time within their store. From active notifications to receipt
-                     history, Blitz keeps you informed of past, present, and soon to be transactions. Since we've digitized all the receipts, you'll be able 
-                     to handle purchase and returns with your smartphone or your computer."
+                    tabDescription="Blitz allows vendors to monitor purchasing activity in real time within their store.
+                     From active notifications to receipt history, Blitz keeps you informed of past, present, and soon-to-be transactions.
+                      Because Blitz has digitalized all the receipts, you will be able to handle purchases and returns with your smartphone or computer. "
                     tabImg={'/img/blitz-as-pos/track-and-trace.png'}
                   />
                 </TabPanel>
                 <TabPanel>
                   <TabPanelList
                     tabName="Reduced Price"
-                    tabDescription="Unlike traditional POS systems, Blitz requires no hardware! Therefore we have no hardware fees, allowing us to truly 
-                    provide you with great service at an affordable price. Blitz cost is almost 10x cheaper than any other POS system. Also, you can use 
-                    all of Blitz features for free. The only fee we charge is the 2.9% + 30c fees on every purchase from the customer side to process payments."
+                    tabDescription="Unlike traditional POS systems., Blitz requires no hardware! Therefore, there are no hardware fees, 
+                    allowing us to provide great service at an affordable price. Blitz’ cost is almost 10x cheaper than any other POS system. 
+                    Also, you have access to all Blitz features for free. We charge only one fee of 2.9% + 30 cents on the customer side in order to process payments."
                     tabImg={'/img/blitz-as-pos/reduced-price.png'}
                   />
                 </TabPanel>
                 <TabPanel>
                   <TabPanelList
                     tabName="All Digital"
-                    tabDescription="Everything is digital in Blitz. From receipts to product details to payment verification, we digitize everything so 
-                    that you dont have to worry about paper receipts or paper barcodes. We are software focused company so want to transform the entire
-                     POS system into software to modernize your business and make it easy for the customer to purchase."
+                    tabDescription="Everything from receipts to product details to payment verification is digital in Blitz. 
+                    That way, you do not have to worry about keeping track of paper trails. Because we are a software focused company, 
+                    we want to transform the entire POS system into software to modernize your business and increase ease of customer purchasing. "
                     tabImg={'/img/blitz-as-pos/all-digital.png'}
                   />
                 </TabPanel>
                 <TabPanel>
                   <TabPanelList
                     tabName="Tap Verification"
-                    tabDescription="Rather than scanning individual products at the counter, Blitz allows customers to directly do so from their phone 
-                    further leading to less waiting times at the counter. Through the use of Blitz tapper, customers can tap their phone at the counter
-                     for a quick verification process."
+                    tabDescription="Rather than scanning products at the counter, Blitz allows customers to scan products directly from their phone, 
+                    leading to a faster check out. Through the use of Blitz Tapper, customers only need to tap their phone at the counter for a quick verification process."
                     tabImg={'/img/blitz-as-pos/tapper-verify.png'}
                   />
                 </TabPanel>
                 <TabPanel>
                   <TabPanelList
                     tabName="Customizable"
-                    tabDescription="Take control of your POS system. We have wide range of features that lets your modify the system that fits your store. 
-                    Some of the notable features include customizing promotions, batch items for bulk share, complete inventory control from your phone, 
-                    get digital pictures of each of your product and many more. Your store, your rules!"
+                    tabDescription="Take control of your POS system. Our wide range of features lets you modify the system to fit your store. Some notable features include customizing promotions, 
+                    batch items for bulk share, complete inventory control from your phone, digital pictures of every product and more! Your store, your rules!"
                     tabImg={'/img/blitz-as-pos/customizable.png'}
                   />
                 </TabPanel>

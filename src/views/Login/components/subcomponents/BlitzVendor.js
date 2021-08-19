@@ -38,11 +38,11 @@ function BlitzVendor() {
               imgUrl={'/img/vendor/vend1.png'}
             />
             <ImageContentContainer
-              titleLabel={'Manage your Inventory from Blitz.'}
+              titleLabel={'Manage your inventory from Blitz.'}
               imgUrl={'/img/vendor/vend2.png'}
             />
             <ImageContentContainer
-              titleLabel={'Keep track of your Sales and Transactions.'}
+              titleLabel={'Keep track of your sales and transactions.'}
               imgUrl={'/img/vendor/vend3.png'}
             />
           </Slider>

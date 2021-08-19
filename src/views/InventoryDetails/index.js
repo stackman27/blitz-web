@@ -230,6 +230,7 @@ function InventoryDetails() {
               />
               <Input
                 placeholder="Enter Sell Price"
+                inputMode="decimal"
                 variant="flushed"
                 value={`${item.sell_price ? item.sell_price : 0}`}
                 onChange={(e) =>
@@ -263,6 +264,7 @@ function InventoryDetails() {
               <Input
                 placeholder="Enter Sell Price"
                 variant="flushed"
+                inputMode="decimal"
                 value={`${item.crv_by_05_cents ? item.crv_by_05_cents : 0}`}
                 onChange={(e) =>
                   setItem({
@@ -299,6 +301,7 @@ function InventoryDetails() {
               <Input
                 placeholder="Enter Sell Price"
                 variant="flushed"
+                inputMode="decimal"
                 value={`${item.sugar_tax ? item.sugar_tax : 0}`}
                 onChange={(e) =>
                   setItem({

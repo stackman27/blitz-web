@@ -21,6 +21,7 @@ import { UserContext } from '../../context/UserContext';
 function TotalSales() {
   const [isLoading, setIsLoading] = useState(true);
   const [showMoreLoading, setShowMoreLoading] = useState(false);
+  const [isItemsRemaining, setIsItemsRemaining] = useState(true);
   const [receipts, setReceipts] = useState([]);
   const [lastDoc, setLastDoc] = useState(null);
   const [, setNumReceipts] = useState(0);
@@ -32,6 +33,9 @@ function TotalSales() {
       setNumReceipts(res[1]);
       setLastDoc(res[2]);
       setIsLoading(false);
+      if (res[1] < 10) {
+        setIsItemsRemaining(false);
+      }
     });
   }, []);
 
@@ -40,8 +44,11 @@ function TotalSales() {
       setShowMoreLoading(true);
       getMoreReceipts(currentUser.uid, lastDoc).then((res) => {
         setReceipts([...receipts, ...res[0]]);
-        setLastDoc(res[1]);
+        setLastDoc(res[2]);
         setShowMoreLoading(false);
+        if (res[1] < 10) {
+          setIsItemsRemaining(false);
+        }
       });
     }
   };
@@ -149,18 +156,20 @@ function TotalSales() {
               ))}
             </ListItem>
           </List>
-          <Flex alignItems="center" justifyContent="center" my="50">
-            <Button
-              background="#eee"
-              borderColor="#ddd"
-              borderWidth="1px"
-              size="md"
-              px={'28'}
-              onClick={() => getMoreReceiptsCall()}
-              isLoading={showMoreLoading}>
-              Load More
-            </Button>
-          </Flex>
+          {isItemsRemaining && (
+            <Flex alignItems="center" justifyContent="center" my="50">
+              <Button
+                background="#eee"
+                borderColor="#ddd"
+                borderWidth="1px"
+                size="md"
+                px={'28'}
+                onClick={() => getMoreReceiptsCall()}
+                isLoading={showMoreLoading}>
+                Load More
+              </Button>
+            </Flex>
+          )}
         </Box>
       </Flex>
     </Flex>

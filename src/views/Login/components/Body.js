@@ -8,6 +8,7 @@ import Footer from './Footer';
 import BlitzInAction from './subcomponents/BlitzInAction';
 import BlitzAsPos from './subcomponents/BlitzAsPos';
 import GetBlitz from './subcomponents/GetBlitz';
+import BlitzPricing from './subcomponents/BlitzPricing';
 
 function Body({ signIn }) {
   return (
@@ -22,6 +23,10 @@ function Body({ signIn }) {
 
       <Fade>
         <BlitzAsPos />
+      </Fade>
+
+      <Fade>
+        <BlitzPricing />
       </Fade>
 
       <Fade>

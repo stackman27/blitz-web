@@ -8,7 +8,6 @@ import {
   List,
   Stack,
   ListItem,
-  Spinner,
   Badge,
   Button,
 } from '@chakra-ui/react';
@@ -20,11 +19,13 @@ import {
 } from '../../fb-calls/FirebaseInventory';
 import FilterOptions from './components/FilterOptions';
 import { UserContext } from '../../context/UserContext';
+import Loading from '../../components/Loading';
 
 function Inventory() {
   const [isLoading, setIsLoading] = useState(true);
   const [showMoreLoading, setShowMoreLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [isItemsRemaining, setIsItemsRemaining] = useState(true);
   const [lastDoc, setLastDoc] = useState(null);
   const [, setNumItems] = useState(0);
   const currentUser = useContext(UserContext);
@@ -39,6 +40,9 @@ function Inventory() {
       setNumItems(res[1]);
       setLastDoc(res[2]);
       setIsLoading(false);
+      if (res[1] < 25) {
+        setIsItemsRemaining(false);
+      }
     });
   };
 
@@ -47,8 +51,11 @@ function Inventory() {
       setShowMoreLoading(true);
       getMoreInventory(currentUser.uid, lastDoc).then((res) => {
         setItems([...items, ...res[0]]);
-        setLastDoc(res[1]);
+        setLastDoc(res[2]);
         setShowMoreLoading(false);
+        if (res[1] < 25) {
+          setIsItemsRemaining(false);
+        }
       });
     }
   };
@@ -130,11 +137,7 @@ function Inventory() {
   );
 
   if (isLoading) {
-    return (
-      <Flex justifyContent={'center'} height="50vh" alignItems="center">
-        <Spinner />
-      </Flex>
-    );
+    return <Loading />;
   }
 
   return (
@@ -169,18 +172,20 @@ function Inventory() {
               ))}
             </ListItem>
           </List>
-          <Flex alignItems="center" justifyContent="center" my="50">
-            <Button
-              background="#eee"
-              borderColor="#ddd"
-              borderWidth="1px"
-              size="md"
-              px={'28'}
-              onClick={() => getMoreInventoryCall()}
-              isLoading={showMoreLoading}>
-              Load More
-            </Button>
-          </Flex>
+          {isItemsRemaining && (
+            <Flex alignItems="center" justifyContent="center" my="50">
+              <Button
+                background="#eee"
+                borderColor="#ddd"
+                borderWidth="1px"
+                size="md"
+                px={'28'}
+                onClick={() => getMoreInventoryCall()}
+                isLoading={showMoreLoading}>
+                Load More
+              </Button>
+            </Flex>
+          )}
         </Box>
       </Flex>
     </Flex>
