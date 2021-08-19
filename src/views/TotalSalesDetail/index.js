@@ -167,27 +167,20 @@ function SalesDetails() {
             />
           )}
 
+          {sales.purchaseInfo?.purchaseInfo.batchItemDiscount > 0 && (
+            <ShowDiscountInfo
+              purchaseInfo={
+                sales.purchaseInfo.purchaseInfo.batchItemDiscount || 0
+              }
+              labelDesc={'Batch Item Discounts'}
+            />
+          )}
+
           {sales.purchaseInfo?.purchaseInfo.blitzDiscount > 0 && (
-            <Flex flexDir="row" justifyContent="space-between" py={1}>
-              <Text
-                style={{
-                  fontFamily: 'Avenir',
-                  fontSize: 16,
-                  color: 'green',
-                }}>
-                Blitz 20% Off
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Avenir',
-                  fontSize: 18,
-                  fontWeight: '500',
-                  color: 'green',
-                }}>
-                -$
-                {sales.purchaseInfo.purchaseInfo?.blitzDiscount.toFixed(2)}
-              </Text>
-            </Flex>
+            <ShowDiscountInfo
+              purchaseInfo={sales.purchaseInfo.purchaseInfo.blitzDiscount || 0}
+              labelDesc={'Blitz 20% Off'}
+            />
           )}
         </Flex>
 
@@ -224,6 +217,31 @@ function ShowTaxesInfo({ purchaseInfo, labelDesc }) {
           color: '#222222',
         }}>
         ${purchaseInfo.toFixed(2)}
+      </Text>
+    </Flex>
+  );
+}
+
+function ShowDiscountInfo({ purchaseInfo, labelDesc }) {
+  return (
+    <Flex flexDir="row" justifyContent="space-between" py={1}>
+      <Text
+        style={{
+          fontFamily: 'Avenir',
+          fontSize: 16,
+          color: 'green',
+        }}>
+        {labelDesc}
+      </Text>
+      <Text
+        style={{
+          fontFamily: 'Avenir',
+          fontSize: 18,
+          fontWeight: '500',
+          color: 'green',
+        }}>
+        -$
+        {purchaseInfo.toFixed(2)}
       </Text>
     </Flex>
   );
