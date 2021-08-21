@@ -46,6 +46,7 @@ async function getMoreReceipts(vendorUid, lastDoc) {
       });
       lastDoc = res.docs[res.docs.length - 1];
       totalSales = res.size;
+      lastDoc = res.docs[res.docs.length - 1];
     });
 
   return [salesReceipts, totalSales, lastDoc];
