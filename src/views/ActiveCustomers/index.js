@@ -83,6 +83,7 @@ function ActiveCustomers() {
     <Flex justifyContent={'center'} my="10">
       <Flex
         width={[
+          '55%',
           '90%', // 480px upwards
           '80%', // 768px upwards
           '55%', // 992px upwards

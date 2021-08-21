@@ -122,7 +122,15 @@ function PendingTransactionsDetail() {
 
   return (
     <Flex justifyContent={'center'} my="10">
-      <Flex width="55%" fontFamily="Avenir" flexDirection={'column'}>
+      <Flex
+        width={[
+          '55%',
+          '90%', // 480px upwards
+          '80%', // 768px upwards
+          '55%', // 992px upwards
+        ]}
+        fontFamily="Avenir"
+        flexDirection={'column'}>
         <Box
           display="flex"
           flex={1}
