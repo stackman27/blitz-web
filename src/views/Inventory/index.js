@@ -142,7 +142,14 @@ function Inventory() {
 
   return (
     <Flex justifyContent={'center'} my="10">
-      <Flex width="60%" fontFamily="Avenir" flexDirection={'column'}>
+      <Flex
+        width={[
+          '90%', // 480px upwards
+          '80%', // 768px upwards
+          '60%', // 992px upwards
+        ]}
+        fontFamily="Avenir"
+        flexDirection={'column'}>
         <Box
           display="flex"
           flexDir="row"
