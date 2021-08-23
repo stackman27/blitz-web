@@ -1,14 +1,13 @@
+/* eslint-disable no-unused-vars */
 import firebase from '../Firebase';
 
 async function requestPermissionNotificationWeb(vendorUid) {
   const messaging = firebase.messaging();
   await messaging
     .requestPermission()
-    .then(() => {
-      return messaging.getToken();
-    })
-    .then((token) => {
-      storeWebNotifToken(vendorUid, token);
+    .then(async () => {
+      const token = await messaging.getToken();
+      await storeWebNotifToken(vendorUid, token);
     })
     .catch((err) => {
       console.log(err);

@@ -29,8 +29,8 @@ function VendorHome() {
   const audio = new Audio('/newactivecustomer.mp3');
 
   useEffect(() => {
-    if (token) {
-      requestPermissionNotificationWeb(currentUser?.uid);
+    if (token && currentUser?.uid) {
+      requestPermissionNotificationWeb(currentUser.uid);
       navigator.serviceWorker.addEventListener('message', (message) => {
         try {
           triggerNotificationToast(
@@ -41,7 +41,7 @@ function VendorHome() {
         }
       });
     }
-  }, []);
+  }, [currentUser]);
 
   const triggerNotificationToast = (data) => {
     audio.play();
