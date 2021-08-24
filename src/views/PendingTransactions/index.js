@@ -115,6 +115,7 @@ function PendingTransactions() {
           '55%',
           '90%', // 480px upwards
           '80%', // 768px upwards
+          '70%',
           '55%', // 992px upwards
         ]}
         fontFamily="Avenir"

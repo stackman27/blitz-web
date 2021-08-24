@@ -1,5 +1,5 @@
 export const TABLET_SIZE = {
-  MAX_WIDTH: '(max-width: 768px)',
+  MAX_WIDTH: '(max-width:1024px)',
 };
 
 export const MOBILE_SIZE = {
