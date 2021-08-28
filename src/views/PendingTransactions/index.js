@@ -71,19 +71,10 @@ function PendingTransactions() {
             <Text fontSize="22" fontWeight="600" textAlign="right">
               ${item.purchaseInfo.total.toFixed(2)}
             </Text>
-            {item.purchaseInfo.discountUsed ? (
-              <Text
-                fontSize="18"
-                fontWeight="500"
-                textAlign="end"
-                color="green">
-                20% off Blitz
-              </Text>
-            ) : (
-              <Text fontSize="18" fontWeight="400" textAlign="end">
-                Tax + Fees
-              </Text>
-            )}
+
+            <Text fontSize="18" fontWeight="400" textAlign="end">
+              Tax + Fees
+            </Text>
           </Box>
         </Box>
       </Box>

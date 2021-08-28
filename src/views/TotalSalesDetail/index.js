@@ -47,7 +47,7 @@ function SalesDetails() {
             <Text style={{ color: '#bbb' }}>|</Text>
             &nbsp; &nbsp;
             <Text fontWeight="600" color="#0A63BC">
-              Count: x{item.purchaseCount || 1}
+              x{item.purchaseCount || 1}
             </Text>
             &nbsp; &nbsp;
             {item.batchItemDiscount > 0 && (
@@ -185,10 +185,10 @@ function SalesDetails() {
             />
           )}
 
-          {sales.purchaseInfo?.purchaseInfo.blitzDiscount > 0 && (
+          {sales.purchaseInfo?.purchaseInfo.promoUsed && (
             <ShowDiscountInfo
-              purchaseInfo={sales.purchaseInfo.purchaseInfo.blitzDiscount || 0}
-              labelDesc={'Blitz 20% Off'}
+              purchaseInfo={sales.purchaseInfo.purchaseInfo.promoDiscount || 0}
+              labelDesc={'Promo 50% Off'}
             />
           )}
         </Flex>

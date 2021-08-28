@@ -103,7 +103,7 @@ async function saveDiscountAmount(vendorUid, purchaseInfo) {
     .doc(vendorUid)
     .update({
       discount_total: firebase.firestore.FieldValue.increment(
-        purchaseInfo.purchaseInfo.blitzDiscount,
+        purchaseInfo.purchaseInfo.promoDiscount,
       ),
     });
 }

@@ -81,7 +81,7 @@ function VendorViewReceipt({ purchaseInfo }) {
             <Text style={{ color: '#bbb' }}>|</Text>
             &nbsp; &nbsp;
             <Text fontWeight="600" color="#0A63BC">
-              Count: x{item.purchaseCount}
+              x{item.purchaseCount}
             </Text>
             &nbsp; &nbsp;
             {item.batchItemDiscount > 0 && (
@@ -121,57 +121,68 @@ function VendorViewReceipt({ purchaseInfo }) {
         <Box
           display="flex"
           flex={1}
-          flexDir="row"
+          flexDir="column"
           justifyContent="space-between"
           paddingBottom="1"
           borderBottom="1px"
           borderBottomColor="gray.200">
-          <Box
-            display="flex"
-            flexDir="row"
-            justifyContent="center"
-            alignItems="center">
-            <Box width="16" height="16">
-              <Image
-                src={purchaseInfo?.userImg}
-                borderRadius="100"
-                fit="contain"
-                background="#ddd"
-                width={'100%'}
-                height={'100%'}
-              />
+          <Flex flexDir="row" justifyContent="space-between">
+            <Box
+              display="flex"
+              flexDir="row"
+              justifyContent="center"
+              alignItems="center">
+              <Box width="16" height="16">
+                <Image
+                  src={purchaseInfo?.userImg}
+                  borderRadius="100"
+                  fit="contain"
+                  background="#ddd"
+                  width={'100%'}
+                  height={'100%'}
+                />
+              </Box>
+
+              <Box mx="2">
+                <Text fontSize="22" fontWeight="bold">
+                  {purchaseInfo?.userName}
+                </Text>
+                <Box display="flex" flexDir="row">
+                  <IoCart color="#222222" size="25" />
+                  <Text fontSize="18" fontWeight="500" mx={1}>
+                    {purchaseInfo.purchaseInfo?.cartItems.length} Items
+                  </Text>
+                </Box>
+              </Box>
             </Box>
 
-            <Box mx="2">
-              <Text fontSize="22" fontWeight="bold">
-                {purchaseInfo?.userName}
-              </Text>
-              <Box display="flex" flexDir="row">
-                <IoCart color="#222222" size="25" />
-                <Text fontSize="18" fontWeight="500" mx={1}>
-                  {purchaseInfo.purchaseInfo?.cartItems.length} Items
+            <Box
+              display="flex"
+              flexDir="row"
+              justifyContent="center"
+              alignItems="center">
+              <Box mx="2">
+                <Text
+                  fontSize="30"
+                  fontWeight="bold"
+                  textAlign="right"
+                  color="#0A63BC">
+                  ${purchaseInfo.purchaseInfo?.total.toFixed(2)}
+                </Text>
+                <Text fontSize="16" textAlign="right">
+                  Total with Tax + Fee
                 </Text>
               </Box>
             </Box>
-          </Box>
+          </Flex>
 
-          <Box
-            display="flex"
-            flexDir="row"
-            justifyContent="center"
-            alignItems="center">
-            <Box mx="2">
-              <Text
-                fontSize="30"
-                fontWeight="bold"
-                textAlign="right"
-                color="#0A63BC">
-                ${purchaseInfo.purchaseInfo?.total.toFixed(2)}
-              </Text>
-              <Text fontSize="16" textAlign="right">
-                Total with Tax + Fee
-              </Text>
-            </Box>
+          <Box padding={3} paddingBottom={1}>
+            {purchaseInfo.purchaseInfo?.promoUsed && (
+              <ShowDiscountInfo
+                purchaseInfo={purchaseInfo.purchaseInfo.promoDiscount || 0}
+                labelDesc={'Promo 50% Off'}
+              />
+            )}
           </Box>
         </Box>
 
@@ -196,6 +207,31 @@ function VendorViewReceipt({ purchaseInfo }) {
           </Button>
         </Box>
       </Flex>
+    </Flex>
+  );
+}
+
+function ShowDiscountInfo({ purchaseInfo, labelDesc }) {
+  return (
+    <Flex flexDir="row" justifyContent="space-between" py={1}>
+      <Text
+        style={{
+          fontFamily: 'Avenir',
+          fontSize: 18,
+          color: 'green',
+        }}>
+        {labelDesc}
+      </Text>
+      <Text
+        style={{
+          fontFamily: 'Avenir',
+          fontSize: 18,
+          fontWeight: '600',
+          color: 'green',
+        }}>
+        -$
+        {purchaseInfo.toFixed(2)}
+      </Text>
     </Flex>
   );
 }
