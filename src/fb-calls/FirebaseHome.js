@@ -57,7 +57,9 @@ async function runPostCheckout(
     async (res) => {
       if (res) {
         purchaseInfo.status = 'verified';
-        await saveDiscountAmount(vendorUid, purchaseInfo);
+        if (purchaseInfo.purchaseInfo.promoUsed) {
+          await saveDiscountAmount(vendorUid, purchaseInfo);
+        }
         await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
         await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
         await removeActiveUser(vendorUid, customerUid);
