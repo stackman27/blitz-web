@@ -15,6 +15,7 @@ import { IoCart, IoArrowForwardCircle } from 'react-icons/io5';
 import { getTransactionDetails } from '../../fb-calls/FirebasePendingTransaction';
 import { runPostCheckout } from '../../fb-calls/FirebaseHome';
 import { UserContext } from '../../context/UserContext';
+import { purchaseItemCountTemporaryFix } from '../../util/Calculations';
 
 function PendingTransactionsDetail() {
   const { state } = useLocation();
@@ -164,7 +165,10 @@ function PendingTransactionsDetail() {
                 <Box display="flex" flexDir="row">
                   <IoCart color="#222222" size="25" />
                   <Text fontSize="18" fontWeight="500" mx={1}>
-                    {pendingTx.purchaseInfo?.cartItems.length} Items
+                    {purchaseItemCountTemporaryFix(
+                      pendingTx.purchaseInfo || null,
+                    ) || pendingTx.purchaseInfo?.cartItems.length}{' '}
+                    Items
                   </Text>
                 </Box>
               </Box>

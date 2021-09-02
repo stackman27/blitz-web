@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { IoCart, IoArrowForwardCircle } from 'react-icons/io5';
 import { runPostCheckout } from '../../fb-calls/FirebaseHome';
+import { purchaseItemCountTemporaryFix } from '../../util/Calculations';
 
 function VendorViewReceipt({ purchaseInfo }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -150,7 +151,10 @@ function VendorViewReceipt({ purchaseInfo }) {
                 <Box display="flex" flexDir="row">
                   <IoCart color="#222222" size="25" />
                   <Text fontSize="18" fontWeight="500" mx={1}>
-                    {purchaseInfo.purchaseInfo?.cartItems.length} Items
+                    {purchaseItemCountTemporaryFix(
+                      purchaseInfo.purchaseInfo || null,
+                    ) || purchaseInfo.purchaseInfo?.cartItems.length}{' '}
+                    Items
                   </Text>
                 </Box>
               </Box>

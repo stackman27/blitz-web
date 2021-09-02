@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { getSalesDetails } from '../../fb-calls/FirebaseSales';
 import { IoCart } from 'react-icons/io5';
 import { UserContext } from '../../context/UserContext';
+import { purchaseItemCountTemporaryFix } from '../../util/Calculations';
 
 function SalesDetails() {
   const { state } = useLocation();
@@ -113,7 +114,10 @@ function SalesDetails() {
               <Box display="flex" flexDir="row">
                 <IoCart color="#222222" size="25" />
                 <Text fontSize="18" fontWeight="500" mx={1}>
-                  {sales.purchaseInfo?.purchaseInfo.cartItems.length} Items
+                  {purchaseItemCountTemporaryFix(
+                    sales.purchaseInfo?.purchaseInfo,
+                  ) || sales.purchaseInfo?.purchaseInfo.cartItems.length}{' '}
+                  Items
                 </Text>
               </Box>
             </Box>
