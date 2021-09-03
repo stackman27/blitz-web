@@ -23,6 +23,10 @@
   animation: pulse 3s ease 0s infinite;
 }
 
+#pulse h1 {
+  color: 'red';
+}
+
 @keyframes pulse {
   0% {
     opacity: 1;

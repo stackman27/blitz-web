@@ -1,6 +1,6 @@
 import React from 'react';
 import './WaitingReceipt.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Text, Image } from '@chakra-ui/react';
 
 function WaitingReceipt() {
   return (
@@ -9,7 +9,34 @@ function WaitingReceipt() {
       justifyContent="center"
       alignItems="center"
       height="90vh">
-      <span id="pulse"></span>
+      <div id="pulse" onClick={() => window.location.reload()}>
+        <Box
+          style={{
+            width: '100%',
+            marginTop: 60,
+            fontWeight: '600',
+            fontSize: 20,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Image
+            src={'/img/blitzlogo.png'}
+            fit="contain"
+            width={'20%'}
+            borderRadius="8"
+            margin="auto"
+            height={'20%'}
+            background="red"
+          />
+          <Text
+            style={{
+              color: '#fff',
+              textAlign: 'center',
+            }}>
+            Click to update
+          </Text>
+        </Box>
+      </div>
     </Box>
   );
 }
