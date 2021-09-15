@@ -16,6 +16,7 @@ import { getTransactionDetails } from '../../fb-calls/FirebasePendingTransaction
 import { runPostCheckout } from '../../fb-calls/FirebaseHome';
 import { UserContext } from '../../context/UserContext';
 import { purchaseItemCountTemporaryFix } from '../../util/Calculations';
+import PriceInfo from '../../components/PriceInfo';
 
 function PendingTransactionsDetail() {
   const { state } = useLocation();
@@ -195,10 +196,30 @@ function PendingTransactionsDetail() {
           </Flex>
 
           <Box padding={3} paddingBottom={1}>
+            <PriceInfo
+              purchaseInfo={
+                pendingTx.purchaseInfo?.salesTax +
+                pendingTx.purchaseInfo?.sugarTax +
+                pendingTx.purchaseInfo?.blitzFee +
+                pendingTx.purchaseInfo?.crvFee
+              }
+              labelDesc={'Taxes and Fees'}
+              type={'taxFee'}
+            />
+
             {pendingTx.purchaseInfo?.promoUsed && (
-              <ShowDiscountInfo
+              <PriceInfo
                 purchaseInfo={pendingTx.purchaseInfo.promoDiscount || 0}
                 labelDesc={'Promo 50% Off'}
+                type={'discount'}
+              />
+            )}
+
+            {pendingTx.purchaseInfo?.bagUsed && (
+              <PriceInfo
+                purchaseInfo={pendingTx.purchaseInfo.bagCount * 0.1 || 0}
+                labelDesc={'Bag Amount'}
+                type={'taxFee'}
               />
             )}
           </Box>
@@ -225,31 +246,6 @@ function PendingTransactionsDetail() {
           </Button>
         </Box>
       </Flex>
-    </Flex>
-  );
-}
-
-function ShowDiscountInfo({ purchaseInfo, labelDesc }) {
-  return (
-    <Flex flexDir="row" justifyContent="space-between" py={1}>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 18,
-          color: 'green',
-        }}>
-        {labelDesc}
-      </Text>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 18,
-          fontWeight: '600',
-          color: 'green',
-        }}>
-        -$
-        {purchaseInfo.toFixed(2)}
-      </Text>
     </Flex>
   );
 }

@@ -6,6 +6,7 @@ import { getSalesDetails } from '../../fb-calls/FirebaseSales';
 import { IoCart } from 'react-icons/io5';
 import { UserContext } from '../../context/UserContext';
 import { purchaseItemCountTemporaryFix } from '../../util/Calculations';
+import PriceInfo from '../../components/PriceInfo';
 
 function SalesDetails() {
   const { state } = useLocation();
@@ -149,50 +150,65 @@ function SalesDetails() {
           borderBottom="1px"
           borderBottomColor="gray.200"
           px={2}>
-          <ShowTaxesInfo
+          <PriceInfo
             purchaseInfo={sales.purchaseInfo?.purchaseInfo.subTotal || 0}
             labelDesc={'Sub Total'}
+            type={'taxFee'}
           />
 
           {sales.purchaseInfo?.purchaseInfo.salesTax > 0 && (
-            <ShowTaxesInfo
+            <PriceInfo
               purchaseInfo={sales.purchaseInfo?.purchaseInfo.salesTax || 0}
               labelDesc={'Sales Tax'}
+              type={'taxFee'}
             />
           )}
 
           {sales.purchaseInfo?.purchaseInfo.sugarTax > 0 && (
-            <ShowTaxesInfo
+            <PriceInfo
               purchaseInfo={sales.purchaseInfo?.purchaseInfo.sugarTax || 0}
               labelDesc={'Sugar Tax'}
+              type={'taxFee'}
             />
           )}
 
-          <ShowTaxesInfo
+          <PriceInfo
             purchaseInfo={sales.purchaseInfo?.purchaseInfo.blitzFee || 0}
             labelDesc={'Blitz Fee'}
+            type={'taxFee'}
           />
 
           {sales.purchaseInfo?.purchaseInfo.crvFee > 0 && (
-            <ShowTaxesInfo
+            <PriceInfo
               purchaseInfo={sales.purchaseInfo?.purchaseInfo.crvFee || 0}
               labelDesc={'CRV Fee'}
+              type={'taxFee'}
             />
           )}
 
           {sales.purchaseInfo?.purchaseInfo.batchItemDiscount > 0 && (
-            <ShowDiscountInfo
+            <PriceInfo
               purchaseInfo={
                 sales.purchaseInfo.purchaseInfo.batchItemDiscount || 0
               }
               labelDesc={'Batch Item Discounts'}
+              type={'discount'}
             />
           )}
 
           {sales.purchaseInfo?.purchaseInfo.promoUsed && (
-            <ShowDiscountInfo
+            <PriceInfo
               purchaseInfo={sales.purchaseInfo.purchaseInfo.promoDiscount || 0}
               labelDesc={'Promo 50% Off'}
+              type={'discount'}
+            />
+          )}
+
+          {sales.purchaseInfo?.purchaseInfo.bagUsed && (
+            <PriceInfo
+              purchaseInfo={sales.purchaseInfo.purchaseInfo.bagCount * 0.1 || 0}
+              labelDesc={'Bag Amount'}
+              type={'bag'}
             />
           )}
         </Flex>
@@ -207,55 +223,6 @@ function SalesDetails() {
           </List>
         </Box>
       </Flex>
-    </Flex>
-  );
-}
-
-function ShowTaxesInfo({ purchaseInfo, labelDesc }) {
-  return (
-    <Flex flexDir="row" justifyContent="space-between" py={1}>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 16,
-          color: '#222222',
-        }}>
-        {labelDesc}
-      </Text>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 18,
-          fontWeight: '500',
-          color: '#222222',
-        }}>
-        ${purchaseInfo.toFixed(2)}
-      </Text>
-    </Flex>
-  );
-}
-
-function ShowDiscountInfo({ purchaseInfo, labelDesc }) {
-  return (
-    <Flex flexDir="row" justifyContent="space-between" py={1}>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 16,
-          color: 'green',
-        }}>
-        {labelDesc}
-      </Text>
-      <Text
-        style={{
-          fontFamily: 'Avenir',
-          fontSize: 18,
-          fontWeight: '500',
-          color: 'green',
-        }}>
-        -$
-        {purchaseInfo.toFixed(2)}
-      </Text>
     </Flex>
   );
 }
