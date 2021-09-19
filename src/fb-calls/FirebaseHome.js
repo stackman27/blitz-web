@@ -99,14 +99,15 @@ async function userCartActiveFalse(customerUid) {
 }
 
 async function saveDiscountAmount(vendorUid, purchaseInfo) {
+  const discountSum =
+    purchaseInfo.purchaseInfo.promoDiscount +
+    purchaseInfo.purchaseInfo.promotionItemDiscount;
   await firebase
     .firestore()
     .collection('blitz_vendors')
     .doc(vendorUid)
     .update({
-      discount_total: firebase.firestore.FieldValue.increment(
-        purchaseInfo.purchaseInfo.promoDiscount,
-      ),
+      discount_total: firebase.firestore.FieldValue.increment(discountSum),
     });
 }
 
