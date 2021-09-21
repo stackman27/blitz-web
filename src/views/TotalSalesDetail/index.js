@@ -52,11 +52,11 @@ function SalesDetails() {
               x{item.purchaseCount || 1}
             </Text>
             &nbsp; &nbsp;
-            {item.batchItemDiscount > 0 && (
+            {item.contains_promotion && (
               <>
                 <Text style={{ color: '#bbb' }}>|</Text>
                 <Text fontWeight="600" color="#1aa260" marginLeft="3">
-                  Batch Discount: ${item.batchItemDiscount.toFixed(2)} off
+                  Discount: ${item.promotionItemDiscount.toFixed(2)} off
                 </Text>
               </>
             )}

@@ -100,11 +100,11 @@ function PendingTransactionsDetail() {
               x{item.purchaseCount ? item.purchaseCount : 1}
             </Text>
             &nbsp; &nbsp;
-            {item.batchItemDiscount > 0 && (
+            {item.contains_promotion && (
               <>
                 <Text style={{ color: '#bbb' }}>|</Text>
                 <Text fontWeight="600" color="#1aa260" marginLeft="3">
-                  Batch Discount: ${item.batchItemDiscount.toFixed(2)} off
+                  Discount: ${item.promotionItemDiscount.toFixed(2)} off
                 </Text>
               </>
             )}
@@ -196,6 +196,11 @@ function PendingTransactionsDetail() {
           </Flex>
 
           <Box padding={3} paddingBottom={1}>
+            <PriceInfo
+              purchaseInfo={pendingTx.purchaseInfo?.subTotal || 0}
+              labelDesc={'SubTotal'}
+              type={'taxFee'}
+            />
             <PriceInfo
               purchaseInfo={
                 pendingTx.purchaseInfo?.salesTax +
