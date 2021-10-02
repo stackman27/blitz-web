@@ -21,7 +21,7 @@ import Loading from '../components/Loading';
 import InventoryBatch from './InventoryBatch';
 import InventoryBatchDetails from './InventoryBatchDetails';
 import Analytics from './Analytics';
-// import TutorialSticker from '../TutorialSticker';
+import TutorialSticker from '../TutorialSticker';
 
 function VendorHome() {
   const token = getToken();
@@ -74,9 +74,9 @@ function VendorHome() {
     <Router>
       <Header />
       <Switch>
-        {/* <Route path="/tutorial_sticker" component={TutorialSticker}>
+        <Route path="/tutorial_sticker" component={TutorialSticker}>
           <TutorialSticker />
-        </Route> */}
+        </Route>
 
         <Route path="/home" component={HomeBody}>
           <HomeBody />

@@ -2,405 +2,76 @@ import React from 'react';
 import { Flex, Text, Image } from '@chakra-ui/react';
 const data = [
   {
-    'Product Name': 'Bottle Coca Cola',
-    UPC: 75004699,
-    URL: 'https://img.packworld.com/files/base/pmmi/all/image/2021/02/Coke_rPET_20oz.602495208a6ed.png?auto=format%2Ccompress&fit=max&q=70&w=1200',
-    'Current Price': 2.49,
-    'Promotion type': '40% off',
-    'New Price': 1.5,
-  },
-  {
-    'Product Name': 'Mountain Dew',
-    UPC: 12000001314,
-    URL: 'https://images.barcodelookup.com/4998/49983827-1.jpg',
-    'Current Price': 2.25,
-    'Promotion type': '40% off',
-    'New Price': 1.35,
-  },
-  {
-    'Product Name': 'Yerba Mate Sprk Gold',
-    UPC: 632432333106,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '50% off',
-    'New Price': 1.5,
-  },
-  {
-    'Product Name': 'Yerba Mate Sprk Grapefruit',
-    UPC: 632432333205,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '50% off',
-    'New Price': 1.5,
-  },
-  {
-    'Product Name': 'Yerba mate: sparkling cranbery pomegranate',
-    UPC: 632432333304,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '50% off',
-    'New Price': 1.5,
-  },
-  {
-    'Product Name': 'Yerba Mate Bluephoira',
-    UPC: 632432708775,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.69,
-    'Promotion type': '50% off',
-    'New Price': 1.85,
-  },
-  {
-    'Product Name': 'Yerba Mate: Lemon',
-    UPC: 632432717777,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.69,
-    'Promotion type': '50% off',
-    'New Price': 1.85,
-  },
-  {
-    'Product Name': 'Yerba Mate:Orange Exuberance',
-    UPC: 632432728773,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.69,
-    'Promotion type': '50% off',
-    'New Price': 1.85,
-  },
-  {
-    'Product Name': 'Yerba Mate:Revel Berry',
-    UPC: 632432737775,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.69,
-    'Promotion type': '50% off',
-    'New Price': 1.85,
-  },
-  {
-    'Product Name': 'Yerba Mate: Enlighten Mint',
-    UPC: 632432757773,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.69,
-    'Promotion type': '50% off',
-    'New Price': 1.85,
-  },
-  {
-    'Product Name': 'Yerba Mate: Traditional Mate',
-    UPC: 632432911007,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.95,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba Mate: Mint Btl',
-    UPC: 632432911205,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba Mate: Raspberry Revolution Btl',
-    UPC: 632432911403,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba mate: Traditional Unsweetened Btl',
-    UPC: 632432911502,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba Mate: Lemon Mint Unsweetened Btl',
-    UPC: 632432911526,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba mate: Passion Btl',
-    UPC: 632432911809,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba Mate: Peach',
-    UPC: 632432922225,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.94,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Yerba Mate: blue',
-    UPC: 638632708775,
-    URL: 'https://images.barcodelookup.com/1033/10332604-1.jpg',
-    'Current Price': 3.64,
-    'Promotion type': '50% off',
-    'New Price': 1.99,
-  },
-  {
-    'Product Name': 'Lays BBQ Chips',
-    UPC: 28400199612,
-    URL: 'https://images.barcodelookup.com/3181/31819392-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': 'BUY 2 GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays Sour Cream & Onion',
-    UPC: 28400199636,
-    URL: 'https://images.barcodelookup.com/3181/31813076-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': 'BUY 2 GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'doritos flamin hot',
-    UPC: 28400199247,
-    URL: 'https://images.barcodelookup.com/11695/116957624-1.jpg',
-    'Current Price': 4.29,
-    'Promotion type': '20% OFF',
-    'New Price': 3.5,
-  },
-  {
-    'Product Name': 'Lays: Honey BBQ',
-    UPC: 28400323819,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
+    'Product Name': "Chester's Fries Corn and Potato Snacks Flamin' Hot",
+    UPC: 28400331524,
+    URL: 'https://images.barcodelookup.com/16659/166592453-1.jpg',
     'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
+    'Promotion type': 'BUY 1 GET 1 FREE',
     'New Price': '',
   },
   {
-    'Product Name': 'Lays: Classic',
-    UPC: 28400323826,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: Salt & Vinegar',
-    UPC: 28400323857,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: faming hot',
-    UPC: 28400323864,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: sweet suthern BBQ',
-    UPC: 28400323888,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: Chile Lime',
-    UPC: 28400323901,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: Barbecue',
-    UPC: 28400324205,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Lays: Limon',
-    UPC: 28400324236,
-    URL: 'https://images.barcodelookup.com/19883/198836890-1.jpg',
-    'Current Price': 1.99,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Clover 2% Milk',
-    UPC: 70852191003,
-    URL: 'https://images.barcodelookup.com/9050/90502196-1.jpg',
-    'Current Price': 3.59,
-    'Promotion type': '30% OFF',
-    'New Price': 2.5,
-  },
-  {
-    'Product Name': 'Redbull: Blue',
-    UPC: 611269182460,
-    URL: 'https://images.barcodelookup.com/5587/55871606-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': '40% OFF',
-    'New Price': 2.3,
-  },
-  {
-    'Product Name': 'Redbull: Orange',
-    UPC: 611269206432,
-    URL: 'https://images.barcodelookup.com/5587/55871606-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': '40% OFF',
-    'New Price': 2.3,
-  },
-  {
-    'Product Name': 'Redbull: Green',
-    UPC: 611269212457,
-    URL: 'https://images.barcodelookup.com/5587/55871606-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': '40% OFF',
-    'New Price': 2.3,
-  },
-  {
-    'Product Name': 'Redbull: Peach',
-    UPC: 611269283105,
-    URL: 'https://images.barcodelookup.com/5587/55871606-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': '40% OFF',
-    'New Price': 2.3,
-  },
-  {
-    'Product Name': 'Redbull: Coco',
-    UPC: 611269321210,
-    URL: 'https://images.barcodelookup.com/5587/55871606-1.jpg',
-    'Current Price': 3.79,
-    'Promotion type': '40% OFF',
-    'New Price': 2.3,
-  },
-  {
-    'Product Name': 'Bang Cotton Candy',
-    UPC: 610764000316,
-    URL: 'https://images.barcodelookup.com/8253/82533885-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '30% OFF',
-    'New Price': 2,
-  },
-  {
-    'Product Name': 'Bang',
-    UPC: 610764028495,
-    URL: 'https://images.barcodelookup.com/8253/82533885-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '30% OFF',
-    'New Price': 2,
-  },
-  {
-    'Product Name': 'Bang Cherry Lemonade',
-    UPC: 610764120472,
-    URL: 'https://images.barcodelookup.com/8253/82533885-1.jpg',
-    'Current Price': 2.99,
-    'Promotion type': '30% OFF',
-    'New Price': 2,
-  },
-  {
-    'Product Name': 'Pepsi Cola',
-    UPC: 12000030284,
-    URL: 'https://images.barcodelookup.com/5047/50478939-1.jpg',
-    'Current Price': 1.78,
-    'Promotion type': 'BUY ONE GET ONE FREE',
-    'New Price': '',
-  },
-  {
-    'Product Name': 'Starbucks Frappuccino Coffee',
-    UPC: 12000001802,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 3.64,
-    'Promotion type': '30% OFF',
-    'New Price': 2.5,
-  },
-  {
-    'Product Name': 'Frappuccino Coffee Drink Caramel',
-    UPC: 12000002717,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 2.59,
-    'Promotion type': '30% OFF',
-    'New Price': 1.78,
-  },
-  {
-    'Product Name': 'Starbucks Coffee Drink',
-    UPC: 12000003554,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 2.94,
-    'Promotion type': '30% OFF',
-    'New Price': 2,
-  },
-  {
-    'Product Name': 'Starbucks Frappuccino Vanilla',
-    UPC: 12000004100,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 2.64,
-    'Promotion type': '40% OFF',
-    'New Price': 1.6,
-  },
-  {
-    'Product Name': 'Starbucks Frappuccino Mocha',
-    UPC: 12000004520,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 3.64,
-    'Promotion type': '30% OFF',
-    'New Price': 2.5,
-  },
-  {
-    'Product Name': 'Starbucks Frappuccino Mocha',
-    UPC: 12000006494,
-    URL: 'https://images.barcodelookup.com/3013/30138786-1.jpg',
-    'Current Price': 2.94,
-    'Promotion type': '30% OFF',
-    'New Price': 2,
-  },
-  {
-    'Product Name': 'Starbucks Doubleshot Light:Espresso & Cream',
-    UPC: 12000008801,
-    URL: 'https://images.barcodelookup.com/4730/47305851-1.jpg',
+    'Product Name': 'Takis Tortilla Chips Hot Chili Pepper and Lime',
+    UPC: 757528008680,
+    URL: 'https://images.barcodelookup.com/3181/31814115-1.jpg',
     'Current Price': 3.99,
-    'Promotion type': '10% OFF',
-    'New Price': 3.6,
+    'Promotion type': '50% off',
+    'New Price': 2,
   },
   {
-    'Product Name':
-      'Starbucks Frappuccino Caramel Intense Chilled Coffee Drink',
-    UPC: 12000016721,
-    URL: 'https://images.barcodelookup.com/3013/30136192-1.jpg',
-    'Current Price': 3.64,
-    'Promotion type': '30% OFF',
-    'New Price': 2.5,
+    'Product Name': 'Doritos Flavor Shots',
+    UPC: 28400211772,
+    URL: 'https://images.barcodelookup.com/13658/136586181-1.jpg',
+    'Current Price': 1.19,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
   },
   {
-    'Product Name': 'Starbucks Doubleshot:Mocha',
-    UPC: 12000028458,
-    URL: 'https://images.barcodelookup.com/3013/30136192-1.jpg',
-    'Current Price': 3.74,
-    'Promotion type': '30% OFF',
-    'New Price': 2.6,
+    'Product Name': 'Ruffles Sco',
+    UPC: 28400324410,
+    URL: 'https://images.barcodelookup.com/19678/196780810-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
   },
   {
-    'Product Name': 'Starbucks Doubleshot:Coffee',
-    UPC: 12000028472,
-    URL: 'https://images.barcodelookup.com/3013/30136192-1.jpg',
-    'Current Price': 3.74,
-    'Promotion type': '30% OFF',
-    'New Price': 2.6,
+    'Product Name': 'Ruffle flm ht',
+    UPC: 28400324472,
+    URL: 'https://images.barcodelookup.com/16285/162854126-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
   },
   {
-    'Product Name': 'Starbucks Doubleshot:Vanilla',
-    UPC: 12000028496,
-    URL: 'https://images.barcodelookup.com/3013/30136192-1.jpg',
-    'Current Price': 3.74,
-    'Promotion type': '30% OFF',
-    'New Price': 2.6,
+    'Product Name': 'Cheetos hot puff',
+    UPC: 28400329132,
+    URL: 'https://images.barcodelookup.com/19808/198088066-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
+  },
+  {
+    'Product Name': 'Funyons',
+    UPC: 28400331555,
+    URL: 'https://images.barcodelookup.com/19959/199592061-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
+  },
+  {
+    'Product Name': 'Cheetos Flaming Hot',
+    UPC: 28400329491,
+    URL: 'https://images.barcodelookup.com/16285/162854092-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
+  },
+  {
+    'Product Name': 'Cheetos XXTRA Flaming Hot',
+    UPC: 28400329460,
+    URL: 'https://images.barcodelookup.com/16659/166592470-1.jpg',
+    'Current Price': 1.99,
+    'Promotion type': 'BUY 1 GET 1 FREE',
+    'New Price': '',
   },
 ];
 
@@ -413,7 +84,7 @@ function TutorialSticker() {
             key={index}
             style={{
               width: 210,
-              height: 225,
+              height: 230,
               borderWidth: 1,
               borderColor: '#ddd',
               margin: 10,
@@ -432,17 +103,26 @@ function TutorialSticker() {
                 alignItems: 'center',
                 borderTopLeftRadius: 15,
               }}>
-              <Image
-                src={item.URL}
+              <Flex
                 style={{
                   height: 50,
-                  width: 50,
-                  padding: 5,
+                  width: 55,
+                  borderColor: '#bbb',
                   borderRadius: '100%',
-                  background: '#fff',
-                }}
-                objectFit="contain"
-              />
+                  borderWidth: 1,
+                }}>
+                <Image
+                  src={item.URL}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '100%',
+                    padding: 5,
+                    background: '#fff',
+                  }}
+                  objectFit="contain"
+                />
+              </Flex>
               <Text
                 style={{
                   marginLeft: 5,
@@ -460,18 +140,23 @@ function TutorialSticker() {
               style={{
                 flex: 1,
                 height: 120,
-
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: 10,
                 fontFamily: 'Avenir',
               }}>
-              <Flex style={{ alignItems: 'center' }}>
+              <Flex
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                }}>
                 <Text
                   style={{
                     fontSize: 18,
                     fontWeight: 'bold',
                     textAlign: 'center',
+
                     fontFamily: 'Avenir Next',
                     color: '#222',
                   }}>
@@ -524,31 +209,63 @@ function TutorialSticker() {
                 </>
               )}
             </Flex>
+
             <Flex
               style={{
                 fontFamily: 'Avenir',
                 width: '100%',
+                borderBottomLeftRadius: 15,
+                borderBottomRightRadius: 15,
+
+                background: '#fff',
                 justifyContent: 'center',
                 alignItems: 'center',
-                paddingBottom: 5,
+                color: '#fff',
               }}>
-              <Text
+              <Flex
                 style={{
-                  fontSize: 14,
-                  textAlign: 'center',
-                  fontWeight: '500',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
                 }}>
-                *Use{' '}
-                <span
+                <Text
                   style={{
-                    fontStyle: 'italic',
+                    fontFamily: 'Avenir',
                     fontWeight: 'bold',
+                    color: 'red',
+                  }}>
+                  *For
+                </Text>
+                <Image
+                  src={'/img/blitzlogo.png'}
+                  fit="contain"
+                  width={'10%'}
+                  style={{ marginLeft: 5 }}
+                  borderRadius="4"
+                  height={'10%'}
+                  background="red"
+                />
+                <Text
+                  style={{
+                    fontFamily: 'Avenir Next',
+                    fontWeight: 'bold',
+                    marginLeft: 5,
+                    fontStyle: 'italic',
                     color: '#0A63BC',
                   }}>
-                  Blitz{' '}
-                </span>
-                to access discounts
-              </Text>
+                  Blitz
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: 'Avenir',
+                    fontWeight: 'bold',
+                    color: 'red',
+                    marginLeft: 5,
+                  }}>
+                  users only
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
         );
