@@ -57,9 +57,7 @@ async function runPostCheckout(
     async (res) => {
       if (res) {
         purchaseInfo.status = 'verified';
-        if (purchaseInfo.purchaseInfo.promoUsed) {
-          await saveDiscountAmount(vendorUid, purchaseInfo);
-        }
+        await saveDiscountAmount(vendorUid, purchaseInfo);
         await storeSalesReceiptVendor(vendorUid, receiptId, purchaseInfo);
         await storeSalesReceiptCustomer(customerUid, receiptId, purchaseInfo);
         await removeActiveUser(vendorUid, customerUid);
@@ -100,8 +98,8 @@ async function userCartActiveFalse(customerUid) {
 
 async function saveDiscountAmount(vendorUid, purchaseInfo) {
   const discountSum =
-    purchaseInfo.purchaseInfo.promoDiscount +
-    purchaseInfo.purchaseInfo.promotionItemDiscount;
+    (purchaseInfo.purchaseInfo.promoDiscount || 0) +
+    (purchaseInfo.purchaseInfo.promotionItemDiscount || 0);
   await firebase
     .firestore()
     .collection('blitz_vendors')
