@@ -19,16 +19,14 @@ function HomeBody() {
       currentUser.uid,
       getTags,
     ).onSnapshot((snap) => {
-      snap.docChanges().forEach(() => {
-        snap.forEach((doc) => {
-          if (doc.data()) {
-            setScannedReceipt(true);
-            setPurchaseInfo(doc.data());
-            setTimeout(() => {
-              setScannedReceipt(false);
-            }, 30000);
-          }
-        });
+      snap.forEach((doc) => {
+        if (doc.data()) {
+          setScannedReceipt(true);
+          setPurchaseInfo(doc.data());
+          setTimeout(() => {
+            setScannedReceipt(false);
+          }, 30000);
+        }
       });
     });
     return () => unsubscribe();
