@@ -19,13 +19,15 @@ function HomeBody() {
       currentUser.uid,
       getTags,
     ).onSnapshot((snap) => {
-      snap.forEach((doc) => {
-        if (doc.data()) {
-          setScannedReceipt(true);
-          setPurchaseInfo(doc.data());
-          setTimeout(() => {
-            setScannedReceipt(false);
-          }, 30000);
+      snap.docChanges().forEach(function (change) {
+        if (change.type === 'added') {
+          if (change.doc.data()) {
+            setScannedReceipt(true);
+            setPurchaseInfo(change.doc.data());
+            setTimeout(() => {
+              setScannedReceipt(false);
+            }, 30000);
+          }
         }
       });
     });
