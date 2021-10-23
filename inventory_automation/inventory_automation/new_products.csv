@@ -1,0 +1,46 @@
+,upc,department,product_name,crv_by_05_cents,Price,size,upce,has_crv,sugar_column,is_taxable,Images,sugar_tax,contains_promotion
+2269,50700007724,Household Essentials,Forks,1.0,1.99,,,False,False,True,,0,False
+2453,62338797168,Household Essentials,AW SCTD OIL REFL FRESH WATERS,1.0,4.99,0.67FO,,False,False,True,,0,False
+3332,79184171028,Household Essentials,Campass,1.0,3.29,,,False,False,True,,0,False
+3333,79184221143,Household Essentials,Eraser,1.0,2.49,,,False,False,True,,0,False
+4119,648054512485,Household Essentials,Cracker,1.0,4.39,,0,False,False,True,,0,False
+4189,671072255799,Household Essentials,WegaCell Type c,1.0,7.99,,0,False,False,True,,0,False
+65,12993112127,Soda,La Croix BlackRazzBery,12.0,7.99,12pk,,True,True,True,,0,False
+101,21136180589,Soda,Topo chico twist lime pb,1.0,2.29,15.5fl oz,,True,True,True,,0,False
+102,21136180596,Soda,Topochico pb,1.0,2.29,,,True,True,True,,0,False
+254,49000075465,Soda,EN Mexico Coke,4.0,9.99,,04954605,True,True,True,,0,False
+484,90097888889,Energy,"Vital 4U:The Rave Drink, Killer Chocolate Mocha Flavor",1.0,2.99,0.60 OZ,09088809,True,True,True,,0,False
+519,610764030054,Energy,Bang Wztermelon,1.0,2.99,16oz,0,True,True,True,,0,False
+819,860439001005,Soda,Olipop Vintage Cola,1.0,2.89,,0,True,True,True,,0,False
+59,10497301818,Frozen Food,Orange Chiken,1.0,22.99,,,False,False,False,,0,False
+1620,40000565604,Candies/Bars/Gum,M&M Classic Mix,1.0,2.29,2.5oz,04056004,False,False,False,,0,False
+1911,42272003532,Frozen Food,AMY'S BURRITO,1.0,3.69,,04235322,False,False,False,,0,False
+2542,70462005219,Candies/Bars/Gum,swedish fish tails,1.0,2.29,,,False,False,False,,0,False
+2545,70462098679,Candies/Bars/Gum,Swedish Fish Bags:Original Soft & Chewy,1.0,2.29,5.00 OZ,,False,False,False,,0,False
+2547,70477000056,Food,Wild Mountain:Honey,1.0,7.29,16.00 OZ,07047756,False,False,False,,0,False
+3495,84253240475,Food,Imagine:Creamy Tomato Soup,1.0,5.99,34.00 OZ,08404725,False,False,False,,0,False
+3517,86700662793,Food,Sunridge Org mulit color pop,1.0,3.99,,,False,False,False,,0,False
+3523,86700670880,Food,SunRidge Keto Granola,1.0,8.99,11oz,,False,False,False,,0,False
+3527,86700676134,Nuts/Seeds,Sun Ridge Farm California pistachio shelled,1.0,8.69,5oz,,False,False,False,,0,False
+3530,86700676806,Candies/Bars/Gum,Sunridge Malt Balls Pnt Btr Mlk,1.0,5.99,7 oz,,False,False,False,,0,False
+3543,86700681657,Nuts/Seeds,Sunridge Crystallize Ginger,1.0,7.39,5 oz,,False,False,False,,0,False
+3544,86700681701,Candies/Bars/Gum,Sunridge Milk Malt Balls,1.0,5.59,7 oz,,False,False,False,,0,False
+3546,86700681787,Nuts/Seeds,SunRidge Farms:Sliced Almonds,1.0,3.99,4.00 OZ,,False,False,False,,0,False
+3547,86700681794,Nuts/Seeds,SunRidge Farms:Slivered Almonds,1.0,5.99,5.00 OZ,,False,False,False,,0,False
+3548,86700681855,Nuts/Seeds,"SunRidge Farms:Fancy Cashews, Roasted & Salted",1.0,7.29,8.00 OZ,,False,False,False,,0,False
+3551,86700682067,Nuts/Seeds,SunRidge Org. Pumpkin Seeds,1.0,4.69,7.00 OZ,,False,False,False,,0,False
+3558,86700682647,Nuts/Seeds,Sunridge Keto Trial Mix,1.0,7.49,,,False,False,False,,0,False
+3562,86700689547,Nuts/Seeds,Sunridge Org. Sunflower,1.0,2.29,2.6oz,,False,False,False,,0,False
+3563,86700689561,Nuts/Seeds,Organic coffee almond coconut chews 2 Oz,1.0,2.29,2 Oz,,False,False,False,,0,False
+3564,86700689578,Nuts/Seeds,Sun Ridge Farm organic oatmeal raisin,1.0,2.29,2oz,,False,False,False,,0,False
+3565,86700689585,Nuts/Seeds,Dart chocolate almons,1.0,2.29,2.5oz,,False,False,False,,0,False
+3566,86700689592,Nuts/Seeds,Sunridge Drk Choc Cocn Chews,1.0,2.29,2.25oz,,False,False,False,,0,False
+3567,86700689615,Nuts/Seeds,SunRidge Appl Cider Cashew,1.0,2.29,1.8oz,,False,False,False,,0,False
+4604,747599610653,Food,Ghirardelli Chocolate:Classic White,1.0,5.89,11.00 OZ,0,False,False,False,,0,False
+5628,888109010072,Food,Hostess Frosted Orange Cake with Creamy Filling,1.0,1.99,3.38 OZ,0,False,False,False,,0,False
+271,52000047905,Sports Drinks,Gatorlyte Rapid,1.0,3.69,20oz,05279005,True,True,False,,0,False
+272,52000049008,Sports Drinks,Gatorlyte Rapid,1.0,3.69,20oz,05290008,True,True,False,,0,False
+310,70074802404,Sports Drinks,Pedialyte Grape Flavor,2.0,9.49,1.00 LT,07024004,True,True,False,,0,False
+311,70074803364,Sports Drinks,Pedialyte Unflavored,2.0,9.49,33.80 OZ,07033604,True,True,False,,0,False
+312,70074803654,Sports Drinks,Pedialyte:Fruit Flavor,2.0,9.49,33.80 OZ,07036504,True,True,False,,0,False
+663,786162200433,Water/Juices,Glaceau Smart Water:Electrolyte Enhanced Water,1.0,1.99,20.00 FL OZ,0,True,False,False,,0,False
