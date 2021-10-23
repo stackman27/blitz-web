@@ -1,3 +1,0 @@
-,img,has_sugar_tax,contains_promotion,crv_by_05_cents,upce,has_crv,sugar_tax,department,has_sales_tax,upc,size,sell_price,promotion_data,product_name
-1,https://pics.drugstore.com/prodimg/623982/450.jpg,False,True,1,,False,0,Chips,False,28400199612,7.75 oz,3.79,"{'amount': 3.79, 'count': 2, 'type': 'BatchItem', 'storeName': 'Derby Food Center'}",Lays BBQ Chips
-2,https://pics.drugstore.com/prodimg/621632/450.jpg,False,True,1,,False,0,Chips,False,28400199636,7.75 Oz,3.79,"{'count': 3, 'amount': 7.58, 'storeName': 'Derby Food Center', 'type': 'BatchItem'}",Lays Sour Cream & Onion
