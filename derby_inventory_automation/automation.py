@@ -23,7 +23,7 @@ def extract_new_products():
     newest_products = final_table[(~final_table["upc"].isin(
         current_inventory["upc"])) & (~final_table["upc"].isin(promotions_list["upc"]))]
     newest_products["contains_promotion"] = False
-    newest_products.to_csv('new_products.csv')
+    newest_products.to_json("newest_products.json",orient = "records")
     return newest_products
 
 
@@ -38,7 +38,7 @@ def extract_changed_promo():
                                        != merged_promotions["sell_price"]]
     final_changed_promotions = promotions_list[promotions_list["upc"].isin(
         changed_prices["upc"])]
-    final_changed_promotions.to_csv('changed_promotions.csv')
+    final_changed_promotions.to_json("changed_promotions.json",orient = "records")
     return final_changed_promotions
 
 
@@ -56,8 +56,8 @@ def extract_product_changes():
         changed_prices["upc"])]
     final_changed_products["contains_promotion"] = False
     final_changed_products["Images"] = merged_promotions["img"]
-    final_changed_products.to_csv('changed_products.csv')
+    final_changed_products.to_json("changed_products.json",orient = "records")
     return final_changed_products
 
 
-extract_product_changes()
+print(extract_new_products())

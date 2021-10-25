@@ -2,11 +2,11 @@ import pandas as pd
 
 
 def clean_headers(df):
-    df["Price"] = [float(i)/100 for i in df["cents"]]
+    df["sell_price"] = [float(i)/100 for i in df["cents"]]
     df = df.rename(columns={"Department": "department",
                    "Name": "product_name", "Fee Multiplier": "crv_by_05_cents"})
     df = df[["upc", "department", "product_name",
-             "crv_by_05_cents", "Price", "size"]]
+             "crv_by_05_cents", "sell_price", "size"]]
     return df
 
 
@@ -87,17 +87,17 @@ def find_sugar(df):
             sugar_column.append(False)
         else:
             sugar_column.append(True)
-    table4["sugar_column"] = sugar_column
+    table4["has_sugar_tax"] = sugar_column
 
     df_not_sugar = df[~df["upc"].isin(table4["upc"])]
-    df_not_sugar["sugar_column"] = False
+    df_not_sugar["has_sugar_tax"] = False
     combined = df_not_sugar.append(table4)
 
     return combined
 
 
 def add_images(df):
-    df["Images"] = ""
+    df["img"] = ""
     return df
 
 
@@ -105,13 +105,13 @@ def add_images(df):
 def get_taxable(df):
     table44 = df[(df["department"] == "Energy") | (df["department"] == "Pets") | (df["department"] == "Soda") | (
         df["department"] == "Household Essentials") | (df["department"] == "Health & Wellness")]
-    table44["is_taxable"] = True
+    table44["has_sales_tax"] = True
 
     other_department = df[~df["upc"].isin(table44["upc"])]
-    other_department["is_taxable"] = False
+    other_department["has_sales_tax"] = False
 
     finalized = table44.append(other_department)
-    finalized["Images"] = ""
+    finalized["img"] = ""
     finalized["sugar_tax"] = 0
 
     return finalized
