@@ -26,8 +26,8 @@ def extract_new_products():
     newest_products.to_csv('new_products.csv')
     return newest_products
 
-# Extract changed promotions
 
+# Extract changed promotions
 
 def extract_changed_promo():
     updated_promotions = final_table[final_table["upc"].isin(
@@ -40,6 +40,7 @@ def extract_changed_promo():
         changed_prices["upc"])]
     final_changed_promotions.to_csv('changed_promotions.csv')
     return final_changed_promotions
+
 
 # Extract changed product pricing excluding promotions
 

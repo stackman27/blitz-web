@@ -1,0 +1,23 @@
+[
+  {
+    "img": "https://images.barcodelookup.com/4998/49983827-1.jpg",
+    "has_sugar_tax": true,
+    "contains_promotion": true,
+    "crv_by_05_cents": 2,
+    "upce": 1213104,
+    "has_crv": true,
+    "sugar_tax": 0,
+    "department": "Soda",
+    "has_sales_tax": true,
+    "upc": "12000001314",
+    "size": "20.00 OZ",
+    "sell_price": 2.25,
+    "promotion_data": {
+      "storeName": "Derby Food Center",
+      "count": 1,
+      "type": "Discount",
+      "amount": 1.35
+    },
+    "product_name": "Mountain Dew"
+  }
+]
