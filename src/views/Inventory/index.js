@@ -34,6 +34,23 @@ function Inventory() {
     appliedFilterData();
   }, []);
 
+  const uploadInventory = () => {
+    fetch(
+      'https://us-central1-blitz-checkout-dev.cloudfunctions.net/webApi/api/v1/inventoryDetail',
+    )
+      .then((res) => res.json)
+      .then((val) => console.log(val))
+      .catch((err) => {
+        console.log(err);
+      });
+    // const upload = firebase
+    //   .functions()
+    //   .httpsCallable('restful-uploadInventory');
+    // upload().then((res) => {
+    //   console.log(res.data);
+    // });
+  };
+
   const appliedFilterData = (filterValue) => {
     getInventory(currentUser.uid, filterValue).then((res) => {
       setItems(res[0]);
@@ -159,6 +176,7 @@ function Inventory() {
           borderBottom="1px"
           borderBottomColor="gray.200"
           paddingBottom="1">
+          <Button onClick={() => uploadInventory()}>Upload Inventory</Button>
           <Text fontSize={30} fontWeight="bold">
             Inventory
           </Text>
